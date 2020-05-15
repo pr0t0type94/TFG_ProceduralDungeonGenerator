@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: 2
+  m_EditorClassIdentifier: 
+  roomConnectionsData:
+  - baseNodeId: d40c76a0-9675-4178-bdf7-495c2c49b757
+    basePortName: Output
+    targetNodeId: cc1cb82a-8131-4c3a-b9bc-0b99c3f43c67
+    targetPortName: Input
+  - baseNodeId: 4ed9f946-de7f-47ff-8b15-cb858dd40f30
+    basePortName: up
+    targetNodeId: e8f06dab-5ee2-45b0-825b-d4fd74fc9ae0
+    targetPortName: Input
+  - baseNodeId: cc1cb82a-8131-4c3a-b9bc-0b99c3f43c67
+    basePortName: up
+    targetNodeId: 4ed9f946-de7f-47ff-8b15-cb858dd40f30
+    targetPortName: Input
+  roomNodeData:
+  - nodeID: cc1cb82a-8131-4c3a-b9bc-0b99c3f43c67
+    nodeType: enemy
+    position: {x: 347, y: 133}
+    isTerminal: 1
+  - nodeID: d40c76a0-9675-4178-bdf7-495c2c49b757
+    nodeType: begin
+    position: {x: -28, y: 58}
+    isTerminal: 1
+  - nodeID: 4ed9f946-de7f-47ff-8b15-cb858dd40f30
+    nodeType: enemy
+    position: {x: 713, y: 112}
+    isTerminal: 1
+  - nodeID: e8f06dab-5ee2-45b0-825b-d4fd74fc9ae0
+    nodeType: Room
+    position: {x: 732, y: -42}
+    isTerminal: 0

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: Level1
+  m_EditorClassIdentifier: 
+  nodeConnectionsData:
+  - baseNodeId: cf6d5886-d1a1-4bbb-98f0-7405cd2b4bf4
+    basePortName: right
+    targetNodeId: 64b5b862-a564-4959-b45f-b9b02c56ba0d
+    targetPortName: left
+  - baseNodeId: cf6d5886-d1a1-4bbb-98f0-7405cd2b4bf4
+    basePortName: down
+    targetNodeId: aa11f87d-b5ad-4edb-9c77-a61b0c6be0f0
+    targetPortName: up
+  - baseNodeId: 64b5b862-a564-4959-b45f-b9b02c56ba0d
+    basePortName: right
+    targetNodeId: e5bdcbbc-203c-4f22-84b5-961de07eb4c4
+    targetPortName: left
+  roomNodeData:
+  - nodeID: aa11f87d-b5ad-4edb-9c77-a61b0c6be0f0
+    nodeType: Enemy
+    position: {x: 14, y: 221}
+  - nodeID: cf6d5886-d1a1-4bbb-98f0-7405cd2b4bf4
+    nodeType: start
+    position: {x: 5, y: 87}
+  - nodeID: e5bdcbbc-203c-4f22-84b5-961de07eb4c4
+    nodeType: Treasure
+    position: {x: 579, y: 95}
+  - nodeID: 64b5b862-a564-4959-b45f-b9b02c56ba0d
+    nodeType: Trap
+    position: {x: 294, y: 89}
