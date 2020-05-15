@@ -34,14 +34,14 @@ public class DungeonGeneration : MonoBehaviour
         GameObject l_parent = new GameObject();
         l_parent.name = "Dungeon";
 
-        string l_startRoomID = m_graphToLoad.roomNodeData.Find(x => x.nodeType == "start").ToString();
-        //var startRoomNeighbours = m_graphToLoad.roomConnectionsData.Where(x => x.baseNodeId == l_startRoomID).ToList();
+        string l_startRoomID = m_graphToLoad.roomNodeData.Find(x => x.nodeType == "Start").nodeID;
+
         GameObject l_startRoom = SpawnRoom(l_startRoomID, l_parent.transform);
         roomDictionary.Add(l_startRoomID, l_startRoom);
         GenerateNeighbours(l_startRoomID, l_parent.transform);
 
-        List<RoomNodeData> roomsToGenerate = m_graphToLoad.roomNodeData.Where(x => x.nodeType != "start").ToList();//always generate the start room 1st
-      
+        List<RoomNodeData> roomsToGenerate = m_graphToLoad.roomNodeData.Where(x => x.nodeType != "Start").ToList();//always generate the start room 1st
+        Debug.Log(roomsToGenerate.Count());
         for (int i = 0; i < roomsToGenerate.Count; i++)
         {
 
@@ -50,6 +50,7 @@ public class DungeonGeneration : MonoBehaviour
             //generate doors
         }
 
+        roomDictionary.Clear();
 
         //////
     }
@@ -73,9 +74,18 @@ public class DungeonGeneration : MonoBehaviour
             //find connected gameObject by nodeID on dictionary
             GameObject connectedBaseRoom = roomDictionary.First(x=>x.Key == _baseRoomID).Value;
 
-            GameObject l_nextRoom = SpawnRoom(m_graphToLoad.roomNodeData.First(x=> x.nodeID == listOfOutputConnections[i].targetNodeId).nodeType, _parent);
+            string l_nextRoomID = listOfOutputConnections[i].targetNodeId;
+            GameObject l_nextRoom = SpawnRoom(l_nextRoomID, _parent);
+
+            roomDictionary.Add(l_nextRoomID, l_nextRoom);
+
+
             //List<RoomNodeConnectionsData> listOfConnections = m_graphToLoad.roomConnectionsData.Where(x => x.targetNodeId == _roomID).ToList();
-            ConnectRooms(connectedBaseRoom, l_nextRoom);
+            //string targetConnectionName = listOfOutputConnections[i].targetPortName;
+            string baseConnectionName = listOfOutputConnections[i].basePortName;
+
+
+            ConnectRooms(connectedBaseRoom, l_nextRoom, baseConnectionName);
         
             
 
@@ -87,20 +97,20 @@ public class DungeonGeneration : MonoBehaviour
     }
 
 
-    void ConnectRooms(GameObject _previousRoom, GameObject _currentRoomToSpawn)
+    void ConnectRooms(GameObject _previousRoom, GameObject _currentRoomToSpawn, string baseConnection)
     {
         RoomScript baseRoom = _previousRoom.GetComponent<RoomScript>();
         RoomScript targetRoom = _currentRoomToSpawn.GetComponent<RoomScript>();
 
-        string connection = baseRoom.m_doorsPlaceHolders[0].name;
-
-        switch (connection)
+        switch (baseConnection)
         {
             case "up":
-
+                baseRoom.GenerateDoor("up");
+                targetRoom.GenerateDoor("down");
+                targetRoom.transform.position = baseRoom.returnPosition("up") - (baseRoom.returnRoomSize()/2);
                 break;
         }
-        _currentRoomToSpawn.transform.position = new Vector3();
+
 
 
 
