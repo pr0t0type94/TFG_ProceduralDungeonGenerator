@@ -212,23 +212,9 @@ public class GrammarGraphWindow : EditorWindow
             List<RoomNodeConnectionsData> l_tempOutRoomPorts = _graphToLoadCache.roomConnectionsData.Where(x => x.baseNodeId == rData.nodeID).ToList();
             l_tempOutRoomPorts.ForEach(x => m_graphView.GenerateOutputPortsOnNode(l_tempRoom, x.basePortName));
 
-            List<RoomNodeConnectionsData> l_inputOutRoomPorts = _graphToLoadCache.roomConnectionsData.Where(x => x.targetNodeId == rData.nodeID).ToList();
-            l_inputOutRoomPorts.ForEach(x => m_graphView.GenerateInputPortsOnNode(l_tempRoom, x.targetPortName));
+            List<RoomNodeConnectionsData> l_tempInputRoomPorts = _graphToLoadCache.roomConnectionsData.Where(x => x.targetNodeId == rData.nodeID).ToList();
+            l_tempInputRoomPorts.ForEach(x => m_graphView.GenerateInputPortsOnNode(l_tempRoom, x.targetPortName));
         }
-
-        #region
-        //string targetRoomID = _graphToLoadCache.roomConnectionsData.Find(x => x.baseNodeId == beginNodeInstantiated.roomID).targetNodeId.ToString();
-        //Port targetPort = m_graphView.edges.ToList().Find(x => (x.input.node as RoomNode).roomID 
-        //== targetRoomID).input;
-
-
-        //string endNodeID = _graphToLoadCache.roomNodeData.Find(x => x.nodeType == "ending").nodeID;
-        //RoomNode endNode = l_newInstantiatedRoomsList.Find(x => x.name == "ending");
-        //beginNode.outputContainer.
-
-        //LinkRoomPorts(edgesBaseConnected.output, beginConnectedRoom.input);
-        //m_graphView.GenerateInputPortsOnNode(beginNodeInstantiated);
-        #endregion
 
         for (int i = 0; i < l_newInstantiatedRoomsList.Count; i++)
         {
@@ -239,9 +225,12 @@ public class GrammarGraphWindow : EditorWindow
                 string targetNodeId = l_connectionDataCache[j].targetNodeId;
                 RoomNode targetRoom = l_newInstantiatedRoomsList.First(x => x.roomID == targetNodeId);
                 //targetRoom.inputContainer.Q<Port>().portName = connectionDataCache[j].targetPortName;
-                
-               
-                LinkRoomPorts(l_newInstantiatedRoomsList[i].outputContainer[j].Q<Port>(), (Port)targetRoom.inputContainer[0]);
+
+                string targetPortName = l_connectionDataCache[j].targetPortName;
+
+                Port targetPortToConnect = m_graphView.ports.ToList().First(x => (x.node as RoomNode) == targetRoom && x.portName == targetPortName);
+
+                LinkRoomPorts(l_newInstantiatedRoomsList[i].outputContainer[j].Q<Port>(), targetPortToConnect);
 
                 
                 targetRoom.SetPosition(new Rect(_graphToLoadCache.roomNodeData.First(x => x.nodeID == targetRoom.roomID).position + 

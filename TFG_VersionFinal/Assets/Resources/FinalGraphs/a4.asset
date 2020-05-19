@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: a4
+  m_EditorClassIdentifier: 
+  roomConnectionsData:
+  - baseNodeId: 97db4d3b-d886-4cba-af4f-a2e0faf61e7b
+    basePortName: left
+    targetNodeId: 75c1d1fa-9adf-401d-874f-27f9bb60b7e0
+    targetPortName: down
+  - baseNodeId: 75c1d1fa-9adf-401d-874f-27f9bb60b7e0
+    basePortName: up
+    targetNodeId: f4d3ec62-8acd-46b5-81a9-31a5f47eab74
+    targetPortName: down
+  - baseNodeId: 2f23bf13-ebb2-4f7b-917d-7ff6f66a9ec6
+    basePortName: up
+    targetNodeId: 97db4d3b-d886-4cba-af4f-a2e0faf61e7b
+    targetPortName: down
+  - baseNodeId: 5c54d7ab-d08d-421c-b3ec-4b19f170df5e
+    basePortName: right
+    targetNodeId: 2f23bf13-ebb2-4f7b-917d-7ff6f66a9ec6
+    targetPortName: left
+  - baseNodeId: a044b7cb-f7ef-48aa-a1f5-062d9c2ae6bf
+    basePortName: rigth
+    targetNodeId: 4d8dd950-d046-45e4-b5f5-36e35c078b60
+    targetPortName: left
+  - baseNodeId: f4d3ec62-8acd-46b5-81a9-31a5f47eab74
+    basePortName: up
+    targetNodeId: a044b7cb-f7ef-48aa-a1f5-062d9c2ae6bf
+    targetPortName: down
+  roomNodeData:
+  - nodeID: 97db4d3b-d886-4cba-af4f-a2e0faf61e7b
+    nodeType: BaseRoom
+    position: {x: 432, y: 184}
+    isTerminal: 1
+  - nodeID: 75c1d1fa-9adf-401d-874f-27f9bb60b7e0
+    nodeType: BaseRoom
+    position: {x: 37, y: 181}
+    isTerminal: 1
+  - nodeID: 2f23bf13-ebb2-4f7b-917d-7ff6f66a9ec6
+    nodeType: BaseRoom
+    position: {x: 440, y: 284}
+    isTerminal: 1
+  - nodeID: f4d3ec62-8acd-46b5-81a9-31a5f47eab74
+    nodeType: BaseRoom
+    position: {x: 36, y: 61}
+    isTerminal: 1
+  - nodeID: 5c54d7ab-d08d-421c-b3ec-4b19f170df5e
+    nodeType: Start
+    position: {x: 56, y: 298}
+    isTerminal: 1
+  - nodeID: a044b7cb-f7ef-48aa-a1f5-062d9c2ae6bf
+    nodeType: BaseRoom
+    position: {x: 36, y: -62}
+    isTerminal: 1
+  - nodeID: 4d8dd950-d046-45e4-b5f5-36e35c078b60
+    nodeType: BaseRoom
+    position: {x: 446, y: -63}
+    isTerminal: 0

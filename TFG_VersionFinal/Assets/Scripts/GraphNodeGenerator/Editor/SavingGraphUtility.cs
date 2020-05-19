@@ -125,8 +125,14 @@ public class SavingGraphUtility
             {
                 string targetNodeId = l_connectionDataCache[j].targetNodeId;
                 RoomNode targetRoom = m_roomsList.First(x => x.roomID == targetNodeId);
+                string targetPortName = l_connectionDataCache[j].targetPortName;
+
+                Port targetPort = m_targetGraph.ports.ToList().First(x => (x.node as RoomNode) == targetRoom && x.portName == targetPortName);
+
                 //targetRoom.inputContainer.Q<Port>().portName = connectionDataCache[j].targetPortName;
-                LinkRoomPorts(m_roomsList[i].outputContainer[j].Q<Port>(), (Port)targetRoom.inputContainer[0]);
+                //LinkRoomPorts(m_roomsList[i].outputContainer[j].Q<Port>(), (Port)targetRoom.inputContainer[0]);
+                LinkRoomPorts(m_roomsList[i].outputContainer[j].Q<Port>(), targetPort);
+
                 targetRoom.SetPosition(new Rect(m_graphToLoadCache.roomNodeData.First(x => x.nodeID == targetRoom.roomID).position, m_targetGraph.defaultNodeSize));
             }
         }

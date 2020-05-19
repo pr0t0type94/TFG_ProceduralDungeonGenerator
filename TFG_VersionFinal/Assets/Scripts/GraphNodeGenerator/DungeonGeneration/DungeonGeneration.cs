@@ -20,10 +20,13 @@ public class DungeonGeneration : MonoBehaviour
     public Dictionary<string, GameObject> roomDictionary = new Dictionary<string, GameObject>();
 
 
+    public List<GameObject[]> prefabsList = new List<GameObject[]>();
 
 
     public void GenerateDungeon(string _fileName)
     {
+       
+
         m_graphToLoad = Resources.Load<RoomInfoContainer>($"FinalGraphs/{_fileName}");
         LoadRoomsInfo();
     }
@@ -31,6 +34,9 @@ public class DungeonGeneration : MonoBehaviour
 
     void LoadRoomsInfo()
     {
+        roomDictionary.Clear();
+
+
         GameObject l_parent = new GameObject();
         l_parent.name = "Dungeon";
 
@@ -50,8 +56,8 @@ public class DungeonGeneration : MonoBehaviour
             //generate doors
         }
 
-        roomDictionary.Clear();
-
+        //roomDictionary.Clear();
+       
         //////
     }
 
@@ -72,12 +78,26 @@ public class DungeonGeneration : MonoBehaviour
         for (int i = 0; i < listOfOutputConnections.Count; i++)
         {           
             //find connected gameObject by nodeID on dictionary
+
             GameObject connectedBaseRoom = roomDictionary.First(x=>x.Key == _baseRoomID).Value;
-
+            GameObject l_nextRoom;
             string l_nextRoomID = listOfOutputConnections[i].targetNodeId;
-            GameObject l_nextRoom = SpawnRoom(l_nextRoomID, _parent);
+         
+            if(!roomDictionary.ContainsKey(l_nextRoomID))
+            {
+                l_nextRoom = SpawnRoom(l_nextRoomID, _parent);
+                roomDictionary.Add(l_nextRoomID, l_nextRoom);
+            }
+            else
+            {
+               
+                l_nextRoom = roomDictionary.First(x => x.Key == l_nextRoomID).Value;
 
-            roomDictionary.Add(l_nextRoomID, l_nextRoom);
+            }
+
+
+         
+
 
 
             //List<RoomNodeConnectionsData> listOfConnections = m_graphToLoad.roomConnectionsData.Where(x => x.targetNodeId == _roomID).ToList();
@@ -101,13 +121,35 @@ public class DungeonGeneration : MonoBehaviour
     {
         RoomScript baseRoom = _previousRoom.GetComponent<RoomScript>();
         RoomScript targetRoom = _currentRoomToSpawn.GetComponent<RoomScript>();
+        Vector3 newPosition;
+
 
         switch (baseConnection)
         {
             case "up":
                 baseRoom.GenerateDoor("up");
                 targetRoom.GenerateDoor("down");
-                targetRoom.transform.position = baseRoom.returnPosition("up") - (baseRoom.returnRoomSize()/2);
+                newPosition = new Vector3(baseRoom.transform.position.x, baseRoom.transform.position.y, baseRoom.returnPosition("up").z - (baseRoom.returnRoomSize().z / 2));
+                targetRoom.transform.position = newPosition;
+                break;
+            case "right":
+                baseRoom.GenerateDoor("right");
+                targetRoom.GenerateDoor("left");
+                newPosition = new Vector3(baseRoom.returnPosition("right").x - (baseRoom.returnRoomSize().x / 2), baseRoom.transform.position.y, baseRoom.transform.position.z);
+                targetRoom.transform.position = newPosition;
+                break;
+
+            case "down":
+                baseRoom.GenerateDoor("down");
+                targetRoom.GenerateDoor("up");
+                newPosition = new Vector3(baseRoom.transform.position.x, baseRoom.transform.position.y, baseRoom.returnPosition("down").z + (baseRoom.returnRoomSize().z / 2));
+                targetRoom.transform.position = newPosition;
+                break;
+            case "left":
+                baseRoom.GenerateDoor("left");
+                targetRoom.GenerateDoor("right");
+                newPosition = new Vector3(baseRoom.returnPosition("left").x + (baseRoom.returnRoomSize().x / 2), baseRoom.transform.position.y, baseRoom.transform.position.z);
+                targetRoom.transform.position = newPosition;
                 break;
         }
 

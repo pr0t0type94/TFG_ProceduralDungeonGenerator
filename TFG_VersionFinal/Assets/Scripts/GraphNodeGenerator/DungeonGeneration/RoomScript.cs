@@ -15,7 +15,7 @@ public class RoomScript : MonoBehaviour
     public Vector3 returnRoomSize()
     {
         var goRenderer = gameObject.GetComponent<MeshRenderer>();
-        return new Vector3(0, 0, goRenderer.bounds.size.z);
+        return new Vector3(goRenderer.bounds.size.x, goRenderer.bounds.size.y, goRenderer.bounds.size.z);
     }
     public void getParents()
     {
@@ -40,27 +40,21 @@ public class RoomScript : MonoBehaviour
 
                 break;
             case "left":
-                //m_doorsPlaceHolders[2].SetActive(false);
+                m_doorsPlaceHolders[2].SetActive(false);
 
 
                 break;
-            case "rigth":
+            case "right":
 
-                //m_doorsPlaceHolders[3].SetActive(false);
-
+                m_doorsPlaceHolders[3].SetActive(false);
                 break;
         }
-
-    }
-    public void ConnectRoom()
-    {
 
     }
 
     public Vector3 returnPosition(string _name)
     {
         GameObject selectedDoor = m_doorsPlaceHolders.First(x => x.name == _name);
-        Debug.Log(selectedDoor.name);
         return selectedDoor.transform.position;
     }
 }

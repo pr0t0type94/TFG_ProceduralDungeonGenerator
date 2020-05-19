@@ -21,6 +21,10 @@ MonoBehaviour:
     basePortName: up
     targetNodeId: 8d980546-5e86-4998-9cc0-c2cee59bb4ad
     targetPortName: down
+  - baseNodeId: 82044356-e240-44b6-b213-565a80758458
+    basePortName: right
+    targetNodeId: 6bfe5534-4bdb-4168-b5c5-3557eee038ad
+    targetPortName: left
   roomNodeData:
   - nodeID: 8d980546-5e86-4998-9cc0-c2cee59bb4ad
     nodeType: BaseRoom
@@ -32,5 +36,9 @@ MonoBehaviour:
     isTerminal: 0
   - nodeID: 82044356-e240-44b6-b213-565a80758458
     nodeType: Start
-    position: {x: 36, y: 33}
+    position: {x: 26, y: 35}
+    isTerminal: 1
+  - nodeID: 6bfe5534-4bdb-4168-b5c5-3557eee038ad
+    nodeType: BaseRoom
+    position: {x: 421, y: 53}
     isTerminal: 1
