@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using System;
+using System.Linq;
 
 
 public class GrammarGraphView : GraphView
@@ -124,7 +125,7 @@ public class GrammarGraphView : GraphView
     public void GenerateOutputPortsOnNode(RoomNode _roomNode, string overridedName = "")
     {
 
-        Port generatedPort = GeneratePort(_roomNode, Direction.Output, Port.Capacity.Multi);
+        Port generatedPort = GeneratePort(_roomNode, Direction.Output, Port.Capacity.Single);
         
 
         //asignar nombre al puerto de salida
@@ -144,10 +145,10 @@ public class GrammarGraphView : GraphView
         generatedPort.portName = portName;
 
 
-        Button deletePortButton = new Button();
-        deletePortButton.text = "-";
-        deletePortButton.clickable.clicked += () => RemovePort(_roomNode, generatedPort);
-        generatedPort.contentContainer.Add(deletePortButton);
+        Button deleteOutPortButton = new Button();
+        deleteOutPortButton.text = "-";
+        deleteOutPortButton.clickable.clicked += () => RemovePort(_roomNode, generatedPort,"out");
+        generatedPort.contentContainer.Add(deleteOutPortButton);
 
 
         _roomNode.outputContainer.Add(generatedPort);
@@ -175,30 +176,73 @@ public class GrammarGraphView : GraphView
         generatedPort.contentContainer.Add(portText);
         generatedPort.portName = portName;
 
+        Button deleteInputPortButton = new Button();
+        deleteInputPortButton.text = "-";
+        deleteInputPortButton.clickable.clicked += () => RemovePort(_roomNode, generatedPort,"input");
+        generatedPort.contentContainer.Add(deleteInputPortButton);
+
+
 
         _roomNode.inputContainer.Add(generatedPort);
         _roomNode.RefreshPorts();
         _roomNode.RefreshExpandedState();
     }
 
-    private void RemovePort(RoomNode _roomNode, Port _portToRemove)
+
+    private void RemovePort(RoomNode _roomNode, Port _portToRemove, string _portDirection)
     {
-        List<Edge> l_edgesToRemove = edges.ToList();
+        List<Edge> edgesToList;
+        //identificamos los puertos que provengan de este room node & make sure este port proviene de este room node
+        if (_portDirection=="out")
+        {
+            _roomNode.outputContainer.Remove(_portToRemove);
+            edgesToList = edges.ToList().Where(x => x.output.portName == _portToRemove.portName && x.output.node == _portToRemove.node).ToList();
 
-        foreach(Edge e in l_edgesToRemove)
-        {         
-
-            if(e.output.portName == _portToRemove.portName && e.output.node == _portToRemove.node)
+            if (edgesToList.Any())
             {
-                e.input.Disconnect(e);
-                RemoveElement(e);
-                _roomNode.outputContainer.Remove(_portToRemove);
-                _roomNode.RefreshPorts();
-                _roomNode.RefreshExpandedState();
-                //_roomNode.connectedPorts.Remove(_portToRemove);
+
+                Edge targetEdge = edgesToList.First();
+                targetEdge.input.Disconnect(targetEdge);
+                RemoveElement(edgesToList.First());
+
+            }
+
+        }
+        else
+        {
+            _roomNode.inputContainer.Remove(_portToRemove);
+            edgesToList = edges.ToList().Where(x => x.input.portName == _portToRemove.portName && x.input.node == _portToRemove.node).ToList();
+
+            if (edgesToList.Any())
+            {
+
+                Edge targetEdge = edgesToList.First();
+                targetEdge.output.Disconnect(targetEdge);
+                RemoveElement(edgesToList.First());
 
             }
         }
+
+
+        _roomNode.RefreshPorts();
+        _roomNode.RefreshExpandedState();
+        
+        //List<Edge> l_edgesToRemove = edges.ToList();
+
+        //foreach(Edge e in l_edgesToRemove)
+        //{         
+
+        //    if(e.output.portName == _portToRemove.portName && e.output.node == _portToRemove.node)
+        //    {
+        //        e.input.Disconnect(e);
+        //        RemoveElement(e);
+        //        _roomNode.outputContainer.Remove(_portToRemove);
+        //        _roomNode.RefreshPorts();
+        //        _roomNode.RefreshExpandedState();
+        //        //_roomNode.connectedPorts.Remove(_portToRemove);
+
+        //    }
+        //}
     }
 
     // metodo para generar nuevos puertos en un nodo //definimos los posibles tipos de input de los puertos //obligatorio hacer override sino, no poemos conectar nodos 

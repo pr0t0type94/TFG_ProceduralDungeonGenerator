@@ -8,13 +8,14 @@ using System.Linq;
 
 public class GrammarGraphWindow : EditorWindow 
 {
+
+    ///// VARIABLES
     private GrammarGraphView m_graphView;
     private string m_ruleFileName = "New Grammar";
     private string m_finalGraphName = "Final Grammar";
-
-    public RoomNode m_selectedRoomNode;
-
-    public Edge m_currentBeginNodeEdge;
+    private Edge m_currentBeginNodeEdge;
+    private List<RoomInfoContainer> m_resourcesRulesLoaded = new List<RoomInfoContainer>();
+    /////FUNCIONES
     [MenuItem("Grammar/Graph Editor")]
     public static void OpenGrammarGraphWindow()
     {
@@ -23,16 +24,16 @@ public class GrammarGraphWindow : EditorWindow
         window.titleContent = new GUIContent(text: "GrammarGraph");
     }
 
-    private void OnEnable()//al abrir el editor debemos;
+    private void OnEnable()//al abrir el editor;
     {
         ConstructGraphView(); //generar la ventana
         GenerateToolbar(); // generar la barra de botones
     }
-
     private void OnDisable()//al cerrar el editor;
     {
         rootVisualElement.Remove(m_graphView);//eliminar la ventana 
     }
+
     private void ConstructGraphView()//generar la ventana del editor
     {
         m_graphView = new GrammarGraphView();//crear la variable ventana
@@ -45,7 +46,6 @@ public class GrammarGraphWindow : EditorWindow
     {
         Toolbar toolbar = new Toolbar();
 
-        //lambda expression para no tner el cuenta el tipo; de createNode (void) a clickEvent (Event)
         Button nodeButton = new Button(); //boton para crear un nodo tipo "Room", el clickEvent especifica que debe hacer el boton cuando es clicado
         nodeButton.text = "Create Room";//nombre del boton
         nodeButton.clickable.clicked += () => m_graphView.createNode("Room"); //evento de clickar -> llamamos a la funcion createNode del graphView
@@ -107,8 +107,7 @@ public class GrammarGraphWindow : EditorWindow
         toolbar.Add(loadFinalGraph);//añadimos el boton a la toolbar
 
         rootVisualElement.Add(toolbar);//finalmente añadimos la toolbar a la ventana del editor
-    }
-
+    }//generar la barra de botones de la ventana
 
     private void SaveGrammarData(string _saveFileName,bool isFinalGraph = false)
     {
@@ -122,7 +121,7 @@ public class GrammarGraphWindow : EditorWindow
             saveManager.SaveGraph(_saveFileName, isFinalGraph);
         }
 
-    }
+    }//guardar info del grafico
     private void LoadGrammarData(string _saveFileName,bool isFinalGraph = false)
     {
         if (string.IsNullOrEmpty(_saveFileName))
@@ -132,60 +131,34 @@ public class GrammarGraphWindow : EditorWindow
 
         SavingGraphUtility saveManager = SavingGraphUtility.GetInstance(m_graphView);
         saveManager.LoadGraph(_saveFileName, isFinalGraph);
-    }
+    }//cargar info del grafico
 
-
-    //private void SaveFinalGraph()
-    //{
-    //    if (string.IsNullOrEmpty(m_finalGraphName))
-    //    {
-    //        Debug.Log("Invalid file name");
-    //    }
-    //    else
-    //    {
-    //        SavingGraphUtility saveManager = SavingGraphUtility.GetInstance(m_graphView);
-    //        saveManager.SaveGraph(m_finalGraphName, true);
-    //    }
-
-    //}
-    //private void LoadFinalGraph()
-    //{
-    //    if (string.IsNullOrEmpty(m_finalGraphName))
-    //    {
-    //        Debug.Log("Invalid file name");
-    //    }
-    //    else
-    //    {
-    //        SavingGraphUtility saveManager = SavingGraphUtility.GetInstance(m_graphView);
-    //        saveManager.LoadRulesGraph(m_finalGraphName, true);
-    //    }
-
-    //}
-
-
-    private void ExpandNonTerminalNodes()
+    private void ExpandNonTerminalNodes()//expandir los nodos NO MARCADOS con isTerminal
     {
-
-        //RoomNode l_roomToExpand = m_graphView.returnSelectedNode();
-        //RoomInfoContainer expandedLoadedGraph = Resources.Load<RoomInfoContainer>($"Rules/{l_roomToExpand.roomType}");
-
-        //m_graphView.RemoveElement(l_roomToExpand);
-
         foreach(RoomNode _currRoom in m_graphView.nodes.ToList())
         {
             if (!_currRoom.isTerminal)
             {
+                m_resourcesRulesLoaded = Resources.LoadAll<RoomInfoContainer>("Rules").ToList();
 
-                RoomInfoContainer expandedLoadedGraph = Resources.Load<RoomInfoContainer>($"Rules/{_currRoom.roomType}");
-                CreateExpandedNodes(expandedLoadedGraph, _currRoom);
-
-                m_graphView.RemoveElement(_currRoom);
-                foreach(Edge e in m_graphView.edges.ToList())
+                if(m_resourcesRulesLoaded.Exists(x=>x.name.Contains(_currRoom.roomType)))
                 {
-                    if ((e.input.node as RoomNode) == _currRoom)
+                    RoomInfoContainer[] m_candidateRules = m_resourcesRulesLoaded.Where(x => x.name.Contains(_currRoom.roomType)).ToArray();
+
+                    int randomNumber = Random.Range(0, m_candidateRules.Length-1);                   
+                    RoomInfoContainer expandedLoadedGraph = m_candidateRules[randomNumber];                  
+
+                    CreateExpandedNodes(expandedLoadedGraph, _currRoom);
+
+                    m_graphView.RemoveElement(_currRoom);
+                    foreach(Edge e in m_graphView.edges.ToList())
                     {
-                        m_graphView.RemoveElement(e);                        
+                        if ((e.input.node as RoomNode) == _currRoom)
+                        {
+                            m_graphView.RemoveElement(e);                        
+                        }
                     }
+
                 }
             }
         }
@@ -193,13 +166,8 @@ public class GrammarGraphWindow : EditorWindow
 
 
     }
-
-
-
     private void CreateExpandedNodes(RoomInfoContainer _graphToLoadCache, RoomNode roomToExpand)
-    {
-       
-
+    {     
         List<RoomNode> l_newInstantiatedRoomsList = new List<RoomNode>();
 
         foreach (RoomNodeData rData in _graphToLoadCache.roomNodeData)
@@ -280,7 +248,6 @@ public class GrammarGraphWindow : EditorWindow
        
        
     }
-
     private void LinkRoomPorts(Port _outPort, Port _inPort)
     {
         Edge tempEdge = new Edge()

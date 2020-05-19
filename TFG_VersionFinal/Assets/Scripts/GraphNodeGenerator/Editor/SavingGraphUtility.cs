@@ -23,7 +23,7 @@ public class SavingGraphUtility
 
     public void SaveGraph(string _fileName, bool isFinalGraph = false)
     {
-        if (!m_roomsList.Any()) return;// si no hay rooms que guardar, no hacemos nada
+        if (!m_roomsList.Any()) { Debug.Log("No nodes to save found"); return; } // si no hay rooms que guardar, no hacemos nada
 
         RoomInfoContainer l_nodeContainerData = ScriptableObject.CreateInstance<RoomInfoContainer>();
 
@@ -59,10 +59,15 @@ public class SavingGraphUtility
             });
         }
 
-        if(!isFinalGraph)
-        AssetDatabase.CreateAsset(l_nodeContainerData, $"Assets/Resources/Rules/{_fileName}.asset");//generamos un asset con la informacion 
+        if (!isFinalGraph)
+            if(!m_roomsList.Exists(x => x.roomType == "Begin")) { Debug.Log("You need to create a Begin node to save a Rule"); return; }
+            else AssetDatabase.CreateAsset(l_nodeContainerData, $"Assets/Resources/Rules/{_fileName}.asset");//generamos un asset con la informacion 
+
         else
-            AssetDatabase.CreateAsset(l_nodeContainerData, $"Assets/Resources/FinalGraphs/{_fileName}.asset");//generamos un asset con la informacion 
+            if (!m_roomsList.Exists(x => x.roomType == "Start")) { Debug.Log("You need to create a Start node to save a FinalGraph"); return; }
+            else AssetDatabase.CreateAsset(l_nodeContainerData, $"Assets/Resources/FinalGraphs/{_fileName}.asset");//generamos un asset con la informacion 
+
+
 
         AssetDatabase.SaveAssets();
 

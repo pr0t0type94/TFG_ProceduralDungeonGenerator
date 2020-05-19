@@ -426,9 +426,26 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5701536547745370572, guid: f8524319eaddb7242b11ec27f45e3abc,
         type: 3}
-      propertyPath: m_graphFileToGenerate
-      value: d
+      propertyPath: m_roomPrefabsToSpawn.Array.size
+      value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 5701536547745370572, guid: f8524319eaddb7242b11ec27f45e3abc,
+        type: 3}
+      propertyPath: m_graphFileToGenerate
+      value: q3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701536547745370572, guid: f8524319eaddb7242b11ec27f45e3abc,
+        type: 3}
+      propertyPath: m_roomPrefabsToSpawn.Array.data[5]
+      value: 
+      objectReference: {fileID: 8290652283326372936, guid: 9122d8b2c17db4e41a5262b8dd52b0f9,
+        type: 3}
+    - target: {fileID: 5701536547745370572, guid: f8524319eaddb7242b11ec27f45e3abc,
+        type: 3}
+      propertyPath: m_roomPrefabsToSpawn.Array.data[6]
+      value: 
+      objectReference: {fileID: 8290652283326372936, guid: 163f7e199a5733c408eeefa3ce196d2b,
+        type: 3}
     - target: {fileID: 5701536547745370573, guid: f8524319eaddb7242b11ec27f45e3abc,
         type: 3}
       propertyPath: m_LocalPosition.x
