@@ -29,23 +29,53 @@ public class RoomScript : MonoBehaviour
         switch(_roomConnection)
         {
             case "up":
-
                 m_doorsPlaceHolders[0].SetActive(false);
-
                 break;
 
             case "down":
-
                 m_doorsPlaceHolders[1].SetActive(false);
-
                 break;
+
             case "left":
                 m_doorsPlaceHolders[2].SetActive(false);
-
-
                 break;
-            case "right":
 
+            case "right":
+                m_doorsPlaceHolders[3].SetActive(false);
+                break;
+
+            /////KEY CASES
+            case "up+key":
+                m_doorsPlaceHolders[0].SetActive(false);
+                Instantiate(m_doorPrefab, this.gameObject.transform).transform.position = m_doorsPlaceHolders[0].transform.position;
+                break;
+
+            case "down+key":
+                m_doorsPlaceHolders[1].SetActive(false);
+                break;
+
+            case "left+key":
+                m_doorsPlaceHolders[2].SetActive(false);
+                break;
+
+            case "right+key":
+                m_doorsPlaceHolders[3].SetActive(false);
+                break;
+
+            ///// STAIRS CASE
+            case "up+stairs":
+                m_doorsPlaceHolders[0].SetActive(false);
+                break;
+
+            case "down+stairs":
+                m_doorsPlaceHolders[1].SetActive(false);
+                break;
+
+            case "left+stairs":
+                m_doorsPlaceHolders[2].SetActive(false);
+                break;
+
+            case "right+stairs":
                 m_doorsPlaceHolders[3].SetActive(false);
                 break;
         }

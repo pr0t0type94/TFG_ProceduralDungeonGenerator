@@ -17,10 +17,6 @@ MonoBehaviour:
     basePortName: up
     targetNodeId: e29a6a64-21bc-4779-b94e-27afc0e2f2c2
     targetPortName: down
-  - baseNodeId: cc1cb82a-8131-4c3a-b9bc-0b99c3f43c67
-    basePortName: right
-    targetNodeId: 8eeb9bea-ada9-41da-9806-b41d14249abb
-    targetPortName: left
   - baseNodeId: d40c76a0-9675-4178-bdf7-495c2c49b757
     basePortName: right
     targetNodeId: cc1cb82a-8131-4c3a-b9bc-0b99c3f43c67
@@ -34,11 +30,7 @@ MonoBehaviour:
     nodeType: Room
     position: {x: 366, y: -21}
     isTerminal: 0
-  - nodeID: 8eeb9bea-ada9-41da-9806-b41d14249abb
-    nodeType: Enemy
-    position: {x: 787, y: 142}
-    isTerminal: 1
   - nodeID: d40c76a0-9675-4178-bdf7-495c2c49b757
     nodeType: begin
-    position: {x: -34, y: 137}
+    position: {x: -34, y: 87}
     isTerminal: 1

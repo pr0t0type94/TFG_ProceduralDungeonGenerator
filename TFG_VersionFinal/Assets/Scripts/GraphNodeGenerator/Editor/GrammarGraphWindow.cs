@@ -14,6 +14,7 @@ public class GrammarGraphWindow : EditorWindow
     private string m_ruleFileName = "New Grammar";
     private string m_finalGraphName = "Final Grammar";
     private Edge m_currentBeginNodeEdge;
+    private RoomNode beginNodeInstantiated;
     private List<RoomInfoContainer> m_resourcesRulesLoaded = new List<RoomInfoContainer>();
     /////FUNCIONES
     [MenuItem("Grammar/Graph Editor")]
@@ -198,9 +199,11 @@ public class GrammarGraphWindow : EditorWindow
 
                 Port targetPortToConnect = m_graphView.ports.ToList().First(x => (x.node as RoomNode) == targetRoom && x.portName == targetPortName);
 
+                if(l_newInstantiatedRoomsList[i].roomType == "begin")
+                beginNodeInstantiated = l_newInstantiatedRoomsList[i];
+
                 LinkRoomPorts(l_newInstantiatedRoomsList[i].outputContainer[j].Q<Port>(), targetPortToConnect);
 
-                
                 targetRoom.SetPosition(new Rect(_graphToLoadCache.roomNodeData.First(x => x.nodeID == targetRoom.roomID).position + 
                     roomToExpand.GetPosition().position, m_graphView.defaultNodeSize));
             }
@@ -210,7 +213,6 @@ public class GrammarGraphWindow : EditorWindow
         basePort.portColor = new Color(0, 0, 200);//blue
 
 
-        RoomNode beginNodeInstantiated = l_newInstantiatedRoomsList.First(x => x.roomType == "begin");
         Port targetPort = m_currentBeginNodeEdge.input;
         targetPort.portColor = new Color(200, 0, 0);//red
 
@@ -255,8 +257,11 @@ public class GrammarGraphWindow : EditorWindow
             output = _outPort,
             input = _inPort
         };
-        if ((_outPort.node as RoomNode).roomType == "begin")
+
+        if ((_outPort.node as RoomNode) == beginNodeInstantiated)
+        {
             m_currentBeginNodeEdge = tempEdge;
+        }
         else
         {
             tempEdge.input.Connect(tempEdge);

@@ -60,11 +60,11 @@ public class SavingGraphUtility
         }
 
         if (!isFinalGraph)
-            if(!m_roomsList.Exists(x => x.roomType == "Begin")) { Debug.Log("You need to create a Begin node to save a Rule"); return; }
+            if(!m_roomsList.Exists(x => x.roomType == "begin")) { Debug.Log("You need to create a 'begin' node to save a Rule"); return; }
             else AssetDatabase.CreateAsset(l_nodeContainerData, $"Assets/Resources/Rules/{_fileName}.asset");//generamos un asset con la informacion 
 
         else
-            if (!m_roomsList.Exists(x => x.roomType == "Start")) { Debug.Log("You need to create a Start node to save a FinalGraph"); return; }
+            if (!m_roomsList.Exists(x => x.roomType == "Start")) { Debug.Log("You need to create a 'Start' node to save a FinalGraph"); return; }
             else AssetDatabase.CreateAsset(l_nodeContainerData, $"Assets/Resources/FinalGraphs/{_fileName}.asset");//generamos un asset con la informacion 
 
 

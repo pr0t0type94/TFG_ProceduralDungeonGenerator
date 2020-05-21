@@ -25,8 +25,7 @@ public class DungeonGeneration : MonoBehaviour
 
     public void GenerateDungeon(string _fileName)
     {
-       
-
+      
         m_graphToLoad = Resources.Load<RoomInfoContainer>($"FinalGraphs/{_fileName}");
         LoadRoomsInfo();
     }
@@ -91,50 +90,39 @@ public class DungeonGeneration : MonoBehaviour
             //find connected gameObject by nodeID on dictionary
             GameObject connectedBaseRoom = roomDictionary.First(x => x.Key == _baseRoomID).Value;
             string baseConnectionName = listOfOutputConnections[i].basePortName;
-            ConnectRooms(connectedBaseRoom, l_nextRoom, baseConnectionName);
+            string targetConnectionName = listOfOutputConnections[i].targetPortName;
+
+            ConnectRooms(connectedBaseRoom, l_nextRoom, baseConnectionName, targetConnectionName);
         
             
         }//end for 
     }
 
 
-    void ConnectRooms(GameObject _previousRoom, GameObject _currentRoomToSpawn, string baseConnection)
+    void ConnectRooms(GameObject _previousRoom, GameObject _currentRoomToSpawn, string _baseConnectionName, string _targetConnectionName)
     {
         RoomScript baseRoom = _previousRoom.GetComponent<RoomScript>();
         RoomScript targetRoom = _currentRoomToSpawn.GetComponent<RoomScript>();
-        Vector3 newPosition;
+        Vector3 newPosition = Vector3.zero;
 
 
-        switch (baseConnection)
-        {
-            case "up":
-                baseRoom.GenerateDoor("up");
-                targetRoom.GenerateDoor("down");
-                newPosition = new Vector3(baseRoom.transform.position.x, baseRoom.transform.position.y, baseRoom.returnPosition("up").z - (baseRoom.returnRoomSize().z / 2));
-                targetRoom.transform.position = newPosition;
-                break;
-            case "right":
-                baseRoom.GenerateDoor("right");
-                targetRoom.GenerateDoor("left");
-                newPosition = new Vector3(baseRoom.returnPosition("right").x - (baseRoom.returnRoomSize().x / 2), baseRoom.transform.position.y, baseRoom.transform.position.z);
-                targetRoom.transform.position = newPosition;
-                break;
+        baseRoom.GenerateDoor(_baseConnectionName);
+        targetRoom.GenerateDoor(_targetConnectionName);
 
-            case "down":
-                baseRoom.GenerateDoor("down");
-                targetRoom.GenerateDoor("up");
-                newPosition = new Vector3(baseRoom.transform.position.x, baseRoom.transform.position.y, baseRoom.returnPosition("down").z + (baseRoom.returnRoomSize().z / 2));
-                targetRoom.transform.position = newPosition;
-                break;
-            case "left":
-                baseRoom.GenerateDoor("left");
-                targetRoom.GenerateDoor("right");
-                newPosition = new Vector3(baseRoom.returnPosition("left").x + (baseRoom.returnRoomSize().x / 2), baseRoom.transform.position.y, baseRoom.transform.position.z);
-                targetRoom.transform.position = newPosition;
-                break;
-        }
+        if(_baseConnectionName == "up" || _baseConnectionName == "up+key")
+            newPosition = new Vector3(baseRoom.transform.position.x, baseRoom.transform.position.y, baseRoom.returnPosition("up").z + (baseRoom.returnRoomSize().z / 2));
+
+        else if (_baseConnectionName == "down" || _baseConnectionName == "down+key")
+            newPosition = new Vector3(baseRoom.transform.position.x, baseRoom.transform.position.y, baseRoom.returnPosition("down").z - (baseRoom.returnRoomSize().z / 2));
+
+        else if (_baseConnectionName == "left" || _baseConnectionName == "left+key")
+            newPosition = new Vector3(baseRoom.returnPosition("left").x - (baseRoom.returnRoomSize().x / 2), baseRoom.transform.position.y, baseRoom.transform.position.z);
+
+        else if (_baseConnectionName == "right" || _baseConnectionName == "right+key")
+            newPosition = new Vector3(baseRoom.returnPosition("right").x + (baseRoom.returnRoomSize().x / 2), baseRoom.transform.position.y, baseRoom.transform.position.z);
 
 
+            targetRoom.transform.position = newPosition;
 
 
     }
