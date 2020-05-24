@@ -634,9 +634,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 06390000
       m_LastClickedID: 0
-      m_ExpandedIDs: d0caffffaacdffffdad2ffff22d3ffff26d3ffff5ad6ffff60e5ffff64e5ffffb8eaffffbceaffff8aeeffff8eeeffffd8f7ffff52fbffff
+      m_ExpandedIDs: 52fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -699,20 +699,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Scripts/GraphNodeGenerator/Editor
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Scripts/GraphNodeGenerator/Editor
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\manel\Desktop\UNI\4to\TFG\ProyectoUnity\TFG_ProceduralDungeonGenerator\TFG_VersionFinal
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 40420000
-    m_LastClickedID: 16960
-    m_ExpandedIDs: 00000000603d0000fe41000000420000024200000442000006420000084200000a4200000c420000
+    m_SelectedIDs: 6c410000
+    m_LastClickedID: 16748
+    m_ExpandedIDs: 000000005a3d00001441000016410000184100001a4100001c4100001e4100002041000066410000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -740,7 +740,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000603d0000fe41000000420000024200000442000006420000084200000a4200000c420000
+    m_ExpandedIDs: 000000005a3d00001441000016410000184100001a4100001c4100001e41000020410000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

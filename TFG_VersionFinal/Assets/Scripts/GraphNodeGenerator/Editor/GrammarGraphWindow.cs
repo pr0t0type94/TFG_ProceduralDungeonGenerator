@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using System.Linq;
+using System;
 
 public class GrammarGraphWindow : EditorWindow 
 {
@@ -16,6 +17,16 @@ public class GrammarGraphWindow : EditorWindow
     private Edge m_currentBeginNodeEdge;
     private RoomNode beginNodeInstantiated;
     private List<RoomInfoContainer> m_resourcesRulesLoaded = new List<RoomInfoContainer>();
+
+    private enum connectionTypes
+    {
+        up,
+        down,
+        left,
+        right
+        
+    }
+
     /////FUNCIONES
     [MenuItem("Grammar/Graph Editor")]
     public static void OpenGrammarGraphWindow()
@@ -29,6 +40,7 @@ public class GrammarGraphWindow : EditorWindow
     {
         ConstructGraphView(); //generar la ventana
         GenerateToolbar(); // generar la barra de botones
+        GenerateSecondaryToolbar();
     }
     private void OnDisable()//al cerrar el editor;
     {
@@ -110,6 +122,34 @@ public class GrammarGraphWindow : EditorWindow
         rootVisualElement.Add(toolbar);//finalmente añadimos la toolbar a la ventana del editor
     }//generar la barra de botones de la ventana
 
+    private void GenerateSecondaryToolbar()
+    {
+        Toolbar l_secondaryToolbar = new Toolbar();
+
+
+        Button generateRandomDungeon = new Button();
+        generateRandomDungeon.text = "Generate Random Dungeon";
+        generateRandomDungeon.clickable.clicked += () => GenerateRandomDungeon();
+        l_secondaryToolbar.Add(generateRandomDungeon);
+
+        //SliderInt maxNumberOfRooms = new SliderInt();
+        //maxNumberOfRooms.tooltip = "Max Number of Rooms instantiated on the dungeon";
+        //l_secondaryToolbar.Add(maxNumberOfRooms);
+
+        IntegerField maxNumberOfRooms = new IntegerField();
+        maxNumberOfRooms.tooltip = "Max Number of Rooms instantiated on the dungeon";
+        maxNumberOfRooms.label = "Max number of rooms";
+        l_secondaryToolbar.Add(maxNumberOfRooms);
+
+        IntegerField maxNumberOfFloors = new IntegerField();
+        maxNumberOfFloors.tooltip = "Max Number of Floors the dungeon has";
+        maxNumberOfFloors.label = "Max number of floors";
+        l_secondaryToolbar.Add(maxNumberOfFloors);
+
+        rootVisualElement.Add(l_secondaryToolbar);
+    }
+
+
     private void SaveGrammarData(string _saveFileName,bool isFinalGraph = false)
     {
         if (string.IsNullOrEmpty(_saveFileName))
@@ -146,7 +186,7 @@ public class GrammarGraphWindow : EditorWindow
                 {
                     RoomInfoContainer[] m_candidateRules = m_resourcesRulesLoaded.Where(x => x.name.Contains(_currRoom.roomType)).ToArray();
 
-                    int randomNumber = Random.Range(0, m_candidateRules.Length-1);                   
+                    int randomNumber = UnityEngine.Random.Range(0, m_candidateRules.Length-1);                   
                     RoomInfoContainer expandedLoadedGraph = m_candidateRules[randomNumber];                  
 
                     CreateExpandedNodes(expandedLoadedGraph, _currRoom);
@@ -269,5 +309,59 @@ public class GrammarGraphWindow : EditorWindow
             m_graphView.Add(tempEdge);
 
         }
+    }
+
+    private void GenerateRandomDungeon()
+    {
+        if (m_graphView.nodes.ToList().Count > 0)
+        {
+            //clear current nodes and conections
+        }
+
+        List<RoomNode> l_currentInstantiatedRooms = new List<RoomNode>();
+
+        RoomNode startNode = m_graphView.CreateRoomNode("Start",true);
+        l_currentInstantiatedRooms.Add(startNode);
+
+        //GenereteNeighbourRooms(startNode);
+
+
+        int newRandomValue = UnityEngine.Random.Range(0,10);
+
+        //for MAX ROOM NUMBER
+        
+
+        //List<RoomNode> l_currentInstantiatedRooms = m_graphView.nodes.ToList().Cast<RoomNode>().ToList();
+
+
+
+
+
+    }
+
+    private void GenereteNeighbourRooms(RoomNode startNode)
+    {
+        int numberOfConnections;
+
+        if (startNode.roomType == "Start")
+         numberOfConnections = UnityEngine.Random.Range(1, 5);
+        else
+            numberOfConnections = UnityEngine.Random.Range(0, 5);
+
+
+        int randomConnectionName = UnityEngine.Random.Range(0, 10);
+
+        for (int i = 0; i < numberOfConnections+1; i++)
+        {
+            Port l_basePort = m_graphView.GenerateOutputPortsOnNode(startNode, "random conection");
+
+            RoomNode l_newRoomToSpawn = m_graphView.CreateRoomNode("random TYPE");
+
+            Port l_targetPort = m_graphView.GenerateInputPortsOnNode(l_newRoomToSpawn, "random previously based");
+
+
+            LinkRoomPorts(l_basePort, l_targetPort);
+        }
+
     }
 }

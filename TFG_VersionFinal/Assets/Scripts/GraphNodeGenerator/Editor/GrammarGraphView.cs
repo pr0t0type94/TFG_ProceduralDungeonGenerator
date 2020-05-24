@@ -122,7 +122,7 @@ public class GrammarGraphView : GraphView
 
 
     //agregar mas puertos de conexion out al nodo
-    public void GenerateOutputPortsOnNode(RoomNode _roomNode, string overridedName = "")
+    public Port GenerateOutputPortsOnNode(RoomNode _roomNode, string overridedName = "")
     {
 
         Port generatedPort = GeneratePort(_roomNode, Direction.Output, Port.Capacity.Single);
@@ -154,9 +154,11 @@ public class GrammarGraphView : GraphView
         _roomNode.outputContainer.Add(generatedPort);
         _roomNode.RefreshPorts();//actualizamos la lista de puertos
         _roomNode.RefreshExpandedState();//hacer visibles los nuevos elementos del container
+
+        return generatedPort;
     }
 
-    public void GenerateInputPortsOnNode(RoomNode _roomNode, string overridedName = "") {
+    public Port GenerateInputPortsOnNode(RoomNode _roomNode, string overridedName = "") {
 
         Port generatedPort = GeneratePort(_roomNode, Direction.Input, Port.Capacity.Single);
 
@@ -186,6 +188,8 @@ public class GrammarGraphView : GraphView
         _roomNode.inputContainer.Add(generatedPort);
         _roomNode.RefreshPorts();
         _roomNode.RefreshExpandedState();
+
+        return generatedPort;
     }
 
 
