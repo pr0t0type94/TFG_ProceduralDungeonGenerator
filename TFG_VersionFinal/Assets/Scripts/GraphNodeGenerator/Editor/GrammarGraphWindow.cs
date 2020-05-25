@@ -18,6 +18,9 @@ public class GrammarGraphWindow : EditorWindow
     private RoomNode beginNodeInstantiated;
     private List<RoomInfoContainer> m_resourcesRulesLoaded = new List<RoomInfoContainer>();
 
+    List<RoomNode> m_currentInstantiatedRooms = new List<RoomNode>();
+
+    private int m_numberOfRoomsToGenerate;
     private enum connectionTypes
     {
         up,
@@ -132,6 +135,8 @@ public class GrammarGraphWindow : EditorWindow
         generateRandomDungeon.clickable.clicked += () => GenerateRandomDungeon();
         l_secondaryToolbar.Add(generateRandomDungeon);
 
+       
+
         //SliderInt maxNumberOfRooms = new SliderInt();
         //maxNumberOfRooms.tooltip = "Max Number of Rooms instantiated on the dungeon";
         //l_secondaryToolbar.Add(maxNumberOfRooms);
@@ -139,12 +144,20 @@ public class GrammarGraphWindow : EditorWindow
         IntegerField maxNumberOfRooms = new IntegerField();
         maxNumberOfRooms.tooltip = "Max Number of Rooms instantiated on the dungeon";
         maxNumberOfRooms.label = "Max number of rooms";
+        maxNumberOfRooms.RegisterValueChangedCallback(evt => m_numberOfRoomsToGenerate = evt.newValue);
+        //m_numberOfRoomsToGenerate = maxNumberOfRooms.value;
         l_secondaryToolbar.Add(maxNumberOfRooms);
 
         IntegerField maxNumberOfFloors = new IntegerField();
         maxNumberOfFloors.tooltip = "Max Number of Floors the dungeon has";
         maxNumberOfFloors.label = "Max number of floors";
         l_secondaryToolbar.Add(maxNumberOfFloors);
+
+
+        Button clearAllNodesOnGraph = new Button();
+        clearAllNodesOnGraph.text = "Clear All";
+        clearAllNodesOnGraph.clickable.clicked += () => ClearAllNodesOnGraph();
+        l_secondaryToolbar.Add(clearAllNodesOnGraph);
 
         rootVisualElement.Add(l_secondaryToolbar);
     }
@@ -262,19 +275,19 @@ public class GrammarGraphWindow : EditorWindow
         LinkRoomPorts(basePort, targetPort);
         //basePort.ConnectTo(targetPort);
 
-        List<RoomNode> currentNodesOnGraph = m_graphView.nodes.ToList().Cast<RoomNode>().ToList();
+        List<RoomNode> l_currentNodesOnGraph = m_graphView.nodes.ToList().Cast<RoomNode>().ToList();
      
-       for (int i = 0; i < currentNodesOnGraph.Count; i++)
+       for (int i = 0; i < l_currentNodesOnGraph.Count; i++)
        {
             for (int j = 0; j < l_newInstantiatedRoomsList.Count(); j++)
             {
-                if (currentNodesOnGraph[i] == l_newInstantiatedRoomsList[j])
+                if (l_currentNodesOnGraph[i] == l_newInstantiatedRoomsList[j])
                 {
 
-                    List<Edge> l_currentOutputRoomEdges = m_graphView.edges.ToList().Where(x => (x.output.node as RoomNode) == currentNodesOnGraph[i]).ToList();
-                    List<Edge> l_currentInputRoomEdges = m_graphView.edges.ToList().Where(x => (x.input.node as RoomNode) == currentNodesOnGraph[i]).ToList();
+                    List<Edge> l_currentOutputRoomEdges = m_graphView.edges.ToList().Where(x => (x.output.node as RoomNode) == l_currentNodesOnGraph[i]).ToList();
+                    List<Edge> l_currentInputRoomEdges = m_graphView.edges.ToList().Where(x => (x.input.node as RoomNode) == l_currentNodesOnGraph[i]).ToList();
 
-                    string newRoomID = currentNodesOnGraph[i].roomID = System.Guid.NewGuid().ToString();
+                    string newRoomID = l_currentNodesOnGraph[i].roomID = System.Guid.NewGuid().ToString();
 
                     foreach (Edge e in l_currentOutputRoomEdges)
                     {
@@ -313,17 +326,22 @@ public class GrammarGraphWindow : EditorWindow
 
     private void GenerateRandomDungeon()
     {
+
+        ClearAllNodesOnGraph();
+        m_currentInstantiatedRooms.Clear();
+
         if (m_graphView.nodes.ToList().Count > 0)
         {
             //clear current nodes and conections
         }
+        Debug.Log(m_numberOfRoomsToGenerate);
 
-        List<RoomNode> l_currentInstantiatedRooms = new List<RoomNode>();
+
 
         RoomNode startNode = m_graphView.CreateRoomNode("Start",true);
-        l_currentInstantiatedRooms.Add(startNode);
-
-        //GenereteNeighbourRooms(startNode);
+        m_graphView.AddElement(startNode);
+        m_currentInstantiatedRooms.Add(startNode);
+        GenereteNeighbourRooms(startNode);
 
 
         int newRandomValue = UnityEngine.Random.Range(0,10);
@@ -339,29 +357,99 @@ public class GrammarGraphWindow : EditorWindow
 
     }
 
-    private void GenereteNeighbourRooms(RoomNode startNode)
+    private void GenereteNeighbourRooms(RoomNode _baseRoom)
     {
+
+        ConectionsDictionary newDictionaryReference = new ConectionsDictionary();
+
+
         int numberOfConnections;
 
-        if (startNode.roomType == "Start")
-         numberOfConnections = UnityEngine.Random.Range(1, 5);
-        else
-            numberOfConnections = UnityEngine.Random.Range(0, 5);
-
+        if (_baseRoom.roomType == "Start") numberOfConnections = UnityEngine.Random.Range(1, 5);
+        else numberOfConnections = UnityEngine.Random.Range(0, 5);
 
         int randomConnectionName = UnityEngine.Random.Range(0, 10);
 
-        for (int i = 0; i < numberOfConnections+1; i++)
+        List<string> currentAddedNames = new List<string>();
+
+        for (int i = 0; i < numberOfConnections; i++)
         {
-            Port l_basePort = m_graphView.GenerateOutputPortsOnNode(startNode, "random conection");
+
+            int randomTerminalProbability = UnityEngine.Random.Range(0, 2); //50% chance
 
             RoomNode l_newRoomToSpawn = m_graphView.CreateRoomNode("random TYPE");
+            //l_newRoomToSpawn.isTerminal = randomTerminalProbability > 0 ? true : false;
+            m_graphView.AddElement(l_newRoomToSpawn);
+            m_currentInstantiatedRooms.Add(l_newRoomToSpawn);
 
-            Port l_targetPort = m_graphView.GenerateInputPortsOnNode(l_newRoomToSpawn, "random previously based");
+            //select a random name for base port
+            int numberOfDifferentConnections = ConectionsDictionary.GetInstance().myConnectionsDictionary.Count();
+
+            int randomSelection = UnityEngine.Random.Range(0, numberOfDifferentConnections);
+            string selectedNameOfBasePort = ConectionsDictionary.GetInstance().myConnectionsDictionary.ElementAt(randomSelection).Key;
+
+            while(currentAddedNames.Contains(selectedNameOfBasePort))
+            {
+                randomSelection = UnityEngine.Random.Range(0, numberOfDifferentConnections);
+                selectedNameOfBasePort = ConectionsDictionary.GetInstance().myConnectionsDictionary.ElementAt(randomSelection).Key;
+            }
 
 
+
+            currentAddedNames.Add(selectedNameOfBasePort);
+
+            string nameOfTargetPort = ConectionsDictionary.GetInstance().returnConnectionNameReferences(selectedNameOfBasePort);
+
+
+
+            //generate and connect ports
+            Port l_basePort = m_graphView.GenerateOutputPortsOnNode(_baseRoom, selectedNameOfBasePort);
+            Port l_targetPort = m_graphView.GenerateInputPortsOnNode(l_newRoomToSpawn, ConectionsDictionary.GetInstance().returnConnectionNameReferences(selectedNameOfBasePort));          
             LinkRoomPorts(l_basePort, l_targetPort);
+
+            if (l_basePort.portName.Contains("up"))
+            {        
+
+                l_newRoomToSpawn.SetPosition(new Rect(_baseRoom.GetPosition().position - new Vector2(0, 150), m_graphView.defaultNodeSize));
+
+            }
+            if (l_basePort.portName.Contains("down"))
+            {
+                l_newRoomToSpawn.SetPosition(new Rect(_baseRoom.GetPosition().position + new Vector2(0, 200), m_graphView.defaultNodeSize));
+
+            }
+            if (l_basePort.portName.Contains("left"))
+            {
+                l_newRoomToSpawn.SetPosition(new Rect(_baseRoom.GetPosition().position + new Vector2(400,0), m_graphView.defaultNodeSize));
+
+            }
+            if (l_basePort.portName.Contains("right"))
+            {
+                l_newRoomToSpawn.SetPosition(new Rect(_baseRoom.GetPosition().position - new Vector2(400, 0), m_graphView.defaultNodeSize));
+
+            }
+
+            //if(l_newRoomToSpawn.isTerminal == true) { ExpandNonTerminalNodes(); }
+
+
         }
 
+    }
+
+
+    private void ClearAllNodesOnGraph()
+    {
+
+
+        foreach(Edge e in m_graphView.edges.ToList())
+        {
+            m_graphView.RemoveElement(e);
+
+        }
+
+        foreach (Node n in m_graphView.nodes.ToList())
+        {
+            m_graphView.RemoveElement(n);
+        }
     }
 }

@@ -634,7 +634,7 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 06390000
+      m_SelectedIDs: 50460000
       m_LastClickedID: 0
       m_ExpandedIDs: 52fbffff
       m_RenameOverlay:
@@ -710,9 +710,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 6c410000
-    m_LastClickedID: 16748
-    m_ExpandedIDs: 000000005a3d00001441000016410000184100001a4100001c4100001e4100002041000066410000
+    m_SelectedIDs: 6e410000
+    m_LastClickedID: 16750
+    m_ExpandedIDs: 000000005a3d000016410000184100001a4100001c4100001e410000204100002241000024410000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -740,7 +740,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000005a3d00001441000016410000184100001a4100001c4100001e41000020410000
+    m_ExpandedIDs: 000000005a3d000016410000184100001a4100001c4100001e410000204100002241000024410000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -771,18 +771,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: e2040000f41f0000d6050000aa050000b4050000e81f00004a1e0000c4050000d21e0000cc0500006a1e0000761e00009a2b0000da280000d80e000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: ConectionsDictionary
+      m_OriginalName: ConectionsDictionary
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 18000
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 6}
     m_CreateAssetUtility:
