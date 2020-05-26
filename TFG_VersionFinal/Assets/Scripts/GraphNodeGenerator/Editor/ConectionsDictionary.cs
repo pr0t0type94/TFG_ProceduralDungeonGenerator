@@ -28,16 +28,16 @@ public class ConectionsDictionary
         myConnectionsDictionary.Add("right", "left");
 
         //KEY VALUES
-        myConnectionsDictionary.Add("up+key", "down+key");
-        myConnectionsDictionary.Add("down+key", "down+key");
-        myConnectionsDictionary.Add("left+key", "right+key");
-        myConnectionsDictionary.Add("right+key", "left+key");
+        myConnectionsDictionary.Add("up key", "down key");
+        myConnectionsDictionary.Add("down key", "up key");
+        myConnectionsDictionary.Add("left key", "right key");
+        myConnectionsDictionary.Add("right key", "left key");
 
-        //STAIRS VALUE
-        myConnectionsDictionary.Add("up+stairs", "down");
-        myConnectionsDictionary.Add("down+stairs", "up");
-        myConnectionsDictionary.Add("left+stairs", "right");
-        myConnectionsDictionary.Add("right+stairs", "left");
+        ////STAIRS VALUE
+        //myConnectionsDictionary.Add("upstairs", "down");
+        //myConnectionsDictionary.Add("downstairs", "up");
+        //myConnectionsDictionary.Add("leftstairs", "right");
+        //myConnectionsDictionary.Add("rightstairs", "left");
 
 
     }

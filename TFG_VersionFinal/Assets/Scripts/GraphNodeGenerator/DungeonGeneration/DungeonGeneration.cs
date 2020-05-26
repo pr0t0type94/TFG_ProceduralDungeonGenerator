@@ -17,7 +17,7 @@ public class DungeonGeneration : MonoBehaviour
 
     private RoomInfoContainer m_graphToLoad;
 
-    public Dictionary<string, GameObject> roomDictionary = new Dictionary<string, GameObject>();
+    public Dictionary<string, GameObject> m_roomDictionary = new Dictionary<string, GameObject>();
 
 
     public List<GameObject[]> prefabsList = new List<GameObject[]>();
@@ -33,7 +33,7 @@ public class DungeonGeneration : MonoBehaviour
 
     void LoadRoomsInfo()
     {
-        roomDictionary.Clear();
+        m_roomDictionary.Clear();
 
 
         GameObject l_parent = new GameObject();
@@ -42,7 +42,7 @@ public class DungeonGeneration : MonoBehaviour
         string l_startRoomID = m_graphToLoad.roomNodeData.Find(x => x.nodeType == "Start").nodeID;
 
         GameObject l_startRoom = SpawnRoom(l_startRoomID, l_parent.transform);
-        roomDictionary.Add(l_startRoomID, l_startRoom);
+        m_roomDictionary.Add(l_startRoomID, l_startRoom);
         GenerateNeighbours(l_startRoomID, l_parent.transform);
 
         List<RoomNodeData> roomsToGenerate = m_graphToLoad.roomNodeData.Where(x => x.nodeType != "Start").ToList();//always generate the start room 1st
@@ -74,21 +74,21 @@ public class DungeonGeneration : MonoBehaviour
             GameObject l_nextRoom;
             string l_nextRoomID = listOfOutputConnections[i].targetNodeId;
          
-            if(!roomDictionary.ContainsKey(l_nextRoomID))
+            if(!m_roomDictionary.ContainsKey(l_nextRoomID))
             {
                 l_nextRoom = SpawnRoom(l_nextRoomID, _parent);
-                roomDictionary.Add(l_nextRoomID, l_nextRoom);
+                m_roomDictionary.Add(l_nextRoomID, l_nextRoom);
             }
             else
             {
                
-                l_nextRoom = roomDictionary.First(x => x.Key == l_nextRoomID).Value;
+                l_nextRoom = m_roomDictionary.First(x => x.Key == l_nextRoomID).Value;
 
             }
 
 
             //find connected gameObject by nodeID on dictionary
-            GameObject connectedBaseRoom = roomDictionary.First(x => x.Key == _baseRoomID).Value;
+            GameObject connectedBaseRoom = m_roomDictionary.First(x => x.Key == _baseRoomID).Value;
             string baseConnectionName = listOfOutputConnections[i].basePortName;
             string targetConnectionName = listOfOutputConnections[i].targetPortName;
 
