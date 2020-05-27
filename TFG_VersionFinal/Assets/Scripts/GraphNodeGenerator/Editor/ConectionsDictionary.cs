@@ -9,6 +9,8 @@ public class ConectionsDictionary
 
     public Dictionary<string, string> myConnectionsDictionary = new Dictionary<string, string>();
 
+    public List<string> typesOfRoomsList = new List<string>();
+
     public ConectionsDictionary ()
     {
         generateConnectionsNames();
@@ -22,6 +24,7 @@ public class ConectionsDictionary
 
    public void generateConnectionsNames()
     {
+        //BASIC VALUES
         myConnectionsDictionary.Add("up","down");
         myConnectionsDictionary.Add("down", "up");
         myConnectionsDictionary.Add("left", "right");
@@ -33,7 +36,7 @@ public class ConectionsDictionary
         myConnectionsDictionary.Add("left key", "right key");
         myConnectionsDictionary.Add("right key", "left key");
 
-        ////STAIRS VALUE
+        ////STAIRS VALUES
         //myConnectionsDictionary.Add("upstairs", "down");
         //myConnectionsDictionary.Add("downstairs", "up");
         //myConnectionsDictionary.Add("leftstairs", "right");

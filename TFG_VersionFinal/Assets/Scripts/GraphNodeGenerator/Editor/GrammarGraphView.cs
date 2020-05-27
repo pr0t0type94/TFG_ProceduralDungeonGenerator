@@ -14,20 +14,13 @@ public class GrammarGraphView : GraphView
 
    public GrammarGraphView()
     {
-
         //zoom in and out
         SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
 
         //logica basica para seleccionar y hacer dragg de objetos // viene por defecto en el Engine
         this.AddManipulator(new SelectionDragger());
         this.AddManipulator(new ContentDragger());
-        this.AddManipulator(new RectangleSelector());
-
-        
-        //generar el nodo start 
-        //AddElement(GenerateStartNode());
-        //AddElement(GenerateEndNode());
-        //createNode("Room");
+        this.AddManipulator(new RectangleSelector());    
     }
 
     //generar un puerto en el nodo -> puerto sirve para enlazar conexiones
@@ -78,6 +71,7 @@ public class GrammarGraphView : GraphView
         //set node position and size
         l_roomNode.SetPosition(new Rect(20,20, 200,300));
 
+        //boton para marcar si es terminal o no
         Toggle isTerminalRoom = new Toggle();
         isTerminalRoom.text = "isTerminal";
         isTerminalRoom.RegisterValueChangedCallback(evt => l_roomNode.isTerminal = evt.newValue);
@@ -111,10 +105,8 @@ public class GrammarGraphView : GraphView
         portButton.clickable.clicked += () => GenerateOutputPortsOnNode(l_roomNode);
         l_roomNode.titleContainer.Add(portButton);
 
-
         //if (l_roomNode.IsSelected(l_roomNode)) { m_selectedRoomNode = l_roomNode;  Debug.Log("selected room"); } 
-
-
+  
 
         return l_roomNode;
     }
@@ -162,14 +154,8 @@ public class GrammarGraphView : GraphView
 
         Port generatedPort = GeneratePort(_roomNode, Direction.Input, Port.Capacity.Single);
 
-        //asignar nombre al puerto de salida
-        //int outputPortCount = _roomNode.outputContainer.Query(name: "connector").ToList().Count;
         string portName;
         portName = string.IsNullOrEmpty(overridedName) ? "Input" : overridedName;//si no ponemos nombre, que se muestre el por defecto
-
-        //borrar las etiquetas(nombres) anteriores 
-        //Label oldPortName = generatedPort.contentContainer.Q<Label>("type");//cogemos los elementos <Label> de la cola del nodo
-        //generatedPort.contentContainer.Remove(oldPortName);
 
         //generamos el campo de texto donde pondremos el nombre de la conexion
         TextField portText = new TextField();
@@ -182,8 +168,6 @@ public class GrammarGraphView : GraphView
         deleteInputPortButton.text = "-";
         deleteInputPortButton.clickable.clicked += () => RemovePort(_roomNode, generatedPort,"input");
         generatedPort.contentContainer.Add(deleteInputPortButton);
-
-
 
         _roomNode.inputContainer.Add(generatedPort);
         _roomNode.RefreshPorts();
@@ -219,7 +203,6 @@ public class GrammarGraphView : GraphView
 
             if (edgesToList.Any())
             {
-
                 Edge targetEdge = edgesToList.First();
                 targetEdge.output.Disconnect(targetEdge);
                 RemoveElement(edgesToList.First());
@@ -275,7 +258,6 @@ public class GrammarGraphView : GraphView
         return nodePortsList;
 
     }
-
 
     //public RoomNode returnSelectedNode() {
 
