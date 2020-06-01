@@ -1,36 +1,33 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor;
-using UnityEngine.UIElements;
-using UnityEditor.UIElements;
 using System.Linq;
-using System;
+using UnityEditor;
+using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GrammarGraphWindow : EditorWindow
 {
 
     ///// VARIABLES
     private GrammarGraphView m_graphView;
+
+    private int m_numberOfRoomsToGenerate;
+    int m_currentNumberOfRooms;
+
     private string m_ruleFileName = "New Grammar";
     private string m_finalGraphName = "Final Grammar";
+
     private Edge m_currentBeginNodeEdge;
     private RoomNode beginNodeInstantiated;
     private List<RoomInfoContainer> m_resourcesRulesLoaded = new List<RoomInfoContainer>();
 
     List<RoomNode> m_currentInstantiatedRooms = new List<RoomNode>();
 
-    private int m_numberOfRoomsToGenerate;
+    UtilitiesAndReferencesClass m_UtilitiesInstance = UtilitiesAndReferencesClass.GetInstance();
 
-    int m_currentNumberOfRooms;
-    private enum connectionTypes
-    {
-        up,
-        down,
-        left,
-        right
+    Dictionary<RoomNode, string> m_roomInputsDictionary = new Dictionary<RoomNode, string>();
 
-    }
 
     /////FUNCIONES
     [MenuItem("Grammar/Graph Editor")]
@@ -189,7 +186,7 @@ public class GrammarGraphWindow : EditorWindow
                 {
                     RoomInfoContainer[] m_candidateRules = m_resourcesRulesLoaded.Where(x => x.name.Contains(_currRoom.roomType)).ToArray();
 
-                    int randomNumber = UnityEngine.Random.Range(0, m_candidateRules.Length);
+                    int randomNumber = Random.Range(0, m_candidateRules.Length);
                     RoomInfoContainer expandedLoadedGraph = m_candidateRules[randomNumber];
 
                     CreateExpandedNodes(expandedLoadedGraph, _currRoom);
@@ -242,7 +239,9 @@ public class GrammarGraphWindow : EditorWindow
                 Port targetPortToConnect = m_graphView.ports.ToList().First(x => (x.node as RoomNode) == targetRoom && x.portName == targetPortName);
 
                 if (l_newInstantiatedRoomsList[i].roomType == "begin")
+                {
                     beginNodeInstantiated = l_newInstantiatedRoomsList[i];
+                }
 
                 LinkRoomPorts(l_newInstantiatedRoomsList[i].outputContainer[j].Q<Port>(), targetPortToConnect);
 
@@ -318,7 +317,7 @@ public class GrammarGraphWindow : EditorWindow
     {
         if (m_numberOfRoomsToGenerate > 1)
         {
-            //lista de string posiblePortNames -> generateNeighbours(room,listOfNames)
+            m_roomInputsDictionary.Clear();
 
             m_currentNumberOfRooms = 0;
             ClearAllNodesOnGraph();
@@ -331,7 +330,7 @@ public class GrammarGraphWindow : EditorWindow
             GenereteNeighbourRooms(startNode);
 
 
-            int newRandomValue = UnityEngine.Random.Range(0, 10);
+            int newRandomValue = Random.Range(0, 10);
 
             //for MAX ROOM NUMBER
             while (m_currentNumberOfRooms < m_numberOfRoomsToGenerate)
@@ -351,41 +350,51 @@ public class GrammarGraphWindow : EditorWindow
             Debug.Log("enter a max number of rooms to generate (bigger than 1)");
         }
 
-    
+
     }
 
 
 
-    private void GenereteNeighbourRooms(RoomNode _baseRoom, List<string> _availableListOfNames = null)
+    private void GenereteNeighbourRooms(RoomNode _baseRoom)
     {
-        ConectionsDictionary l_conectionsDictionaryInstance = ConectionsDictionary.GetInstance();
+
         int numberOfConnections;
+        if (_baseRoom.roomType == "Start")
+        {
+            numberOfConnections = Random.Range(1, 5);
+        }
+        else
+        {
+            numberOfConnections = Random.Range(1, 4);
+        }
 
-        numberOfConnections = UnityEngine.Random.Range(1, 5);
 
-        int randomConnectionName = UnityEngine.Random.Range(0, 10);
 
         List<string> currentAddedNames = new List<string>();
-        List<string> posibleBasePortNames = l_conectionsDictionaryInstance.myConnectionsDictionary.Keys.ToList();
+        List<string> posibleBasePortNames = m_UtilitiesInstance.myConnectionsDictionary.Keys.ToList();
 
-        #region
-        ///////BASURA
-        //List<Edge> edgesConectedToBaseRoom = m_graphView.edges.ToList().Where(x => (x.input.node as RoomNode) == _baseRoom).ToList();
+        string conectedInputName = m_roomInputsDictionary.ToList().Find(x => x.Key == _baseRoom).Value;
 
-        //List<string> conectedInputPorts = new List<string>();
+        if(conectedInputName!=null)
+        {
+            if (conectedInputName.Contains("up"))
+            {
+                posibleBasePortNames.RemoveAll(x => x.Contains("up"));
+            }
+            else if (conectedInputName.Contains("down"))
+            {
+                posibleBasePortNames.RemoveAll(x => x.Contains("down"));
+            }
+            else if (conectedInputName.Contains("left"))
+            {
+                posibleBasePortNames.RemoveAll(x => x.Contains("left"));
+            }
+            else if (conectedInputName.Contains("right"))
+            {
+                posibleBasePortNames.RemoveAll(x => x.Contains("right"));
+            }
+        }
 
-        //conectedInputPorts.Add(_baseRoom.inputContainer.Q<Port>().portName);
-
-        //foreach (string s in conectedInputPorts)
-        //{
-        //    Debug.Log(s);
-        //    if (CheckIfContains(s, "up")) posibleBasePortNames.RemoveAll(x => x.Contains("up"));
-        //    if (CheckIfContains(s, "down")) posibleBasePortNames.RemoveAll(x => x.Contains("down"));
-        //    if (CheckIfContains(s, "left")) posibleBasePortNames.RemoveAll(x => x.Contains("left"));
-        //    if (CheckIfContains(s, "right")) posibleBasePortNames.RemoveAll(x => x.Contains("right"));
-        //}
-        //////BASURA
-        #endregion
 
 
         for (int i = 0; i < numberOfConnections; i++)
@@ -399,10 +408,12 @@ public class GrammarGraphWindow : EditorWindow
 
             //select a random name for base port
             int numberOfDifferentConnections = posibleBasePortNames.Count();
-            int randomSelection = UnityEngine.Random.Range(0, numberOfDifferentConnections);
+            int randomSelection = Random.Range(0, numberOfDifferentConnections);
             string selectedNameOfBasePort = posibleBasePortNames.ElementAt(randomSelection);
-            string nameOfTargetPort = l_conectionsDictionaryInstance.returnConnectionNameReferences(selectedNameOfBasePort);
-
+            string nameOfTargetPort = m_UtilitiesInstance.returnConnectionNameReferences(selectedNameOfBasePort);
+            
+             m_roomInputsDictionary.Add(l_newRoomToSpawn, nameOfTargetPort);
+            
 
             //DONT REPEAT NAMES OF NEXT PORTS
             if (selectedNameOfBasePort.Contains("up"))
@@ -421,7 +432,7 @@ public class GrammarGraphWindow : EditorWindow
             {
                 posibleBasePortNames.RemoveAll(x => x.Contains("right"));
             }
-    
+
             //generate and connect ports
             Port l_basePort = m_graphView.GenerateOutputPortsOnNode(_baseRoom, selectedNameOfBasePort);
             Port l_targetPort = m_graphView.GenerateInputPortsOnNode(l_newRoomToSpawn, nameOfTargetPort);
