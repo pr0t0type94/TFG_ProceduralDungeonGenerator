@@ -13,24 +13,36 @@ MonoBehaviour:
   m_Name: q1
   m_EditorClassIdentifier: 
   roomConnectionsData:
-  - baseNodeId: 5c54d7ab-d08d-421c-b3ec-4b19f170df5e
+  - baseNodeId: be798082-6284-4690-b320-7ec393088abe
     basePortName: right
-    targetNodeId: 2f23bf13-ebb2-4f7b-917d-7ff6f66a9ec6
+    targetNodeId: 47a13451-1a83-4473-a1b1-71be8ba8da68
     targetPortName: left
-  - baseNodeId: 5c54d7ab-d08d-421c-b3ec-4b19f170df5e
-    basePortName: up
-    targetNodeId: d1da0743-579d-43d0-992f-ff2ba4560290
+  - baseNodeId: be798082-6284-4690-b320-7ec393088abe
+    basePortName: up stairs
+    targetNodeId: f8319326-87fd-4e13-9428-2c9f9935726b
     targetPortName: down
+  - baseNodeId: 47a13451-1a83-4473-a1b1-71be8ba8da68
+    basePortName: up stairs
+    targetNodeId: 4ad6e1fa-406d-4531-ac8a-3e3ad9bd6be0
+    targetPortName: down
+  - baseNodeId: f8319326-87fd-4e13-9428-2c9f9935726b
+    basePortName: right
+    targetNodeId: 4ad6e1fa-406d-4531-ac8a-3e3ad9bd6be0
+    targetPortName: left
   roomNodeData:
-  - nodeID: d1da0743-579d-43d0-992f-ff2ba4560290
-    nodeType: Room
-    position: {x: 25, y: 17}
-    isTerminal: 0
-  - nodeID: 5c54d7ab-d08d-421c-b3ec-4b19f170df5e
+  - nodeID: be798082-6284-4690-b320-7ec393088abe
     nodeType: Start
-    position: {x: 37, y: 147}
+    position: {x: 20, y: 20}
     isTerminal: 1
-  - nodeID: 2f23bf13-ebb2-4f7b-917d-7ff6f66a9ec6
-    nodeType: Trap
-    position: {x: 433, y: 150}
+  - nodeID: 47a13451-1a83-4473-a1b1-71be8ba8da68
+    nodeType: Room
+    position: {x: 378, y: 49}
     isTerminal: 1
+  - nodeID: 4ad6e1fa-406d-4531-ac8a-3e3ad9bd6be0
+    nodeType: Room
+    position: {x: 375, y: -105}
+    isTerminal: 1
+  - nodeID: f8319326-87fd-4e13-9428-2c9f9935726b
+    nodeType: Room
+    position: {x: 20, y: -104}
+    isTerminal: 0

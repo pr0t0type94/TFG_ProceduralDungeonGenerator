@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: xxx
+  m_EditorClassIdentifier: 
+  roomConnectionsData:
+  - baseNodeId: 8ba0374c-dedf-40d5-bca1-cc06a2e7c30c
+    basePortName: right
+    targetNodeId: cca8cfd7-0bf5-4a3f-8bc5-370ee31d0db4
+    targetPortName: left
+  - baseNodeId: 8ba0374c-dedf-40d5-bca1-cc06a2e7c30c
+    basePortName: left
+    targetNodeId: c5913c58-23ac-4adc-b026-cba78658c320
+    targetPortName: right
+  - baseNodeId: 8ba0374c-dedf-40d5-bca1-cc06a2e7c30c
+    basePortName: down
+    targetNodeId: 2b9c89a4-fb91-4cb0-881a-2fc5b51657f7
+    targetPortName: up
+  - baseNodeId: 8ba0374c-dedf-40d5-bca1-cc06a2e7c30c
+    basePortName: up
+    targetNodeId: 8cd6e319-9d88-40e8-bb1f-705af2230782
+    targetPortName: down
+  - baseNodeId: cca8cfd7-0bf5-4a3f-8bc5-370ee31d0db4
+    basePortName: right
+    targetNodeId: efb2a49e-f173-47b2-bf93-ad40899069fb
+    targetPortName: left
+  - baseNodeId: cca8cfd7-0bf5-4a3f-8bc5-370ee31d0db4
+    basePortName: down
+    targetNodeId: 76d0cc83-fcac-4d6b-bf36-9580324216e3
+    targetPortName: up
+  - baseNodeId: c5913c58-23ac-4adc-b026-cba78658c320
+    basePortName: left
+    targetNodeId: cbca6b2d-1d8f-4019-bd6c-99787eaffc3c
+    targetPortName: right
+  - baseNodeId: 2b9c89a4-fb91-4cb0-881a-2fc5b51657f7
+    basePortName: down
+    targetNodeId: 68966e0c-47a5-4991-8bc9-4331709a2e0c
+    targetPortName: up
+  - baseNodeId: 2b9c89a4-fb91-4cb0-881a-2fc5b51657f7
+    basePortName: left
+    targetNodeId: 7e21bb35-2037-4866-b718-871999edbd86
+    targetPortName: right
+  - baseNodeId: 8cd6e319-9d88-40e8-bb1f-705af2230782
+    basePortName: up
+    targetNodeId: 00cf0426-c76b-48f3-8a1d-6169331b187e
+    targetPortName: down
+  - baseNodeId: 8cd6e319-9d88-40e8-bb1f-705af2230782
+    basePortName: right
+    targetNodeId: 5ae825ba-8467-4d36-bc44-19ef5828174b
+    targetPortName: left
+  - baseNodeId: efb2a49e-f173-47b2-bf93-ad40899069fb
+    basePortName: right
+    targetNodeId: 0756e608-baee-4de9-9753-a8c7e66e3c7d
+    targetPortName: left
+  - baseNodeId: efb2a49e-f173-47b2-bf93-ad40899069fb
+    basePortName: up
+    targetNodeId: f369d588-7388-4a00-a912-3e4b35a97a2c
+    targetPortName: down
+  - baseNodeId: efb2a49e-f173-47b2-bf93-ad40899069fb
+    basePortName: down
+    targetNodeId: e9c81190-53a3-4283-9b44-53d4665dd08b
+    targetPortName: up
+  roomNodeData:
+  - nodeID: 8ba0374c-dedf-40d5-bca1-cc06a2e7c30c
+    nodeType: Start
+    position: {x: 20, y: 20}
+    isTerminal: 1
+  - nodeID: cca8cfd7-0bf5-4a3f-8bc5-370ee31d0db4
+    nodeType: random TYPE
+    position: {x: 400, y: 0}
+    isTerminal: 0
+  - nodeID: c5913c58-23ac-4adc-b026-cba78658c320
+    nodeType: random TYPE
+    position: {x: -400, y: 0}
+    isTerminal: 0
+  - nodeID: 2b9c89a4-fb91-4cb0-881a-2fc5b51657f7
+    nodeType: random TYPE
+    position: {x: 0, y: 200}
+    isTerminal: 0
+  - nodeID: 8cd6e319-9d88-40e8-bb1f-705af2230782
+    nodeType: random TYPE
+    position: {x: 0, y: -200}
+    isTerminal: 0
+  - nodeID: efb2a49e-f173-47b2-bf93-ad40899069fb
+    nodeType: random TYPE
+    position: {x: 800, y: 0}
+    isTerminal: 0
+  - nodeID: cbca6b2d-1d8f-4019-bd6c-99787eaffc3c
+    nodeType: random TYPE
+    position: {x: -800, y: 0}
+    isTerminal: 0
+  - nodeID: 7e21bb35-2037-4866-b718-871999edbd86
+    nodeType: random TYPE
+    position: {x: -400, y: 200}
+    isTerminal: 0
+  - nodeID: 00cf0426-c76b-48f3-8a1d-6169331b187e
+    nodeType: random TYPE
+    position: {x: 0, y: -400}
+    isTerminal: 0
+  - nodeID: 5ae825ba-8467-4d36-bc44-19ef5828174b
+    nodeType: random TYPE
+    position: {x: 400, y: -200}
+    isTerminal: 0
+  - nodeID: 0756e608-baee-4de9-9753-a8c7e66e3c7d
+    nodeType: random TYPE
+    position: {x: 1200, y: 0}
+    isTerminal: 0
+  - nodeID: f369d588-7388-4a00-a912-3e4b35a97a2c
+    nodeType: random TYPE
+    position: {x: 800, y: -200}
+    isTerminal: 0
+  - nodeID: e9c81190-53a3-4283-9b44-53d4665dd08b
+    nodeType: random TYPE
+    position: {x: 800, y: 200}
+    isTerminal: 0
+  - nodeID: 68966e0c-47a5-4991-8bc9-4331709a2e0c
+    nodeType: random TYPE
+    position: {x: 2, y: 347}
+    isTerminal: 0
+  - nodeID: 76d0cc83-fcac-4d6b-bf36-9580324216e3
+    nodeType: random TYPE
+    position: {x: 432, y: 219}
+    isTerminal: 0

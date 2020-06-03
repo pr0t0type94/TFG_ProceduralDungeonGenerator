@@ -13,16 +13,24 @@ MonoBehaviour:
   m_Name: a
   m_EditorClassIdentifier: 
   roomConnectionsData:
-  - baseNodeId: c5cf7792-ccda-421a-8ee8-53ba948f035f
+  - baseNodeId: 8ed9e1ee-41ca-48b2-aaed-d735c4f93f74
     basePortName: Output
-    targetNodeId: 276508a4-66ec-4e9b-b4ff-1d919f0d3ba5
+    targetNodeId: 25b3bfd4-37d0-4aef-b641-2d7bee55cddb
+    targetPortName: Input
+  - baseNodeId: 25b3bfd4-37d0-4aef-b641-2d7bee55cddb
+    basePortName: Output
+    targetNodeId: 7a2371c6-d1cf-4b1f-992b-5b1a4d476f87
     targetPortName: Input
   roomNodeData:
-  - nodeID: c5cf7792-ccda-421a-8ee8-53ba948f035f
+  - nodeID: 8ed9e1ee-41ca-48b2-aaed-d735c4f93f74
     nodeType: begin
-    position: {x: 89, y: 63}
+    position: {x: 0, y: 0}
     isTerminal: 0
-  - nodeID: 276508a4-66ec-4e9b-b4ff-1d919f0d3ba5
+  - nodeID: 25b3bfd4-37d0-4aef-b641-2d7bee55cddb
     nodeType: Room
-    position: {x: 472, y: 136}
+    position: {x: 0, y: 0}
+    isTerminal: 0
+  - nodeID: 7a2371c6-d1cf-4b1f-992b-5b1a4d476f87
+    nodeType: Room
+    position: {x: 0, y: 0}
     isTerminal: 0

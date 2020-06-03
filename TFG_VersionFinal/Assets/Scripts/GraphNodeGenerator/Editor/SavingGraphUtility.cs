@@ -118,6 +118,7 @@ public class SavingGraphUtility
 
             List<RoomNodeConnectionsData> l_tempInputRoomPorts = m_graphToLoadCache.roomConnectionsData.Where(x => x.targetNodeId == rData.nodeID).ToList();
             l_tempInputRoomPorts.ForEach(x => m_targetGraph.GenerateInputPortsOnNode(l_tempRoom, x.targetPortName));
+
         }
     }
 
@@ -139,6 +140,9 @@ public class SavingGraphUtility
                 LinkRoomPorts(m_roomsList[i].outputContainer[j].Q<Port>(), targetPort);
 
                 targetRoom.SetPosition(new Rect(m_graphToLoadCache.roomNodeData.First(x => x.nodeID == targetRoom.roomID).position, m_targetGraph.defaultNodeSize));
+
+                //targetRoom.transform.position = m_graphToLoadCache.roomNodeData.First(x => x.nodeID == targetRoom.roomID).position;
+
             }
         }
     }
