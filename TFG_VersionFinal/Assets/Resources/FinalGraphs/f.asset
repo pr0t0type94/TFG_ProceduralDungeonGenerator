@@ -13,32 +13,48 @@ MonoBehaviour:
   m_Name: f
   m_EditorClassIdentifier: 
   roomConnectionsData:
-  - baseNodeId: 9e045e21-47d8-4c75-b9d8-63fefec81c43
+  - baseNodeId: a0c64e94-55c5-4c97-86e7-05254b49f21c
+    basePortName: left
+    targetNodeId: 889f3426-ff2a-4015-a1db-7980fb72d8af
+    targetPortName: right
+  - baseNodeId: a0c64e94-55c5-4c97-86e7-05254b49f21c
     basePortName: down key
-    targetNodeId: cfa1bcea-99dc-4a0c-a49e-ee261dfa6444
+    targetNodeId: d9460eb2-b55b-45d9-bdd6-0f5e84bfcf0a
     targetPortName: up key
-  - baseNodeId: 9e045e21-47d8-4c75-b9d8-63fefec81c43
+  - baseNodeId: a0c64e94-55c5-4c97-86e7-05254b49f21c
+    basePortName: up key
+    targetNodeId: 7499aa7e-4eee-41ad-88b3-80a88adb1fd9
+    targetPortName: down key
+  - baseNodeId: 889f3426-ff2a-4015-a1db-7980fb72d8af
+    basePortName: left
+    targetNodeId: 12c3c4f2-3cc6-49c2-9a52-10b7363ef1bd
+    targetPortName: right
+  - baseNodeId: a0c64e94-55c5-4c97-86e7-05254b49f21c
     basePortName: right key
-    targetNodeId: 63721e75-0ec8-4bbb-8bbb-ca24c8b18617
+    targetNodeId: febb0ed9-236a-4085-ad1d-262cf008770c
     targetPortName: left key
-  - baseNodeId: 9e045e21-47d8-4c75-b9d8-63fefec81c43
-    basePortName: up
-    targetNodeId: af9d5bb0-e7ac-4786-8d92-d37315144dd1
-    targetPortName: down
   roomNodeData:
-  - nodeID: 9e045e21-47d8-4c75-b9d8-63fefec81c43
+  - nodeID: a0c64e94-55c5-4c97-86e7-05254b49f21c
     nodeType: Start
     position: {x: 20, y: 20}
     isTerminal: 1
-  - nodeID: cfa1bcea-99dc-4a0c-a49e-ee261dfa6444
-    nodeType: Trap
+  - nodeID: 889f3426-ff2a-4015-a1db-7980fb72d8af
+    nodeType: Room
+    position: {x: -400, y: 0}
+    isTerminal: 1
+  - nodeID: d9460eb2-b55b-45d9-bdd6-0f5e84bfcf0a
+    nodeType: Enemy
     position: {x: 0, y: 200}
     isTerminal: 1
-  - nodeID: 63721e75-0ec8-4bbb-8bbb-ca24c8b18617
+  - nodeID: 7499aa7e-4eee-41ad-88b3-80a88adb1fd9
     nodeType: Trap
-    position: {x: 400, y: 0}
-    isTerminal: 1
-  - nodeID: af9d5bb0-e7ac-4786-8d92-d37315144dd1
-    nodeType: Room
     position: {x: 0, y: -200}
     isTerminal: 1
+  - nodeID: 12c3c4f2-3cc6-49c2-9a52-10b7363ef1bd
+    nodeType: Room
+    position: {x: -800, y: 0}
+    isTerminal: 1
+  - nodeID: febb0ed9-236a-4085-ad1d-262cf008770c
+    nodeType: Room
+    position: {x: 852, y: 140}
+    isTerminal: 0

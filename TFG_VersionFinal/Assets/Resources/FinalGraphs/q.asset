@@ -13,32 +13,40 @@ MonoBehaviour:
   m_Name: q
   m_EditorClassIdentifier: 
   roomConnectionsData:
-  - baseNodeId: be798082-6284-4690-b320-7ec393088abe
+  - baseNodeId: c61b8621-499d-4a0c-9cfc-4480e5ddf1a2
     basePortName: right
-    targetNodeId: 47a13451-1a83-4473-a1b1-71be8ba8da68
+    targetNodeId: 94b28427-0fb1-4d20-8257-6062d99c8660
     targetPortName: left
-  - baseNodeId: be798082-6284-4690-b320-7ec393088abe
-    basePortName: up stairs
-    targetNodeId: f8319326-87fd-4e13-9428-2c9f9935726b
-    targetPortName: down
-  - baseNodeId: 47a13451-1a83-4473-a1b1-71be8ba8da68
-    basePortName: up stairs
-    targetNodeId: 4ad6e1fa-406d-4531-ac8a-3e3ad9bd6be0
-    targetPortName: down
+  - baseNodeId: 94b28427-0fb1-4d20-8257-6062d99c8660
+    basePortName: right key
+    targetNodeId: b39df42d-e35d-47e2-ae49-d9fe2089d273
+    targetPortName: left key
+  - baseNodeId: 94b28427-0fb1-4d20-8257-6062d99c8660
+    basePortName: down key
+    targetNodeId: 310ccb5f-f356-4b9d-ad29-48337e2e99b8
+    targetPortName: up key
+  - baseNodeId: b39df42d-e35d-47e2-ae49-d9fe2089d273
+    basePortName: right
+    targetNodeId: 722e07de-a2c8-4826-8515-2308bb7463b8
+    targetPortName: left
   roomNodeData:
-  - nodeID: be798082-6284-4690-b320-7ec393088abe
+  - nodeID: c61b8621-499d-4a0c-9cfc-4480e5ddf1a2
     nodeType: Start
-    position: {x: 16, y: 51}
-    isTerminal: 0
-  - nodeID: 47a13451-1a83-4473-a1b1-71be8ba8da68
-    nodeType: Room
-    position: {x: 378, y: 49}
-    isTerminal: 0
-  - nodeID: 4ad6e1fa-406d-4531-ac8a-3e3ad9bd6be0
-    nodeType: Room
-    position: {x: 375, y: -105}
-    isTerminal: 0
-  - nodeID: f8319326-87fd-4e13-9428-2c9f9935726b
-    nodeType: Room
-    position: {x: 20, y: -104}
-    isTerminal: 0
+    position: {x: 20, y: 20}
+    isTerminal: 1
+  - nodeID: 94b28427-0fb1-4d20-8257-6062d99c8660
+    nodeType: Enemy
+    position: {x: 400, y: 0}
+    isTerminal: 1
+  - nodeID: b39df42d-e35d-47e2-ae49-d9fe2089d273
+    nodeType: Enemy
+    position: {x: 800, y: 0}
+    isTerminal: 1
+  - nodeID: 310ccb5f-f356-4b9d-ad29-48337e2e99b8
+    nodeType: Trap
+    position: {x: 400, y: 200}
+    isTerminal: 1
+  - nodeID: 722e07de-a2c8-4826-8515-2308bb7463b8
+    nodeType: Enemy
+    position: {x: 1200, y: 0}
+    isTerminal: 1

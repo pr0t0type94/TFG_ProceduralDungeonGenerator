@@ -827,8 +827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d3f930e315f1549b5668d63d4dfa65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: {fileID: 6218110881390380050}
-  end: {fileID: 6218110882134193507}
+  m_endOfStaircaseGameobject: {fileID: 6218110882134193507}
 --- !u!1 &6218110881390380050
 GameObject:
   m_ObjectHideFlags: 0

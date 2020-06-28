@@ -7,23 +7,19 @@ using System.Linq;
 public class RoomScript : MonoBehaviour
 {
     // Start is called before the first frame update
+    private Vector3 roomSize;
+
     [SerializeField]
     private GameObject[] m_doorsPlaceHolders = new GameObject[4];
-    private Vector3 roomSize;
+
     public GameObject m_doorPrefab;
     public GameObject m_staircasePrefab;
 
-    public Vector3 returnRoomSize()
+    public Vector3 ReturnRoomSize()
     {
-        var goRenderer = gameObject.GetComponent<MeshRenderer>();
-        return new Vector3(goRenderer.bounds.size.x, goRenderer.bounds.size.y, goRenderer.bounds.size.z);
+        MeshRenderer l_gameobjRenderer = gameObject.GetComponent<MeshRenderer>();
+        return new Vector3(l_gameobjRenderer.bounds.size.x, l_gameobjRenderer.bounds.size.y, l_gameobjRenderer.bounds.size.z);
     }
-    public void getParents()
-    {
-        m_doorsPlaceHolders = gameObject.GetComponentsInChildren<GameObject>();
-       
-    }
-
 
     public void GenerateDoor(string _roomConnection)
     {
@@ -60,7 +56,7 @@ public class RoomScript : MonoBehaviour
             else if (_roomConnection.Contains("stairs"))
             {
                 GameObject stairsPrefab = Instantiate(m_staircasePrefab, gameObject.transform);
-                Vector3 bounds = new Vector3(0, -stairsPrefab.GetComponent<MeshRenderer>().bounds.size.y / 3, stairsPrefab.GetComponent<MeshRenderer>().bounds.size.z / 2);
+                Vector3 bounds = new Vector3( 0 , -stairsPrefab.GetComponent<MeshRenderer>().bounds.size.y / 3, stairsPrefab.GetComponent<MeshRenderer>().bounds.size.z / 2);
                 stairsPrefab.transform.position = m_doorsPlaceHolders[1].transform.position - bounds;
                 stairsPrefab.transform.Rotate(new Vector3(0, 180, 0));
             }
@@ -105,7 +101,7 @@ public class RoomScript : MonoBehaviour
 
     public Vector3 returnPosition(string _name)
     {
-        GameObject selectedDoor = m_doorsPlaceHolders.First(x => x.name == _name);
-        return selectedDoor.transform.position;
+        GameObject l_selectedDoor = m_doorsPlaceHolders.First(x => x.name == _name);
+        return l_selectedDoor.transform.position;
     }
 }

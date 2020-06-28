@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: g2
+  m_EditorClassIdentifier: 
+  roomConnectionsData:
+  - baseNodeId: 727b97ab-5938-427e-928d-fd244a220619
+    basePortName: left key
+    targetNodeId: a6ceb706-bfc5-4154-9e2d-00353f5bd1b7
+    targetPortName: right key
+  - baseNodeId: 727b97ab-5938-427e-928d-fd244a220619
+    basePortName: down key
+    targetNodeId: ecefbeec-2da7-4ccb-a840-03a4fc70135b
+    targetPortName: up key
+  - baseNodeId: a6ceb706-bfc5-4154-9e2d-00353f5bd1b7
+    basePortName: left key
+    targetNodeId: ea2508a6-1bbe-492f-98cd-a2fa8b7b83e0
+    targetPortName: right key
+  - baseNodeId: a6ceb706-bfc5-4154-9e2d-00353f5bd1b7
+    basePortName: up stairs
+    targetNodeId: 3564ecc9-cc92-4b5d-b520-4c820ca0eaf3
+    targetPortName: down
+  - baseNodeId: a6ceb706-bfc5-4154-9e2d-00353f5bd1b7
+    basePortName: up key
+    targetNodeId: e21f9e90-b48c-48b8-bb30-f6f1a0c31187
+    targetPortName: down key
+  - baseNodeId: ecefbeec-2da7-4ccb-a840-03a4fc70135b
+    basePortName: right stairs
+    targetNodeId: ad88a89e-c8b9-4a3d-80fa-ffa660648c29
+    targetPortName: left
+  - baseNodeId: ecefbeec-2da7-4ccb-a840-03a4fc70135b
+    basePortName: right key
+    targetNodeId: 1778f96d-155a-48a5-925b-360f450f46ed
+    targetPortName: left key
+  - baseNodeId: ea2508a6-1bbe-492f-98cd-a2fa8b7b83e0
+    basePortName: up stairs
+    targetNodeId: 45dc941b-f9a8-44eb-862f-8552d97b117a
+    targetPortName: down
+  - baseNodeId: 3564ecc9-cc92-4b5d-b520-4c820ca0eaf3
+    basePortName: left
+    targetNodeId: cd11470f-a216-41da-92bc-c1ec58222661
+    targetPortName: right
+  - baseNodeId: 3564ecc9-cc92-4b5d-b520-4c820ca0eaf3
+    basePortName: down
+    targetNodeId: a617d4a1-e237-44a3-a26e-b9c0240ba513
+    targetPortName: up
+  roomNodeData:
+  - nodeID: 727b97ab-5938-427e-928d-fd244a220619
+    nodeType: Start
+    position: {x: 20, y: 20}
+    isTerminal: 1
+  - nodeID: a6ceb706-bfc5-4154-9e2d-00353f5bd1b7
+    nodeType: Trap
+    position: {x: -400, y: 0}
+    isTerminal: 1
+  - nodeID: ecefbeec-2da7-4ccb-a840-03a4fc70135b
+    nodeType: Enemy
+    position: {x: 0, y: 200}
+    isTerminal: 1
+  - nodeID: ea2508a6-1bbe-492f-98cd-a2fa8b7b83e0
+    nodeType: Enemy
+    position: {x: -800, y: 0}
+    isTerminal: 1
+  - nodeID: 3564ecc9-cc92-4b5d-b520-4c820ca0eaf3
+    nodeType: Trap
+    position: {x: -400, y: 200}
+    isTerminal: 1
+  - nodeID: e21f9e90-b48c-48b8-bb30-f6f1a0c31187
+    nodeType: Room
+    position: {x: -400, y: -200}
+    isTerminal: 1
+  - nodeID: ad88a89e-c8b9-4a3d-80fa-ffa660648c29
+    nodeType: Trap
+    position: {x: 0, y: 400}
+    isTerminal: 1
+  - nodeID: 1778f96d-155a-48a5-925b-360f450f46ed
+    nodeType: Enemy
+    position: {x: 400, y: 200}
+    isTerminal: 1
+  - nodeID: 45dc941b-f9a8-44eb-862f-8552d97b117a
+    nodeType: Enemy
+    position: {x: -800, y: 200}
+    isTerminal: 1
+  - nodeID: cd11470f-a216-41da-92bc-c1ec58222661
+    nodeType: Enemy
+    position: {x: -800, y: 200}
+    isTerminal: 1
+  - nodeID: a617d4a1-e237-44a3-a26e-b9c0240ba513
+    nodeType: Trap
+    position: {x: -400, y: 400}
+    isTerminal: 1

@@ -55,11 +55,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\GraphNodeGenerator\Editor\GrammarGraphView.cs" />
-     <Compile Include="Assets\Scripts\GraphNodeGenerator\Editor\GrammarGraphWindow.cs" />
-     <Compile Include="Assets\Scripts\GraphNodeGenerator\Editor\RoomNode.cs" />
-     <Compile Include="Assets\Scripts\GraphNodeGenerator\Editor\SavingGraphUtility.cs" />
-     <Compile Include="Assets\Scripts\GraphNodeGenerator\Editor\UtilitiesAndReferencesClass.cs" />
      <Compile Include="Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
  <Reference Include="UnityEditor.TestRunner">
  <HintPath>C:/Users/manel/Desktop/UNI/4to/TFG/ProyectoUnity/TFG_ProceduralDungeonGenerator/TFG_VersionFinal/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>

@@ -14,15 +14,11 @@ public class DungeonGeneration : MonoBehaviour
     public Dictionary<string, GameObject> m_roomDictionary = new Dictionary<string, GameObject>();
 
     private GameObject m_parent;
-    int dungeonCounter = 0;
 
     public void GenerateDungeon(string _fileName)
     {
-        dungeonCounter++;
-
         m_parent = new GameObject();
-        m_parent.name = "Dungeon " + dungeonCounter;
-        //m_parent.transform.position = Vector3.up * (dungeonCounter * 100);
+        m_parent.name = "Dungeon " + _fileName;
         m_graphToLoad = Resources.Load<RoomInfoContainer>($"FinalGraphs/{_fileName}");
         LoadRoomsInfo();
     }
@@ -95,7 +91,7 @@ public class DungeonGeneration : MonoBehaviour
         RoomScript baseRoom = _previousRoom.GetComponent<RoomScript>();
         RoomScript targetRoom = _currentRoomToSpawn.GetComponent<RoomScript>();
         Vector3 newPosition = Vector3.zero;
-        Vector3 baseRoomSize = baseRoom.returnRoomSize();
+        Vector3 baseRoomSize = baseRoom.ReturnRoomSize();
 
 
         baseRoom.GenerateDoor(_baseConnectionName);
@@ -125,7 +121,7 @@ public class DungeonGeneration : MonoBehaviour
         {
             //PROBLEMA AL HABER MAS DE 1 STAIR -> 
             StaircaseScript conectedStairs = baseRoom.GetComponentInChildren<StaircaseScript>();
-            Vector3 positionToConnect = conectedStairs.end.transform.position;
+            Vector3 positionToConnect = conectedStairs.m_endOfStaircaseGameobject.transform.position;
 
 
             if (_baseConnectionName.Contains("up"))
