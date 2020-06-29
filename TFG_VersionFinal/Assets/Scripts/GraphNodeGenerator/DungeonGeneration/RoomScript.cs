@@ -28,7 +28,17 @@ public class RoomScript : MonoBehaviour
         {
             m_doorsPlaceHolders[0].SetActive(false);
 
-            if (_roomConnection.Contains("key"))
+            if (_roomConnection.Contains("key") && _roomConnection.Contains("stairs"))
+            {
+                GameObject doorPrefab = Instantiate(m_doorPrefab, gameObject.transform);
+                doorPrefab.transform.position = m_doorsPlaceHolders[0].transform.position;
+                doorPrefab.transform.rotation = m_doorsPlaceHolders[0].transform.rotation;
+                GameObject stairsPrefab = Instantiate(m_staircasePrefab, gameObject.transform);
+                Vector3 bounds = new Vector3(0, stairsPrefab.GetComponent<MeshRenderer>().bounds.size.y / 3, stairsPrefab.GetComponent<MeshRenderer>().bounds.size.z / 2);
+                stairsPrefab.transform.position = m_doorsPlaceHolders[0].transform.position + bounds;
+                stairsPrefab.transform.Rotate(new Vector3(0, 0, 0));
+            }
+            else if (_roomConnection.Contains("key"))
             {
                 GameObject doorPrefab = Instantiate(m_doorPrefab, gameObject.transform);
                 doorPrefab.transform.position = m_doorsPlaceHolders[0].transform.position;
@@ -47,7 +57,17 @@ public class RoomScript : MonoBehaviour
         {
             m_doorsPlaceHolders[1].SetActive(false);
 
-            if (_roomConnection.Contains("key"))
+             if (_roomConnection.Contains("key") && _roomConnection.Contains("stairs"))
+            {
+                GameObject doorPrefab = Instantiate(m_doorPrefab, gameObject.transform);
+                doorPrefab.transform.position = m_doorsPlaceHolders[1].transform.position;
+                doorPrefab.transform.rotation = m_doorsPlaceHolders[1].transform.rotation;
+                GameObject stairsPrefab = Instantiate(m_staircasePrefab, gameObject.transform);
+                Vector3 bounds = new Vector3(0, -stairsPrefab.GetComponent<MeshRenderer>().bounds.size.y / 3, stairsPrefab.GetComponent<MeshRenderer>().bounds.size.z / 2);
+                stairsPrefab.transform.position = m_doorsPlaceHolders[1].transform.position - bounds;
+                stairsPrefab.transform.Rotate(new Vector3(0, 180, 0));
+            }
+            else if(_roomConnection.Contains("key"))
             {
                 GameObject doorPrefab = Instantiate(m_doorPrefab, gameObject.transform);
                 doorPrefab.transform.position = m_doorsPlaceHolders[1].transform.position;
@@ -65,7 +85,17 @@ public class RoomScript : MonoBehaviour
         {
             m_doorsPlaceHolders[2].SetActive(false);
 
-            if (_roomConnection.Contains("key"))
+             if (_roomConnection.Contains("key") && _roomConnection.Contains("stairs"))
+            {
+                GameObject doorPrefab = Instantiate(m_doorPrefab, gameObject.transform);
+                doorPrefab.transform.position = m_doorsPlaceHolders[2].transform.position;
+                doorPrefab.transform.rotation = m_doorsPlaceHolders[2].transform.rotation;
+                GameObject stairsPrefab = Instantiate(m_staircasePrefab, gameObject.transform);
+                Vector3 bounds = new Vector3(stairsPrefab.GetComponent<MeshRenderer>().bounds.size.z / 2, -stairsPrefab.GetComponent<MeshRenderer>().bounds.size.y / 3, 0);
+                stairsPrefab.transform.position = m_doorsPlaceHolders[2].transform.position - bounds;
+                stairsPrefab.transform.Rotate(new Vector3(0, 270, 0));
+            }
+            else if(_roomConnection.Contains("key"))
             {
                 GameObject doorPrefab = Instantiate(m_doorPrefab, gameObject.transform);
                 doorPrefab.transform.position = m_doorsPlaceHolders[2].transform.position;
@@ -83,7 +113,17 @@ public class RoomScript : MonoBehaviour
         {
             m_doorsPlaceHolders[3].SetActive(false);
 
-            if (_roomConnection.Contains("key"))
+            if (_roomConnection.Contains("key") && _roomConnection.Contains("stairs"))
+            {
+                GameObject doorPrefab = Instantiate(m_doorPrefab, gameObject.transform);
+                doorPrefab.transform.position = m_doorsPlaceHolders[3].transform.position;
+                doorPrefab.transform.rotation = m_doorsPlaceHolders[3].transform.rotation;
+                GameObject stairsPrefab = Instantiate(m_staircasePrefab, gameObject.transform);
+                Vector3 bounds = new Vector3(stairsPrefab.GetComponent<MeshRenderer>().bounds.size.z / 2, stairsPrefab.GetComponent<MeshRenderer>().bounds.size.y / 3, 0);
+                stairsPrefab.transform.position = m_doorsPlaceHolders[3].transform.position + bounds;
+                stairsPrefab.transform.Rotate(new Vector3(0, 90, 0));
+            }
+            else if(_roomConnection.Contains("key"))
             {
                 GameObject doorPrefab = Instantiate(m_doorPrefab, gameObject.transform);
                 doorPrefab.transform.position = m_doorsPlaceHolders[3].transform.position;

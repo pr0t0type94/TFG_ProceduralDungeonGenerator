@@ -63,7 +63,7 @@ public class UtilitiesAndReferencesClass
         foreach(GameObject go in gameObjList)
         {
             //no añadimos rooms start, floor o end
-            if (go.name == "Start" || go.name == "End" || go.name == "Floor") continue;
+            if (go.name.Contains("Start") || go.name.Contains("End") || go.name.Contains("Floor")) continue;
             else m_typesOfRoomsList.Add(go.name);
 
         }

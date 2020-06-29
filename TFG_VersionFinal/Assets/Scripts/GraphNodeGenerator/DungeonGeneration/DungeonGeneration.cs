@@ -15,6 +15,11 @@ public class DungeonGeneration : MonoBehaviour
 
     private GameObject m_parent;
 
+    public GameObject m_keyPrefab;
+
+    [Tooltip("Al marcar esta opción, se cogerá un prefab aleatorio en el caso de que haya mas de 1 con el mismo nombre. Si no esta marcado, se cogerá el prefab que coincida exactamente con el nombre de la sala")]
+    public bool m_selectRandomPrefabs = false;
+
     public void GenerateDungeon(string _fileName)
     {
         m_parent = new GameObject();
@@ -46,7 +51,23 @@ public class DungeonGeneration : MonoBehaviour
     GameObject SpawnRoom(string _roomID)
     {
         string l_roomType = m_graphToLoad.roomNodeData.Find(x => x.nodeID == _roomID).nodeType;
-        GameObject nextRoomToSpawn = Instantiate(m_roomPrefabsToSpawn.Find(x => x.name == l_roomType));
+        GameObject nextRoomToSpawn;
+
+        //si marcamos la opcion en el inspector, el prefab a instanciar se escojera al azar entre todos los que coincidan con el nombre(tipo de habitacion)
+        if (m_selectRandomPrefabs)
+        {
+            List<GameObject> l_posibleRoomPrefabsList = m_roomPrefabsToSpawn.Where(x => x.name.Contains(l_roomType)).ToList();
+            int randomPrefabSelection = Random.Range(0, l_posibleRoomPrefabsList.Count());
+            nextRoomToSpawn = Instantiate(l_posibleRoomPrefabsList.ElementAt(randomPrefabSelection));
+        }
+
+        else
+        {
+            nextRoomToSpawn = Instantiate(m_roomPrefabsToSpawn.First(x => x.name == l_roomType));
+           
+        }
+
+
         nextRoomToSpawn.transform.parent = m_parent.transform;
         return nextRoomToSpawn;
     }
@@ -119,7 +140,7 @@ public class DungeonGeneration : MonoBehaviour
         }
         else
         {
-            //PROBLEMA AL HABER MAS DE 1 STAIR -> 
+            //PROBLEMA AL HABER MAS DE 1 STAIR EN LA MISMA SALA
             StaircaseScript conectedStairs = baseRoom.GetComponentInChildren<StaircaseScript>();
             Vector3 positionToConnect = conectedStairs.m_endOfStaircaseGameobject.transform.position;
 
@@ -148,6 +169,13 @@ public class DungeonGeneration : MonoBehaviour
 
         targetRoom.transform.localPosition = newPosition;
 
+
+        if(_baseConnectionName.Contains("key"))
+        {
+            GameObject keyPrefab = Instantiate(m_keyPrefab);
+            keyPrefab.transform.parent = _previousRoom.transform;
+            keyPrefab.transform.position = _previousRoom.transform.position;
+        }
 
     }
 

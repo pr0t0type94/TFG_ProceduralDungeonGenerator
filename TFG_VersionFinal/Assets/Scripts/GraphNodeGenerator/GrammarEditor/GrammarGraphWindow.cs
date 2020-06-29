@@ -518,61 +518,62 @@ public class GrammarGraphWindow : EditorWindow
 
             nodesAlreadyUsed.Add(selectedNode);
 
-            //List<Edge> l_edgesConnectedToSelectedNode = m_graphView.edges.ToList().Where(x => x.input.node  == selectedNode).ToList();
-            List<Port> l_portsConnectedToSelectedNode = m_graphView.ports.ToList().Where(x => x.node == selectedNode).ToList();
+            List<Port> l_portsConnectedToSelectedNode = m_graphView.ports.ToList().Where(x => x.node == selectedNode && x.direction == Direction.Output).ToList();
 
-            Debug.Log(selectedNode.roomType);
             
             int randomSelectionPort = Random.Range(0, l_portsConnectedToSelectedNode.Count());
             Port selectedPort = l_portsConnectedToSelectedNode.ElementAt(randomSelectionPort);
-            Debug.Log(selectedPort.portName);
 
             Edge conectorEdge = m_edgesList.Find(x => x.output == selectedPort);
+            conectorEdge.output.portColor = Color.red;
 
-            List<KeyValuePair<string, string>> l_listOfNamesWithStairs = m_UtilitiesInstance.m_myConnectionsDictionary.ToList().GetRange(8, 4);
+            Debug.Log(conectorEdge.output.portName);
+            conectorEdge.output.portName += " stairs";
+            Debug.Log(conectorEdge.output.portName);
 
-            if (selectedNode.roomType != "Start")
-            {
-                string previousPortName = m_roomAndItsInputsDictionary.First(x => x.Key == selectedNode).Value;
 
-                if (previousPortName.Contains("up"))
-                {
-                    l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("up"))));
-                }
-                else if (previousPortName.Contains("down"))
-                {
-                    l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("down"))));
+            //List<KeyValuePair<string, string>> l_listOfNamesWithStairs = m_UtilitiesInstance.m_myConnectionsDictionary.ToList().GetRange(8, 4);
 
-                }
-                else if (previousPortName.Contains("left"))
-                {
-                    l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("left"))));
+            ////tener en cuenta mi conexion anterior (start no tiene)
+            //if (selectedNode.roomType != "Start")
+            //{
+            //    string previousPortName = m_roomAndItsInputsDictionary.First(x => x.Key == selectedNode).Value;
 
-                }
-                else if (previousPortName.Contains("right"))
-                {
-                    l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("right"))));
+            //    if (previousPortName.Contains("up"))
+            //    {
+            //        l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("up"))));
+            //    }
+            //    else if (previousPortName.Contains("down"))
+            //    {
+            //        l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("down"))));
 
-                }
-            }
+            //    }
+            //    else if (previousPortName.Contains("left"))
+            //    {
+            //        l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("left"))));
+
+            //    }
+            //    else if (previousPortName.Contains("right"))
+            //    {
+            //        l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("right"))));
+
+            //    }
+            //}
+
             //for (int z = 0; z < l_portsConnectedToSelectedNode.Count(); z++)
             //{
 
-            //    if (l_portsConnectedToSelectedNode[i].portName.Contains("up")) l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("up"))));
-            //    else if (l_portsConnectedToSelectedNode[i].portName.Contains("down")) l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("down"))));
-            //    else if (l_portsConnectedToSelectedNode[i].portName.Contains("left")) l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("left"))));
-            //    else if (l_portsConnectedToSelectedNode[i].portName.Contains("right")) l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("right"))));
+            //    if (l_portsConnectedToSelectedNode[z].portName.Contains("up")) l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("up"))));
+            //    else if (l_portsConnectedToSelectedNode[z].portName.Contains("down")) l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("down"))));
+            //    else if (l_portsConnectedToSelectedNode[z].portName.Contains("left")) l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("left"))));
+            //    else if (l_portsConnectedToSelectedNode[z].portName.Contains("right")) l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("right"))));
 
             //}
 
-            int randomSelectionName = Random.Range(0, l_listOfNamesWithStairs.Count());
-            string selectedNameOfPort = l_listOfNamesWithStairs.ElementAt(randomSelectionName).Key;
-            Debug.Log(selectedNameOfPort);
-            conectorEdge.output.portName = selectedNameOfPort;
-            conectorEdge.output.name = selectedNameOfPort;
+            //int randomSelectionName = Random.Range(0, l_listOfNamesWithStairs.Count());
+            //string selectedNameOfPort = l_listOfNamesWithStairs.ElementAt(randomSelectionName).Key;
 
-            conectorEdge.input.portName = m_UtilitiesInstance.ReturnConnectionNameByReference(selectedNameOfPort);
-            conectorEdge.input.name = m_UtilitiesInstance.ReturnConnectionNameByReference(selectedNameOfPort);
+            //conectorEdge.input.portName = m_UtilitiesInstance.ReturnConnectionNameByReference(selectedNameOfPort);
 
         }
 

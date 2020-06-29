@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: tr
+  m_EditorClassIdentifier: 
+  roomConnectionsData:
+  - baseNodeId: d04f2256-182a-498e-9ab4-5108aa8950f8
+    basePortName: down key
+    targetNodeId: b8697f56-9145-49c1-99ea-e2e6f22ead1f
+    targetPortName: up key
+  - baseNodeId: b8697f56-9145-49c1-99ea-e2e6f22ead1f
+    basePortName: left key
+    targetNodeId: 85d28ece-ec17-4de3-b933-f00ba90d27ea
+    targetPortName: right key
+  - baseNodeId: b8697f56-9145-49c1-99ea-e2e6f22ead1f
+    basePortName: down
+    targetNodeId: 4b1e68e2-be3d-4d2c-b45e-03287375f135
+    targetPortName: up
+  - baseNodeId: b8697f56-9145-49c1-99ea-e2e6f22ead1f
+    basePortName: right key stairs
+    targetNodeId: 1d57d653-737c-4abf-9aa6-903e1f7164c5
+    targetPortName: left key
+  roomNodeData:
+  - nodeID: d04f2256-182a-498e-9ab4-5108aa8950f8
+    nodeType: Start
+    position: {x: 20, y: 20}
+    isTerminal: 1
+  - nodeID: b8697f56-9145-49c1-99ea-e2e6f22ead1f
+    nodeType: Room
+    position: {x: 0, y: 200}
+    isTerminal: 1
+  - nodeID: 85d28ece-ec17-4de3-b933-f00ba90d27ea
+    nodeType: Enemy
+    position: {x: -400, y: 200}
+    isTerminal: 1
+  - nodeID: 4b1e68e2-be3d-4d2c-b45e-03287375f135
+    nodeType: Trap
+    position: {x: 0, y: 400}
+    isTerminal: 1
+  - nodeID: 1d57d653-737c-4abf-9aa6-903e1f7164c5
+    nodeType: Trap
+    position: {x: 400, y: 200}
+    isTerminal: 1
