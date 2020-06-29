@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: Floor
+  m_EditorClassIdentifier: 
+  roomConnectionsData:
+  - baseNodeId: 1117f16f-c4e0-42f6-8407-24657c091fd5
+    basePortName: up
+    targetNodeId: 18d3313e-f3e1-4fd8-8fc0-d9cd8dbab6f1
+    targetPortName: down
+  roomNodeData:
+  - nodeID: 1117f16f-c4e0-42f6-8407-24657c091fd5
+    nodeType: begin
+    position: {x: 20, y: 20}
+    isTerminal: 1
+  - nodeID: 18d3313e-f3e1-4fd8-8fc0-d9cd8dbab6f1
+    nodeType: Room
+    position: {x: 447, y: -111}
+    isTerminal: 1

@@ -57,7 +57,7 @@ public class GrammarGraphView : GraphView
         AddElement(CreateRoomNode(_nodeName));
     }
 
-    public RoomNode CreateRoomNode(string _roomName, bool _isTerminal = false)
+    public RoomNode CreateRoomNode(string _roomName, bool _isTerminal = true)
     {
         RoomNode l_roomNode = new RoomNode
         {

@@ -180,38 +180,55 @@ public class GrammarGraphWindow : EditorWindow
 
     private void ExpandNonTerminalNodes()//expandir los nodos NO MARCADOS con isTerminal -> nodos Non-Terminal
     {
-        foreach (RoomNode rn in m_graphView.nodes.ToList())
+        if(m_graphView.nodes.ToList().Cast<RoomNode>().Where(x => x.isTerminal == false).Count()>0)
         {
-            if (!rn.isTerminal)
+            foreach (RoomNode rn in m_graphView.nodes.ToList().Cast<RoomNode>().Where(x => x.isTerminal == false))
             {
-                m_resourcesRulesLoaded = Resources.LoadAll<RoomInfoContainer>("Rules").ToList();//cargo todas las reglas disponibles
-
-                if (m_resourcesRulesLoaded.Exists(x => x.name.Contains(rn.roomType)))//si existe una regla que contenga el nombre del nodo que quiero expandir;
+                if (rn.outputContainer.Q<Port>() == null)
                 {
-                    RoomInfoContainer[] l_candidateRules = m_resourcesRulesLoaded.Where(x => x.name.Contains(rn.roomType)).ToArray();//cojo las reglas que coincidan
 
-                    int l_randomRuleSelection = Random.Range(0, l_candidateRules.Length);//escojo una regla al azar
-                    RoomInfoContainer l_ruleToLoad = l_candidateRules[l_randomRuleSelection];
+                    m_resourcesRulesLoaded = Resources.LoadAll<RoomInfoContainer>("Rules").ToList();//cargo todas las reglas disponibles
 
-                    CreateExpandedNodes(l_ruleToLoad, rn);//expando el nodo dependiendo de la regla
-                    m_graphView.RemoveElement(rn);//elimino el nodo expandido para dejar sitio a los nuevos
-
-                    //elimino los edges que pertenezcan al nodo expandido
-                    foreach (Edge e in m_graphView.edges.ToList())
+                    if (m_resourcesRulesLoaded.Exists(x => x.name.Contains(rn.roomType)))//si existe una regla que contenga el nombre del nodo que quiero expandir;
                     {
-                        if ((e.input.node as RoomNode) == rn)
+                        RoomInfoContainer[] l_candidateRules = m_resourcesRulesLoaded.Where(x => x.name.Contains(rn.roomType)).ToArray();//cojo las reglas que coincidan
+
+                        int l_randomRuleSelection = Random.Range(0, l_candidateRules.Length);//escojo una regla al azar
+                        RoomInfoContainer l_ruleToLoad = l_candidateRules[l_randomRuleSelection];
+
+                        CreateExpandedNodes(l_ruleToLoad, rn);//expando el nodo dependiendo de la regla
+                        m_graphView.RemoveElement(rn);//elimino el nodo expandido para dejar sitio a los nuevos
+
+                        //elimino los edges que pertenezcan al nodo expandido
+                        foreach (Edge e in m_graphView.edges.ToList())
                         {
-                            m_graphView.RemoveElement(e);
+                            if ((e.input.node as RoomNode) == rn)
+                            {
+                                m_graphView.RemoveElement(e);
+                            }
                         }
+
                     }
+                    else
+                    {
+                        Debug.Log("The node you'r trying to expand doesn't have a rule specified");
+                    }
+
 
                 }
                 else
                 {
-                    Debug.Log("The node you'r trying to expand doesn't have a rule specified");
+                    Debug.Log("Non-terminal nodes must have 0 outputs (should be placed at the end of the graph)");
+
                 }
             }
         }
+        else
+        {
+            Debug.Log("0 Nodes to Expand. Only non-terminal nodes can be expanded. You should dismark 'isTerminal' from any node to expand it");
+        }
+
+       
 
 
 
@@ -525,105 +542,11 @@ public class GrammarGraphWindow : EditorWindow
             Port selectedPort = l_portsConnectedToSelectedNode.ElementAt(randomSelectionPort);
 
             Edge conectorEdge = m_edgesList.Find(x => x.output == selectedPort);
-            conectorEdge.output.portColor = Color.red;
-
-            Debug.Log(conectorEdge.output.portName);
             conectorEdge.output.portName += " stairs";
-            Debug.Log(conectorEdge.output.portName);
-
-
-            //List<KeyValuePair<string, string>> l_listOfNamesWithStairs = m_UtilitiesInstance.m_myConnectionsDictionary.ToList().GetRange(8, 4);
-
-            ////tener en cuenta mi conexion anterior (start no tiene)
-            //if (selectedNode.roomType != "Start")
-            //{
-            //    string previousPortName = m_roomAndItsInputsDictionary.First(x => x.Key == selectedNode).Value;
-
-            //    if (previousPortName.Contains("up"))
-            //    {
-            //        l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("up"))));
-            //    }
-            //    else if (previousPortName.Contains("down"))
-            //    {
-            //        l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("down"))));
-
-            //    }
-            //    else if (previousPortName.Contains("left"))
-            //    {
-            //        l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("left"))));
-
-            //    }
-            //    else if (previousPortName.Contains("right"))
-            //    {
-            //        l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("right"))));
-
-            //    }
-            //}
-
-            //for (int z = 0; z < l_portsConnectedToSelectedNode.Count(); z++)
-            //{
-
-            //    if (l_portsConnectedToSelectedNode[z].portName.Contains("up")) l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("up"))));
-            //    else if (l_portsConnectedToSelectedNode[z].portName.Contains("down")) l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("down"))));
-            //    else if (l_portsConnectedToSelectedNode[z].portName.Contains("left")) l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("left"))));
-            //    else if (l_portsConnectedToSelectedNode[z].portName.Contains("right")) l_listOfNamesWithStairs.RemoveAt(l_listOfNamesWithStairs.IndexOf(l_listOfNamesWithStairs.First(x => x.Key.Contains("right"))));
-
-            //}
-
-            //int randomSelectionName = Random.Range(0, l_listOfNamesWithStairs.Count());
-            //string selectedNameOfPort = l_listOfNamesWithStairs.ElementAt(randomSelectionName).Key;
-
-            //conectorEdge.input.portName = m_UtilitiesInstance.ReturnConnectionNameByReference(selectedNameOfPort);
-
+       
         }
 
-        /////////
-
-
-        //buscar habitaciones sin nodos de output
-
-        //List<RoomNode> l_roomsWithNoOutputs = m_graphView.nodes.ToList().Where(x => x.outputContainer.Q<Port>() == null).ToList();
-
-
-        //coger una habitacion al azar y conectarle la sala Final ("End")
-        //int rnd = Random.Range(0, l_roomsWithNoOutputs.Count());
-        //RoomNode selectedNode = l_roomsWithNoOutputs.ElementAt(rnd);
-
-        /////////////////
-        ////cojo todos los strings posibles -> no usamos los que contengan stairs
-        //List<string> l_posibleBasePortNames = m_UtilitiesInstance.m_myConnectionsDictionary.Keys.ToList().Where(x => !x.Contains("stairs")).ToList();
-
-        ////busco en el diccionary el tipo de input que tiene la _baseRoom
-        //string l_conectedInputName = m_roomAndItsInputsDictionary.ToList().Find(x => x.Key == selectedNode).Value;
-
-        //if (l_conectedInputName != null)
-        //{
-        //    if (l_conectedInputName.Contains("up"))
-        //    {
-        //        l_posibleBasePortNames.RemoveAll(x => x.Contains("up"));
-        //    }
-        //    else if (l_conectedInputName.Contains("down"))
-        //    {
-        //        l_posibleBasePortNames.RemoveAll(x => x.Contains("down"));
-        //    }
-        //    else if (l_conectedInputName.Contains("left"))
-        //    {
-        //        l_posibleBasePortNames.RemoveAll(x => x.Contains("left"));
-        //    }
-        //    else if (l_conectedInputName.Contains("right"))
-        //    {
-        //        l_posibleBasePortNames.RemoveAll(x => x.Contains("right"));
-        //    }
-        //}
-
-        ////generar un puerto out en el nodo escogido
-        //int l_numberOfDifferentConnections = l_posibleBasePortNames.Count();
-        //int l_randomSelectionPortName = Random.Range(0, l_numberOfDifferentConnections);
-        //string l_selectedNameOfBasePort = l_posibleBasePortNames.ElementAt(l_randomSelectionPortName);
-        //string l_nameOfTargetPortByReference = m_UtilitiesInstance.ReturnConnectionNameReferences(l_selectedNameOfBasePort);
-        //m_graphView.GenerateOutputPortsOnNode(selectedNode as RoomNode, l_selectedNameOfBasePort);
-
-        //instancio un nodo del tipo end
+       
 
     }
 
