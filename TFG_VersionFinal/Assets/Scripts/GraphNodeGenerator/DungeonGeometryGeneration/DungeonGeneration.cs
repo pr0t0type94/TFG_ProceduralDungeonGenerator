@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEditor;
 
 
 public class DungeonGeneration : MonoBehaviour
@@ -15,19 +16,32 @@ public class DungeonGeneration : MonoBehaviour
 
     private GameObject m_parent;
 
+    public GameObject m_playerPrefab;
     public GameObject m_keyPrefab;
+    //public GameObject m_doorPrefab;
+    //public GameObject m_staircasePrefab;
 
-    [Tooltip("Al marcar esta opción, se cogerá un prefab aleatorio en el caso de que haya mas de 1 con el mismo nombre. Si no esta marcado, se cogerá el prefab que coincida exactamente con el nombre de la sala")]
+    [Tooltip("Al marcar esta opción, se cogerá un prefab aleatorio en el caso de que haya mas de 1 con el mismo nombre. Si no esta marcado, se cogerá el primer prefab que encuentre con el nombre de la sala")]
     public bool m_selectRandomPrefabs = false;
+
+    [Range(0.01f,0.1f)]
+    public float m_offsetRoomPositions = 0.05f;
+
 
     public void GenerateDungeon(string _fileName)
     {
+        
+        if(!AssetDatabase.FindAssets($"{_fileName}",new[] {"Assets/Resources/FinalGraphs"}).Any())
+        {
+            Debug.Log($"Caution! There is no graph with the name '{_fileName}' on the Resources/FinalGraphs folder");
+            return;
+        }
+
         m_parent = new GameObject();
         m_parent.name = "Dungeon " + _fileName;
         m_graphToLoad = Resources.Load<RoomInfoContainer>($"FinalGraphs/{_fileName}");
         LoadRoomsInfo();
     }
-
 
     void LoadRoomsInfo()
     {
@@ -36,6 +50,9 @@ public class DungeonGeneration : MonoBehaviour
         string l_startRoomID = m_graphToLoad.roomNodeData.Find(x => x.nodeType == "Start").nodeID;
 
         GameObject l_startRoom = SpawnRoom(l_startRoomID);
+        GameObject l_player = Instantiate(m_playerPrefab);
+        l_player.transform.position = l_startRoom.transform.position;
+        l_player.transform.parent = m_parent.transform;
         m_roomDictionary.Add(l_startRoomID, l_startRoom);
         GenerateNeighbours(l_startRoomID);
 
@@ -51,24 +68,36 @@ public class DungeonGeneration : MonoBehaviour
     GameObject SpawnRoom(string _roomID)
     {
         string l_roomType = m_graphToLoad.roomNodeData.Find(x => x.nodeID == _roomID).nodeType;
-        GameObject nextRoomToSpawn;
+        GameObject nextRoomToSpawn = null;
 
-        //si marcamos la opcion en el inspector, el prefab a instanciar se escojera al azar entre todos los que coincidan con el nombre(tipo de habitacion)
-        if (m_selectRandomPrefabs)
+        if (m_roomPrefabsToSpawn.Exists(x => x.name.Contains(l_roomType)))
+
         {
-            List<GameObject> l_posibleRoomPrefabsList = m_roomPrefabsToSpawn.Where(x => x.name.Contains(l_roomType)).ToList();
-            int randomPrefabSelection = Random.Range(0, l_posibleRoomPrefabsList.Count());
-            nextRoomToSpawn = Instantiate(l_posibleRoomPrefabsList.ElementAt(randomPrefabSelection));
-        }
 
+            //si marcamos la opcion en el inspector, el prefab a instanciar se escojera al azar entre todos los que coincidan con el nombre(tipo de habitacion)
+            if (m_selectRandomPrefabs)
+            {
+                List<GameObject> l_posibleRoomPrefabsList = m_roomPrefabsToSpawn.Where(x => x.name.Contains(l_roomType)).ToList();
+                int randomPrefabSelection = Random.Range(0, l_posibleRoomPrefabsList.Count());
+                nextRoomToSpawn = Instantiate(l_posibleRoomPrefabsList.ElementAt(randomPrefabSelection));
+            }
+
+            else
+            {
+                nextRoomToSpawn = Instantiate(m_roomPrefabsToSpawn.First(x => x.name.Contains(l_roomType)));
+
+            }
+
+            nextRoomToSpawn.transform.parent = m_parent.transform;
+
+
+        }
         else
         {
-            nextRoomToSpawn = Instantiate(m_roomPrefabsToSpawn.First(x => x.name == l_roomType));
-           
+            Debug.Log($"There is no existing room of type {l_roomType}");
         }
 
 
-        nextRoomToSpawn.transform.parent = m_parent.transform;
         return nextRoomToSpawn;
     }
 
@@ -114,7 +143,6 @@ public class DungeonGeneration : MonoBehaviour
         Vector3 newPosition = Vector3.zero;
         Vector3 baseRoomSize = baseRoom.ReturnRoomSize();
 
-
         baseRoom.GenerateDoor(_baseConnectionName);
         targetRoom.GenerateDoor(_targetConnectionName);
 
@@ -123,19 +151,19 @@ public class DungeonGeneration : MonoBehaviour
 
             if (_baseConnectionName.Contains("up"))
             {
-                newPosition = new Vector3(baseRoom.transform.position.x, baseRoom.transform.position.y, baseRoom.returnPosition("up").z + (baseRoomSize.z / 2));
+                newPosition = new Vector3(baseRoom.transform.position.x, baseRoom.transform.position.y, baseRoom.returnPosition("up").z + (baseRoomSize.z / 2) + m_offsetRoomPositions);
             }
             else if (_baseConnectionName.Contains("down"))
             {
-                newPosition = new Vector3(baseRoom.transform.position.x, baseRoom.transform.position.y, baseRoom.returnPosition("down").z - (baseRoomSize.z / 2));
+                newPosition = new Vector3(baseRoom.transform.position.x, baseRoom.transform.position.y, baseRoom.returnPosition("down").z - (baseRoomSize.z / 2) - m_offsetRoomPositions);
             }
             else if (_baseConnectionName.Contains("left"))
             {
-                newPosition = new Vector3(baseRoom.returnPosition("left").x - (baseRoomSize.x / 2), baseRoom.transform.position.y, baseRoom.transform.position.z);
+                newPosition = new Vector3(baseRoom.returnPosition("left").x - (baseRoomSize.x / 2) - m_offsetRoomPositions, baseRoom.transform.position.y, baseRoom.transform.position.z);
             }
             else if (_baseConnectionName.Contains("right"))
             {
-                newPosition = new Vector3(baseRoom.returnPosition("right").x + (baseRoomSize.x / 2), baseRoom.transform.position.y, baseRoom.transform.position.z);
+                newPosition = new Vector3(baseRoom.returnPosition("right").x + (baseRoomSize.x / 2) + m_offsetRoomPositions, baseRoom.transform.position.y, baseRoom.transform.position.z);
             }
         }
         else
@@ -170,7 +198,7 @@ public class DungeonGeneration : MonoBehaviour
         targetRoom.transform.localPosition = newPosition;
 
 
-        if(_baseConnectionName.Contains("key"))
+        if (_baseConnectionName.Contains("key"))
         {
             GameObject keyPrefab = Instantiate(m_keyPrefab);
             keyPrefab.transform.parent = _previousRoom.transform;

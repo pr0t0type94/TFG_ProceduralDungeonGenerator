@@ -30,9 +30,9 @@ public class GrammarGraphWindow : EditorWindow
     Dictionary<RoomNode, string> m_roomAndItsInputsDictionary = new Dictionary<RoomNode, string>();//dictionary con la room spawneada y el tipo de input 
 
     List<Edge> m_edgesList = new List<Edge>();
-    //Edge conectorEdge = new Edge();
-   /////FUNCIONES
-   [MenuItem("Grammar/Graph Editor")]
+
+
+    [MenuItem("Grammar Generator/Graph Editor")]
     public static void OpenGrammarGraphWindow()
     {
         //crear la ventana del editor y ponerle nombre
@@ -85,7 +85,6 @@ public class GrammarGraphWindow : EditorWindow
         l_saveRuleButton.text = "Save Rule";//nombre del boton
         l_toolbar.Add(l_saveRuleButton);//añadimos el boton a la toolbar
 
-        //toolbar.Add(new Button(() => LoadGrammarData()) { text = "Load Rule" });
         Button l_loadRuleButton = new Button(); //boton para crear un nodo tipo "Room", el clickEvent especifica que debe hacer el boton cuando es clicado
         l_loadRuleButton.transform.position = new Vector3(60, 0, 0);
         l_loadRuleButton.clickable.clicked += () => LoadGrammarData(m_ruleFileName, false); //evento al clickar 
@@ -108,14 +107,14 @@ public class GrammarGraphWindow : EditorWindow
         l_toolbar.Add(l_finalGraphNameText);//añadimos la variable donde se cambia el nombre del archivo a la toolbar
 
 
-        Button l_saveFinalGraphButton = new Button(); 
+        Button l_saveFinalGraphButton = new Button();
         l_saveFinalGraphButton.transform.position = new Vector3(180, 0, 0);
         l_finalGraphNameText.SetValueWithoutNotify(m_finalGraphName);//guardar el valor por defecto
         l_saveFinalGraphButton.clickable.clicked += () => SaveGrammarData(m_finalGraphName, true); //evento al clickar 
         l_saveFinalGraphButton.text = "Save Final Graph";//nombre del boton
         l_toolbar.Add(l_saveFinalGraphButton);//añadimos el boton a la toolbar
 
-        Button l_loadFinalGraphButton = new Button(); 
+        Button l_loadFinalGraphButton = new Button();
         l_loadFinalGraphButton.transform.position = new Vector3(180, 0, 0);
         l_loadFinalGraphButton.clickable.clicked += () => LoadGrammarData(m_finalGraphName, true); //evento al clickar 
         l_loadFinalGraphButton.text = "Load Final Graph";//nombre del boton
@@ -151,7 +150,7 @@ public class GrammarGraphWindow : EditorWindow
         l_secondaryToolbar.Add(l_clearAllNodesOnGrapButton);
 
         rootVisualElement.Add(l_secondaryToolbar);
-    }
+    }//barra generacion aleatoria
 
 
     private void SaveGrammarData(string _saveFileName, bool _isFinalGraph = false)
@@ -180,7 +179,7 @@ public class GrammarGraphWindow : EditorWindow
 
     private void ExpandNonTerminalNodes()//expandir los nodos NO MARCADOS con isTerminal -> nodos Non-Terminal
     {
-        if(m_graphView.nodes.ToList().Cast<RoomNode>().Where(x => x.isTerminal == false).Count()>0)
+        if (m_graphView.nodes.ToList().Cast<RoomNode>().Where(x => x.isTerminal == false).Count() > 0)
         {
             foreach (RoomNode rn in m_graphView.nodes.ToList().Cast<RoomNode>().Where(x => x.isTerminal == false))
             {
@@ -211,9 +210,8 @@ public class GrammarGraphWindow : EditorWindow
                     }
                     else
                     {
-                        Debug.Log("The node you'r trying to expand doesn't have a rule specified");
+                        Debug.Log($"The node '{rn.roomType}' you'r trying to expand doesn't have a rule specified");
                     }
-
 
                 }
                 else
@@ -228,7 +226,7 @@ public class GrammarGraphWindow : EditorWindow
             Debug.Log("0 Nodes to Expand. Only non-terminal nodes can be expanded. You should dismark 'isTerminal' from any node to expand it");
         }
 
-       
+
 
 
 
@@ -374,8 +372,16 @@ public class GrammarGraphWindow : EditorWindow
                 }
             }
 
-            if(m_numberOfFloorsToGenerate>0)
-            GenerateStairsNodes();
+            if (m_numberOfFloorsToGenerate > 0)
+            {
+                Debug.Log($"Generating {m_numberOfFloorsToGenerate} floors");
+
+                GenerateStairsNodes();
+            }
+            else
+            {
+                Debug.Log("Currently generating 0 floors. You can create floors if you specify a number of floors to generate");
+            }
 
         }
 
@@ -389,7 +395,7 @@ public class GrammarGraphWindow : EditorWindow
 
     private void GenereteNeighbourRooms(RoomNode _baseRoom)
     {
-      
+
         int l_numberOfConnections;
         //si es la 'start' room puedo crear 4 conexiones, sino solo puedo crear 3 (1 viene con el input previo)
         if (_baseRoom.roomType == "Start")
@@ -402,13 +408,13 @@ public class GrammarGraphWindow : EditorWindow
         }
 
         //cojo todos los strings posibles -> no usamos los que contengan stairs
-        List<string> l_posibleBasePortNames = m_UtilitiesInstance.m_myConnectionsDictionary.Keys.ToList().Where(x=>!x.Contains("stairs")).ToList();
-        
+        List<string> l_posibleBasePortNames = m_UtilitiesInstance.m_myConnectionsDictionary.Keys.ToList().Where(x => !x.Contains("stairs")).ToList();
+
         //busco en el diccionary el tipo de input que tiene la _baseRoom
         string l_conectedInputName = m_roomAndItsInputsDictionary.ToList().Find(x => x.Key == _baseRoom).Value;
 
         //dependiendo del input que tengo, debo limitar las opciones de mis outputs
-        if(l_conectedInputName!=null)
+        if (l_conectedInputName != null)
         {
             if (l_conectedInputName.Contains("up"))
             {
@@ -440,14 +446,14 @@ public class GrammarGraphWindow : EditorWindow
             int l_randomSelectionPortName = Random.Range(0, l_numberOfDifferentConnections);
             string l_selectedNameOfBasePort = l_posibleBasePortNames.ElementAt(l_randomSelectionPortName);
             string l_nameOfTargetPortByReference = m_UtilitiesInstance.ReturnConnectionNameByReference(l_selectedNameOfBasePort);
-            
+
             //spawnear la habitacion y añadirla al graph (+dictionary +list +counter)
             RoomNode l_newRoomToSpawn = m_graphView.CreateRoomNode(l_selectedRoomType, true);
             m_graphView.AddElement(l_newRoomToSpawn);
             m_roomAndItsInputsDictionary.Add(l_newRoomToSpawn, l_nameOfTargetPortByReference);
             m_currentlyInstantiatedRoomList.Add(l_newRoomToSpawn);
             m_numberOfRoomsInstantiated++;
-                        
+
 
             //DONT REPEAT NAMES OF PREVIOUS PORTS
             if (l_selectedNameOfBasePort.Contains("up"))
@@ -518,9 +524,9 @@ public class GrammarGraphWindow : EditorWindow
     private void GenerateStairsNodes()
     {
 
-            List<RoomNode> l_allNodesOnGraphWithOutputs = m_graphView.nodes.ToList().Where(x=>x.outputContainer.Q<Port>() != null).Cast<RoomNode>().ToList();
-            List<RoomNode> nodesAlreadyUsed = new List<RoomNode>();
-            int numberOfNodes = l_allNodesOnGraphWithOutputs.Count();
+        List<RoomNode> l_allNodesOnGraphWithOutputs = m_graphView.nodes.ToList().Where(x => x.outputContainer.Q<Port>() != null).Cast<RoomNode>().ToList();
+        List<RoomNode> nodesAlreadyUsed = new List<RoomNode>();
+        int numberOfNodes = l_allNodesOnGraphWithOutputs.Count();
         for (int i = 0; i < m_numberOfFloorsToGenerate; i++)
         {
 
@@ -537,16 +543,16 @@ public class GrammarGraphWindow : EditorWindow
 
             List<Port> l_portsConnectedToSelectedNode = m_graphView.ports.ToList().Where(x => x.node == selectedNode && x.direction == Direction.Output).ToList();
 
-            
+
             int randomSelectionPort = Random.Range(0, l_portsConnectedToSelectedNode.Count());
             Port selectedPort = l_portsConnectedToSelectedNode.ElementAt(randomSelectionPort);
 
             Edge conectorEdge = m_edgesList.Find(x => x.output == selectedPort);
             conectorEdge.output.portName += " stairs";
-       
+
         }
 
-       
+
 
     }
 

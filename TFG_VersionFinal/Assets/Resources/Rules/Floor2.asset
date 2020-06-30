@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: Floor2
+  m_EditorClassIdentifier: 
+  roomConnectionsData:
+  - baseNodeId: 39b22f76-f19e-4ae3-bd1a-4e69f50b446b
+    basePortName: up
+    targetNodeId: c9b63dd9-9aa6-4617-bbc9-2bb7e31f412f
+    targetPortName: down
+  - baseNodeId: c9b63dd9-9aa6-4617-bbc9-2bb7e31f412f
+    basePortName: up
+    targetNodeId: f81cea2a-1087-4699-a4e2-2e1cd36c5a32
+    targetPortName: down
+  - baseNodeId: c9b63dd9-9aa6-4617-bbc9-2bb7e31f412f
+    basePortName: left key
+    targetNodeId: 44c34630-57bf-40ac-bd94-f24004bb0164
+    targetPortName: right key
+  - baseNodeId: c9b63dd9-9aa6-4617-bbc9-2bb7e31f412f
+    basePortName: right
+    targetNodeId: 877c4dc3-fe1b-4e25-8a9e-0bb72c7be254
+    targetPortName: left
+  - baseNodeId: f81cea2a-1087-4699-a4e2-2e1cd36c5a32
+    basePortName: right stairs
+    targetNodeId: 53e17246-6f3a-4bd3-9421-14f7c9d5afaf
+    targetPortName: left
+  - baseNodeId: f81cea2a-1087-4699-a4e2-2e1cd36c5a32
+    basePortName: left
+    targetNodeId: 40c1940a-9dc6-485a-922c-792bbb246b0e
+    targetPortName: right
+  - baseNodeId: f81cea2a-1087-4699-a4e2-2e1cd36c5a32
+    basePortName: up
+    targetNodeId: 56e4b6a3-c136-4980-970d-db18ee66e705
+    targetPortName: down
+  - baseNodeId: 44c34630-57bf-40ac-bd94-f24004bb0164
+    basePortName: up stairs
+    targetNodeId: 0b7721bb-7ce5-4686-8d66-86ba46d7a795
+    targetPortName: down
+  - baseNodeId: 44c34630-57bf-40ac-bd94-f24004bb0164
+    basePortName: down
+    targetNodeId: acba2617-760c-44e2-9e7c-840959c181db
+    targetPortName: up
+  - baseNodeId: 877c4dc3-fe1b-4e25-8a9e-0bb72c7be254
+    basePortName: up key
+    targetNodeId: a72baaf3-83f8-468e-8abe-bbbadfe7df82
+    targetPortName: down key
+  - baseNodeId: 877c4dc3-fe1b-4e25-8a9e-0bb72c7be254
+    basePortName: right key
+    targetNodeId: abfd16ff-4ba0-4c40-9944-9a7ff46884eb
+    targetPortName: left key
+  - baseNodeId: 877c4dc3-fe1b-4e25-8a9e-0bb72c7be254
+    basePortName: down
+    targetNodeId: 8aa4e656-7ae4-4dc9-9ca4-5b09ac0c71ce
+    targetPortName: up
+  roomNodeData:
+  - nodeID: c9b63dd9-9aa6-4617-bbc9-2bb7e31f412f
+    nodeType: Room
+    position: {x: 0, y: -200}
+    isTerminal: 1
+  - nodeID: f81cea2a-1087-4699-a4e2-2e1cd36c5a32
+    nodeType: Room
+    position: {x: 0, y: -400}
+    isTerminal: 1
+  - nodeID: 44c34630-57bf-40ac-bd94-f24004bb0164
+    nodeType: Room
+    position: {x: -400, y: -200}
+    isTerminal: 1
+  - nodeID: 877c4dc3-fe1b-4e25-8a9e-0bb72c7be254
+    nodeType: Room
+    position: {x: 400, y: -200}
+    isTerminal: 1
+  - nodeID: 53e17246-6f3a-4bd3-9421-14f7c9d5afaf
+    nodeType: Room
+    position: {x: 400, y: -400}
+    isTerminal: 1
+  - nodeID: 40c1940a-9dc6-485a-922c-792bbb246b0e
+    nodeType: Trap
+    position: {x: -400, y: -400}
+    isTerminal: 1
+  - nodeID: 56e4b6a3-c136-4980-970d-db18ee66e705
+    nodeType: Room 1
+    position: {x: 0, y: -600}
+    isTerminal: 1
+  - nodeID: 0b7721bb-7ce5-4686-8d66-86ba46d7a795
+    nodeType: Room 1
+    position: {x: -400, y: -400}
+    isTerminal: 1
+  - nodeID: acba2617-760c-44e2-9e7c-840959c181db
+    nodeType: Trap
+    position: {x: -400, y: 0}
+    isTerminal: 1
+  - nodeID: a72baaf3-83f8-468e-8abe-bbbadfe7df82
+    nodeType: Trap
+    position: {x: 400, y: -400}
+    isTerminal: 1
+  - nodeID: abfd16ff-4ba0-4c40-9944-9a7ff46884eb
+    nodeType: Enemy
+    position: {x: 800, y: -200}
+    isTerminal: 1
+  - nodeID: 8aa4e656-7ae4-4dc9-9ca4-5b09ac0c71ce
+    nodeType: Trap
+    position: {x: 400, y: 0}
+    isTerminal: 1
+  - nodeID: 39b22f76-f19e-4ae3-bd1a-4e69f50b446b
+    nodeType: begin
+    position: {x: 20, y: 20}
+    isTerminal: 1

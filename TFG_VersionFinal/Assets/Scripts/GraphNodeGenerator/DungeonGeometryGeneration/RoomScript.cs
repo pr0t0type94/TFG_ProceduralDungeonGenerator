@@ -12,6 +12,7 @@ public class RoomScript : MonoBehaviour
 
     public GameObject m_doorPrefab;
     public GameObject m_staircasePrefab;
+    
 
     public Vector3 ReturnRoomSize()
     {

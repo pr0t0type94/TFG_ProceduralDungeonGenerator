@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+
 public class UtilitiesAndReferencesClass
 {
     // Start is called before the first frame update
@@ -11,22 +12,22 @@ public class UtilitiesAndReferencesClass
 
     public List<string> m_typesOfRoomsList = new List<string>();
 
-    public UtilitiesAndReferencesClass ()
+    public UtilitiesAndReferencesClass()
     {
         GenerateConnectionsNames();
         ReturnListOfRoomTypes();
-    }     
+    }
 
     public static UtilitiesAndReferencesClass GetInstance()
     {
         return new UtilitiesAndReferencesClass { };
     }
-    
 
-   public void GenerateConnectionsNames()
+
+    public void GenerateConnectionsNames()
     {
         //BASIC VALUES
-        m_myConnectionsDictionary.Add("up","down");
+        m_myConnectionsDictionary.Add("up", "down");
         m_myConnectionsDictionary.Add("down", "up");
         m_myConnectionsDictionary.Add("left", "right");
         m_myConnectionsDictionary.Add("right", "left");
@@ -43,6 +44,11 @@ public class UtilitiesAndReferencesClass
         m_myConnectionsDictionary.Add("left stairs", "right");
         m_myConnectionsDictionary.Add("right stairs", "left");
 
+        //STAIRS WITH KEYS VALUES
+        m_myConnectionsDictionary.Add("up key stairs", "down key");
+        m_myConnectionsDictionary.Add("down key stairs", "up key");
+        m_myConnectionsDictionary.Add("left key stairs", "right key");
+        m_myConnectionsDictionary.Add("right key stairs", "left key");
 
     }
 
@@ -59,8 +65,8 @@ public class UtilitiesAndReferencesClass
         m_typesOfRoomsList = new List<string>();
 
         List<GameObject> gameObjList = Resources.LoadAll<GameObject>("Prefabs/RoomPrefabs").ToList();
-     
-        foreach(GameObject go in gameObjList)
+
+        foreach (GameObject go in gameObjList)
         {
             //no añadimos rooms start, floor o end
             if (go.name.Contains("Start") || go.name.Contains("End") || go.name.Contains("Floor")) continue;

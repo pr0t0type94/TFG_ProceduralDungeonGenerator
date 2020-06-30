@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: y
+  m_EditorClassIdentifier: 
+  roomConnectionsData:
+  - baseNodeId: 569bb77f-b2e1-485c-be45-8025d26fc3a8
+    basePortName: right key
+    targetNodeId: 604b8fce-cdc7-4e2e-96d8-84b52e2aa02c
+    targetPortName: left key
+  - baseNodeId: 569bb77f-b2e1-485c-be45-8025d26fc3a8
+    basePortName: down
+    targetNodeId: 43cdf18e-d418-4b85-9043-65ea1ba72f91
+    targetPortName: up
+  - baseNodeId: 604b8fce-cdc7-4e2e-96d8-84b52e2aa02c
+    basePortName: right key
+    targetNodeId: 012591ed-3d7b-46c4-9e62-014a6c82cee4
+    targetPortName: left key
+  - baseNodeId: 604b8fce-cdc7-4e2e-96d8-84b52e2aa02c
+    basePortName: down
+    targetNodeId: 16e1f731-46f0-4e4a-91a9-c112550d7dfe
+    targetPortName: up
+  - baseNodeId: 604b8fce-cdc7-4e2e-96d8-84b52e2aa02c
+    basePortName: up key
+    targetNodeId: 5966b7da-d27d-432f-bb7a-fa94785024ef
+    targetPortName: down key
+  - baseNodeId: 5966b7da-d27d-432f-bb7a-fa94785024ef
+    basePortName: up
+    targetNodeId: e6887d70-a451-4de8-9093-8f60df601d5a
+    targetPortName: down
+  roomNodeData:
+  - nodeID: 569bb77f-b2e1-485c-be45-8025d26fc3a8
+    nodeType: Start
+    position: {x: 20, y: 20}
+    isTerminal: 1
+  - nodeID: 604b8fce-cdc7-4e2e-96d8-84b52e2aa02c
+    nodeType: Enemy
+    position: {x: 400, y: 0}
+    isTerminal: 1
+  - nodeID: 012591ed-3d7b-46c4-9e62-014a6c82cee4
+    nodeType: Multi Puzzle
+    position: {x: 800, y: 0}
+    isTerminal: 1
+  - nodeID: 16e1f731-46f0-4e4a-91a9-c112550d7dfe
+    nodeType: Treasure
+    position: {x: 400, y: 200}
+    isTerminal: 1
+  - nodeID: 43cdf18e-d418-4b85-9043-65ea1ba72f91
+    nodeType: Treasure And Enemies
+    position: {x: -32, y: 200}
+    isTerminal: 1
+  - nodeID: 5966b7da-d27d-432f-bb7a-fa94785024ef
+    nodeType: Enemy
+    position: {x: 394, y: -193}
+    isTerminal: 1
+  - nodeID: e6887d70-a451-4de8-9093-8f60df601d5a
+    nodeType: Room
+    position: {x: 390, y: -334}
+    isTerminal: 0

@@ -13,88 +13,16 @@ MonoBehaviour:
   m_Name: x
   m_EditorClassIdentifier: 
   roomConnectionsData:
-  - baseNodeId: 9a796493-6abd-4903-ad16-dd0b54bdcd7f
-    basePortName: up key
-    targetNodeId: cbf7d997-2758-4ac6-8f13-4832ea86ee2f
-    targetPortName: down key
-  - baseNodeId: 9a796493-6abd-4903-ad16-dd0b54bdcd7f
-    basePortName: left key
-    targetNodeId: 0d0058ee-1368-41ad-9c63-f8fb669f1d6d
-    targetPortName: right key
-  - baseNodeId: 9a796493-6abd-4903-ad16-dd0b54bdcd7f
-    basePortName: right key
-    targetNodeId: 3066f928-82de-4c9a-8733-b96bd30d1e86
-    targetPortName: left key
-  - baseNodeId: 9a796493-6abd-4903-ad16-dd0b54bdcd7f
-    basePortName: down
-    targetNodeId: 0e021e79-ca59-4bad-9382-7bda00e8d9e5
-    targetPortName: up
-  - baseNodeId: cbf7d997-2758-4ac6-8f13-4832ea86ee2f
-    basePortName: right key
-    targetNodeId: 86d34e9d-f748-4c5d-bd38-5895683cb45e
-    targetPortName: left key
-  - baseNodeId: 0d0058ee-1368-41ad-9c63-f8fb669f1d6d
+  - baseNodeId: c75e30c8-3de1-4f96-a126-a81f562eef5e
     basePortName: up
-    targetNodeId: b9b31d7d-0122-456a-a69f-50b0d2883d55
+    targetNodeId: ade6dabb-76ef-433e-a29c-3af19c34c9a2
     targetPortName: down
-  - baseNodeId: 3066f928-82de-4c9a-8733-b96bd30d1e86
-    basePortName: down key
-    targetNodeId: 5d768381-568e-4025-ad48-3529dc75c036
-    targetPortName: up key
-  - baseNodeId: 3066f928-82de-4c9a-8733-b96bd30d1e86
-    basePortName: right
-    targetNodeId: 538c8b2b-3d36-4184-98ac-de052e18cdbc
-    targetPortName: left
-  - baseNodeId: 8d1e9a44-19f8-490c-a6be-5b457f85de83
-    basePortName: up
-    targetNodeId: ed54c942-81ab-4cf4-b7e8-79b32d474f46
-    targetPortName: down
-  - baseNodeId: 3066f928-82de-4c9a-8733-b96bd30d1e86
-    basePortName: up
-    targetNodeId: 8d1e9a44-19f8-490c-a6be-5b457f85de83
-    targetPortName: left
   roomNodeData:
-  - nodeID: cbf7d997-2758-4ac6-8f13-4832ea86ee2f
-    nodeType: Room
-    position: {x: 0, y: -200}
-    isTerminal: 1
-  - nodeID: 0d0058ee-1368-41ad-9c63-f8fb669f1d6d
-    nodeType: Enemy
-    position: {x: -400, y: 0}
-    isTerminal: 1
-  - nodeID: 0e021e79-ca59-4bad-9382-7bda00e8d9e5
-    nodeType: Room
-    position: {x: 0, y: 200}
-    isTerminal: 1
-  - nodeID: 86d34e9d-f748-4c5d-bd38-5895683cb45e
-    nodeType: Trap
-    position: {x: 400, y: -200}
-    isTerminal: 1
-  - nodeID: b9b31d7d-0122-456a-a69f-50b0d2883d55
-    nodeType: Trap
-    position: {x: -400, y: -200}
-    isTerminal: 1
-  - nodeID: 5d768381-568e-4025-ad48-3529dc75c036
-    nodeType: Trap
-    position: {x: 400, y: 200}
-    isTerminal: 1
-  - nodeID: 538c8b2b-3d36-4184-98ac-de052e18cdbc
-    nodeType: Trap
-    position: {x: 800, y: 0}
-    isTerminal: 1
-  - nodeID: ed54c942-81ab-4cf4-b7e8-79b32d474f46
-    nodeType: Room
-    position: {x: 788, y: -249}
-    isTerminal: 0
-  - nodeID: 8d1e9a44-19f8-490c-a6be-5b457f85de83
-    nodeType: Enemy
-    position: {x: 801, y: -117}
-    isTerminal: 1
-  - nodeID: 9a796493-6abd-4903-ad16-dd0b54bdcd7f
+  - nodeID: c75e30c8-3de1-4f96-a126-a81f562eef5e
     nodeType: Start
-    position: {x: 20, y: -50}
+    position: {x: 20, y: 20}
     isTerminal: 1
-  - nodeID: 3066f928-82de-4c9a-8733-b96bd30d1e86
-    nodeType: Trap
-    position: {x: 400, y: -16}
+  - nodeID: ade6dabb-76ef-433e-a29c-3af19c34c9a2
+    nodeType: x
+    position: {x: 34, y: -108}
     isTerminal: 1

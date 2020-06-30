@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomConnectionsData:
   - baseNodeId: 1117f16f-c4e0-42f6-8407-24657c091fd5
-    basePortName: up
-    targetNodeId: 18d3313e-f3e1-4fd8-8fc0-d9cd8dbab6f1
-    targetPortName: down
+    basePortName: right
+    targetNodeId: 9a7b0b3a-96bf-43f1-a236-853c9396dc4f
+    targetPortName: left
   roomNodeData:
   - nodeID: 1117f16f-c4e0-42f6-8407-24657c091fd5
     nodeType: begin
     position: {x: 20, y: 20}
     isTerminal: 1
-  - nodeID: 18d3313e-f3e1-4fd8-8fc0-d9cd8dbab6f1
-    nodeType: Room
-    position: {x: 447, y: -111}
-    isTerminal: 1
+  - nodeID: 9a7b0b3a-96bf-43f1-a236-853c9396dc4f
+    nodeType: Floor
+    position: {x: 681, y: 42}
+    isTerminal: 0

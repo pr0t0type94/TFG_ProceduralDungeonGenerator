@@ -28,30 +28,6 @@ public class GrammarGraphView : GraphView
         return _targetRoom.InstantiatePort(Orientation.Horizontal, _portDir, _capacity, typeof(string));
     }
 
-    //nodo start
-    //private RoomNode GenerateStartNode()
-    //{
-    //    RoomNode node = new RoomNode
-    //    {
-    //        title = "START",
-    //        roomID = Guid.NewGuid().ToString(),
-    //        roomType = "start",
-
-    //    };
-
-    //    //generar el puerto de salida 
-    //    Port generatedPort = GeneratePort(node, Direction.Output, Port.Capacity.Multi);
-    //    generatedPort.portName = "Next";
-    //    node.outputContainer.Add(generatedPort);
-    //    //refresh size of node
-    //    node.RefreshExpandedState();
-    //    node.RefreshPorts();
-
-    //    node.SetPosition(new Rect(100, 200, 200, 250));
-    //    return node;
-    //}
-
-
     public void createNode(string _nodeName)
     {
         AddElement(CreateRoomNode(_nodeName));
@@ -105,7 +81,7 @@ public class GrammarGraphView : GraphView
         l_addOutPortButton.clickable.clicked += () => GenerateOutputPortsOnNode(l_roomNode);
         l_roomNode.titleContainer.Add(l_addOutPortButton);
 
-        //if (l_roomNode.IsSelected(l_roomNode)) { m_selectedRoomNode = l_roomNode;  Debug.Log("selected room"); } 
+        //if (l_roomNode.IsSelected(l_roomNode)) { m_selectedRoomNode = l_roomNode;  Debug.Log("selected room " +); } 
 
 
         return l_roomNode;
@@ -216,22 +192,6 @@ public class GrammarGraphView : GraphView
         _roomNode.RefreshPorts();
         _roomNode.RefreshExpandedState();
 
-        //List<Edge> l_edgesToRemove = edges.ToList();
-
-        //foreach(Edge e in l_edgesToRemove)
-        //{         
-
-        //    if(e.output.portName == _portToRemove.portName && e.output.node == _portToRemove.node)
-        //    {
-        //        e.input.Disconnect(e);
-        //        RemoveElement(e);
-        //        _roomNode.outputContainer.Remove(_portToRemove);
-        //        _roomNode.RefreshPorts();
-        //        _roomNode.RefreshExpandedState();
-        //        //_roomNode.connectedPorts.Remove(_portToRemove);
-
-        //    }
-        //}
     }
 
     //metodo para aceptar conexiones de un puerto //definimos los posibles tipos de input de los puertos 
@@ -249,25 +209,8 @@ public class GrammarGraphView : GraphView
             }
         }
 
-        //ports.ForEach((port) => //para cada nodo;
-        //{
-        //    //nos aseguramos de que el nodo que miramos no es el nuestro mismo, ni conectamos un puerto consigo mismo
-        //    if (startPort != port && startPort.node != port.node)
-        //    {
-        //        nodePortsList.Add(port);
-        //    }
-        //});
-
         return nodePortsList;
 
     }
-
-    //public RoomNode returnSelectedNode() {
-
-    //    RoomNode l_selectedNode = nodes.ToList().Find(x => x.selected == true) as RoomNode;
-    //    Debug.Log(l_selectedNode.name.ToString());
-
-    //    return l_selectedNode;
-    //}
 
 }//end of graphView class
