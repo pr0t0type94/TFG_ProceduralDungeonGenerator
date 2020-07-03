@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class RoomInfoContainer : ScriptableObject 
 {
-    public List<RoomNodeConnectionsData> roomConnectionsData = new List<RoomNodeConnectionsData>();
-    public List<RoomNodeData> roomNodeData = new List<RoomNodeData>();
+    public List<RoomNodeConnectionsData> m_roomConnectionsDataList = new List<RoomNodeConnectionsData>();
+    public List<RoomNodeData> m_roomNodeDataList = new List<RoomNodeData>();
 
 }

@@ -31,7 +31,7 @@ public class SavingGraphUtility
         {
             foreach (RoomNode roomNode in m_roomsList)
             {
-                if (roomNode.roomType !="Start" && roomNode.roomType != "End" && !m_UtilitiesInstance.m_typesOfRoomsList.Exists(x => x.Contains(roomNode.roomType)))
+                if (roomNode.roomType != "Start" && roomNode.roomType != "End" && !m_UtilitiesInstance.m_typesOfRoomsList.Exists(x => x.Contains(roomNode.roomType)))
                 {
                     Debug.Log($"Caution! The room type '{roomNode.roomType}' doesn't exist in the list of room prefabs. Change the node type or add a prefab to the dungeon generation list");
                     return;
@@ -39,9 +39,9 @@ public class SavingGraphUtility
             }
         }
 
-        Edge[] l_portsConnected = m_edgesList.Where(x => x.output.node != null).ToArray();
+        Edge[] l_edgesConnected = m_edgesList.Where(x => x.output.node != null).ToArray();
 
-        foreach (Edge edge in l_portsConnected)
+        foreach (Edge edge in l_edgesConnected)
         {
             if (!m_UtilitiesInstance.m_myConnectionsDictionary.ContainsKey(edge.output.portName))
             {
@@ -53,28 +53,9 @@ public class SavingGraphUtility
         RoomInfoContainer l_nodeContainerData = ScriptableObject.CreateInstance<RoomInfoContainer>();
 
 
-        for (int i = 0; i < l_portsConnected.Length; i++)//para cada puerto del nodo, guardamos 
-        {
-            RoomNode l_outRoom = l_portsConnected[i].output.node as RoomNode;
-            RoomNode l_inputRoom = l_portsConnected[i].input.node as RoomNode;
-
-
-            l_nodeContainerData.roomConnectionsData.Add(new RoomNodeConnectionsData
-            {
-                baseNodeId = l_outRoom.roomID,
-                targetNodeId = l_inputRoom.roomID,
-
-                basePortName = l_portsConnected[i].output.portName,
-                targetPortName = m_UtilitiesInstance.ReturnConnectionNameByReference(l_portsConnected[i].output.portName),
-
-            }
-            );
-
-
-        }
         foreach (RoomNode r in m_roomsList)//guardamos cada nodo, su id, el tipo, y la posicion,
         {
-            l_nodeContainerData.roomNodeData.Add(new RoomNodeData
+            l_nodeContainerData.m_roomNodeDataList.Add(new RoomNodeData
             {
                 nodeID = r.roomID,
                 nodeType = r.roomType,
@@ -82,6 +63,25 @@ public class SavingGraphUtility
                 isTerminal = r.isTerminal
 
             });
+        }
+        for (int i = 0; i < l_edgesConnected.Length; i++)//para cada conexion del grafico, guardamos 
+        {
+            RoomNode l_baseRoom = l_edgesConnected[i].output.node as RoomNode;//nodo de salida
+            RoomNode l_targetRoom = l_edgesConnected[i].input.node as RoomNode;//nodo de entrada
+
+
+            l_nodeContainerData.m_roomConnectionsDataList.Add(new RoomNodeConnectionsData
+            {
+                baseNodeId = l_baseRoom.roomID,
+                targetNodeId = l_targetRoom.roomID,
+
+                basePortName = l_edgesConnected[i].output.portName,
+                targetPortName = m_UtilitiesInstance.ReturnConnectionNameByReference(l_edgesConnected[i].output.portName),
+
+            }
+            );
+
+
         }
 
         if (!isFinalGraph)
@@ -104,6 +104,7 @@ public class SavingGraphUtility
     }
     public void LoadGraph(string _fileName, bool isFinalGraph = false)
     {
+
         if (!isFinalGraph)
         {
             m_graphToLoadCache = Resources.Load<RoomInfoContainer>($"Rules/{_fileName}");
@@ -140,17 +141,17 @@ public class SavingGraphUtility
 
     private void CreateLoadedNodes()
     {
-        foreach (RoomNodeData rData in m_graphToLoadCache.roomNodeData)
+        foreach (RoomNodeData rData in m_graphToLoadCache.m_roomNodeDataList)
         {
             RoomNode l_tempRoom = m_targetGraph.CreateRoomNode(rData.nodeType, rData.isTerminal);
             l_tempRoom.roomID = rData.nodeID;
             l_tempRoom.RefreshExpandedState();
             m_targetGraph.AddElement(l_tempRoom);
 
-            List<RoomNodeConnectionsData> l_tempOutRoomPorts = m_graphToLoadCache.roomConnectionsData.Where(x => x.baseNodeId == rData.nodeID).ToList();
+            List<RoomNodeConnectionsData> l_tempOutRoomPorts = m_graphToLoadCache.m_roomConnectionsDataList.Where(x => x.baseNodeId == rData.nodeID).ToList();
             l_tempOutRoomPorts.ForEach(x => m_targetGraph.GenerateOutputPortsOnNode(l_tempRoom, x.basePortName));
 
-            List<RoomNodeConnectionsData> l_tempInputRoomPorts = m_graphToLoadCache.roomConnectionsData.Where(x => x.targetNodeId == rData.nodeID).ToList();
+            List<RoomNodeConnectionsData> l_tempInputRoomPorts = m_graphToLoadCache.m_roomConnectionsDataList.Where(x => x.targetNodeId == rData.nodeID).ToList();
             l_tempInputRoomPorts.ForEach(x => m_targetGraph.GenerateInputPortsOnNode(l_tempRoom, x.targetPortName));
 
         }
@@ -160,7 +161,7 @@ public class SavingGraphUtility
     {
         for (int i = 0; i < m_roomsList.Count; i++)
         {
-            List<RoomNodeConnectionsData> l_connectionDataCache = m_graphToLoadCache.roomConnectionsData.Where(x => x.baseNodeId == m_roomsList[i].roomID).ToList();
+            List<RoomNodeConnectionsData> l_connectionDataCache = m_graphToLoadCache.m_roomConnectionsDataList.Where(x => x.baseNodeId == m_roomsList[i].roomID).ToList();
             for (int j = 0; j < l_connectionDataCache.Count; j++)
             {
                 string targetNodeId = l_connectionDataCache[j].targetNodeId;
@@ -169,11 +170,9 @@ public class SavingGraphUtility
 
                 Port targetPort = m_targetGraph.ports.ToList().First(x => (x.node as RoomNode) == targetRoom && x.portName == targetPortName);
 
-                //targetRoom.inputContainer.Q<Port>().portName = connectionDataCache[j].targetPortName;
-                //LinkRoomPorts(m_roomsList[i].outputContainer[j].Q<Port>(), (Port)targetRoom.inputContainer[0]);
                 LinkRoomPorts(m_roomsList[i].outputContainer[j].Q<Port>(), targetPort);
 
-                targetRoom.SetPosition(new Rect(m_graphToLoadCache.roomNodeData.First(x => x.nodeID == targetRoom.roomID).position, m_targetGraph.defaultNodeSize));
+                targetRoom.SetPosition(new Rect(m_graphToLoadCache.m_roomNodeDataList.First(x => x.nodeID == targetRoom.roomID).position, m_targetGraph.defaultNodeSize));
 
                 //targetRoom.transform.position = m_graphToLoadCache.roomNodeData.First(x => x.nodeID == targetRoom.roomID).position;
 

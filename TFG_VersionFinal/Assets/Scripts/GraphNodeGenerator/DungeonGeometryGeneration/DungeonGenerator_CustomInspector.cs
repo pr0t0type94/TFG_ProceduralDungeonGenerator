@@ -14,7 +14,7 @@ public class DungeonGenerator_CustomInspector : Editor
 
         if (GUILayout.Button("Build Dungeon"))
         {
-            myTarget.GenerateDungeon(myTarget.m_graphFileToGenerate);
+            myTarget.GenerateDungeon(myTarget.m_dungeonNameToGenerate);
         }
 
 

@@ -43,13 +43,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e0cfe0de1f0d5e42a96f4b9815b8785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_graphFileToGenerate: 1
+  m_dungeonNameToGenerate: Example1
   m_roomPrefabsToSpawn:
-  - {fileID: 1794314690713885378, guid: 8b8e370679c2da441960ae90e774178e, type: 3}
+  - {fileID: 8290652283326372936, guid: 9807620acc99e2344b0d4b7870424157, type: 3}
+  - {fileID: 8290652283326372936, guid: b5ac2f185aa88454681812a5971d6712, type: 3}
+  - {fileID: 8290652283326372936, guid: e718eed41750c7742b2c73dc428ca684, type: 3}
+  - {fileID: 8290652283326372936, guid: c4b402eea21200f409c4112b4de167a3, type: 3}
+  - {fileID: 8290652283326372936, guid: 766498c683a14c74b8c4f0dc9de08875, type: 3}
+  - {fileID: 8290652283326372936, guid: 4bcad28abc0996d44b9ad94d63685b82, type: 3}
+  - {fileID: 8290652283326372936, guid: 5a0326a37e3f4524abdab7d1a86337ce, type: 3}
+  - {fileID: 8290652283326372936, guid: 8c4d17feab394af469a27a1202318fee, type: 3}
   - {fileID: 8290652283326372936, guid: 2882f97a74f1b94429d87f9497be7533, type: 3}
-  - {fileID: 8290652283326372936, guid: b4d93727a07ad9e4e8a188895251ebe5, type: 3}
-  - {fileID: 8290652283326372936, guid: 89d19b33eb2acab4a8168d3cae9e15fc, type: 3}
-  - {fileID: 1689101773813922782, guid: d798235c9316f4c4cb50814dae29410a, type: 3}
-  - {fileID: 1665446305785909639, guid: 433b8e03b9381074595cd23f5374ca33, type: 3}
-  - {fileID: 8290652283326372936, guid: 9122d8b2c17db4e41a5262b8dd52b0f9, type: 3}
-  - {fileID: 8290652283326372936, guid: 163f7e199a5733c408eeefa3ce196d2b, type: 3}
+  - {fileID: 8290652283326372936, guid: 5ba47c141dd687c488e80cc6f5832acb, type: 3}
+  - {fileID: 8290652283326372936, guid: e4c441e7ee21f6c42b2b38b6fd086b6c, type: 3}
+  - {fileID: 8290652283326372936, guid: f8bd14fb2e4934b4ea28fc3388e7aa06, type: 3}
+  - {fileID: 8290652283326372936, guid: 05d1ff3a9cc438b43b556aa336e8942d, type: 3}
+  m_playerPrefab: {fileID: 594957514225001857, guid: 9dd8a3227dc0aa84099496d08718ad7b,
+    type: 3}
+  m_keyPrefab: {fileID: 7755332295200550168, guid: d4c58b3597b2190409b09e7843e0671c,
+    type: 3}
+  m_selectRandomPrefabs: 0
+  m_offsetRoomPositions: 0.065

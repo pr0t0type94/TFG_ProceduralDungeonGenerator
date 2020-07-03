@@ -6,7 +6,7 @@ using UnityEditor;
 
 public class DungeonGeneration : MonoBehaviour
 {
-    public string m_graphFileToGenerate;
+    public string m_dungeonNameToGenerate;
 
     public List<GameObject> m_roomPrefabsToSpawn = new List<GameObject>();
 
@@ -47,27 +47,28 @@ public class DungeonGeneration : MonoBehaviour
     {
         m_roomDictionary.Clear();
 
-        string l_startRoomID = m_graphToLoad.roomNodeData.Find(x => x.nodeType == "Start").nodeID;
+        string l_startRoomID = m_graphToLoad.m_roomNodeDataList.Find(x => x.nodeType == "Start").nodeID;
 
         GameObject l_startRoom = SpawnRoom(l_startRoomID);
         GameObject l_player = Instantiate(m_playerPrefab);
         l_player.transform.position = l_startRoom.transform.position;
         l_player.transform.parent = m_parent.transform;
-        m_roomDictionary.Add(l_startRoomID, l_startRoom);
-        GenerateNeighbours(l_startRoomID);
 
-        List<RoomNodeData> roomsToGenerate = m_graphToLoad.roomNodeData.Where(x => x.nodeType != "Start").ToList();//always generate the start room 1st
+        m_roomDictionary.Add(l_startRoomID, l_startRoom);
+        GenerateNeighbourRoomsOnScene(l_startRoomID);
+
+        List<RoomNodeData> roomsToGenerate = m_graphToLoad.m_roomNodeDataList.Where(x => x.nodeType != "Start").ToList();//always generate the start room 1st
 
         for (int i = 0; i < roomsToGenerate.Count; i++)
         {
-            GenerateNeighbours(roomsToGenerate[i].nodeID);
+            GenerateNeighbourRoomsOnScene(roomsToGenerate[i].nodeID);
         }
 
     }
 
     GameObject SpawnRoom(string _roomID)
     {
-        string l_roomType = m_graphToLoad.roomNodeData.Find(x => x.nodeID == _roomID).nodeType;
+        string l_roomType = m_graphToLoad.m_roomNodeDataList.Find(x => x.nodeID == _roomID).nodeType;
         GameObject nextRoomToSpawn = null;
 
         if (m_roomPrefabsToSpawn.Exists(x => x.name.Contains(l_roomType)))
@@ -102,9 +103,9 @@ public class DungeonGeneration : MonoBehaviour
     }
 
 
-    void GenerateNeighbours(string _baseRoomID)
+    void GenerateNeighbourRoomsOnScene(string _baseRoomID)
     {
-        List<RoomNodeConnectionsData> listOfOutputConnections = m_graphToLoad.roomConnectionsData.Where(x => x.baseNodeId == _baseRoomID).ToList();
+        List<RoomNodeConnectionsData> listOfOutputConnections = m_graphToLoad.m_roomConnectionsDataList.Where(x => x.baseNodeId == _baseRoomID).ToList();
 
 
         for (int i = 0; i < listOfOutputConnections.Count; i++)
@@ -136,58 +137,58 @@ public class DungeonGeneration : MonoBehaviour
     }
 
 
-    void ConnectRooms(GameObject _previousRoom, GameObject _currentRoomToSpawn, string _baseConnectionName, string _targetConnectionName)
+    void ConnectRooms(GameObject _previousRoom, GameObject _currentSpawnedRoom, string _baseConnectionName, string _targetConnectionName)
     {
-        RoomScript baseRoom = _previousRoom.GetComponent<RoomScript>();
-        RoomScript targetRoom = _currentRoomToSpawn.GetComponent<RoomScript>();
-        Vector3 newPosition = Vector3.zero;
-        Vector3 baseRoomSize = baseRoom.ReturnRoomSize();
+        RoomScript l_baseRoom = _previousRoom.GetComponent<RoomScript>();
+        RoomScript l_targetRoom = _currentSpawnedRoom.GetComponent<RoomScript>();
+        Vector3 l_newPosition = Vector3.zero;
+        Vector3 l_baseRoomSize = l_baseRoom.ReturnRoomSize();
 
-        baseRoom.GenerateDoor(_baseConnectionName);
-        targetRoom.GenerateDoor(_targetConnectionName);
+        l_baseRoom.GenerateConnectionsOnRoom(_baseConnectionName);
+        l_targetRoom.GenerateConnectionsOnRoom(_targetConnectionName);
 
         if (!_baseConnectionName.Contains("stairs"))
         {
 
             if (_baseConnectionName.Contains("up"))
             {
-                newPosition = new Vector3(baseRoom.transform.position.x, baseRoom.transform.position.y, baseRoom.returnPosition("up").z + (baseRoomSize.z / 2) + m_offsetRoomPositions);
+                l_newPosition = new Vector3(l_baseRoom.transform.position.x, l_baseRoom.transform.position.y, l_baseRoom.returnPosition("up").z + (l_baseRoomSize.z / 2) + m_offsetRoomPositions);
             }
             else if (_baseConnectionName.Contains("down"))
             {
-                newPosition = new Vector3(baseRoom.transform.position.x, baseRoom.transform.position.y, baseRoom.returnPosition("down").z - (baseRoomSize.z / 2) - m_offsetRoomPositions);
+                l_newPosition = new Vector3(l_baseRoom.transform.position.x, l_baseRoom.transform.position.y, l_baseRoom.returnPosition("down").z - (l_baseRoomSize.z / 2) - m_offsetRoomPositions);
             }
             else if (_baseConnectionName.Contains("left"))
             {
-                newPosition = new Vector3(baseRoom.returnPosition("left").x - (baseRoomSize.x / 2) - m_offsetRoomPositions, baseRoom.transform.position.y, baseRoom.transform.position.z);
+                l_newPosition = new Vector3(l_baseRoom.returnPosition("left").x - (l_baseRoomSize.x / 2) - m_offsetRoomPositions, l_baseRoom.transform.position.y, l_baseRoom.transform.position.z);
             }
             else if (_baseConnectionName.Contains("right"))
             {
-                newPosition = new Vector3(baseRoom.returnPosition("right").x + (baseRoomSize.x / 2) + m_offsetRoomPositions, baseRoom.transform.position.y, baseRoom.transform.position.z);
+                l_newPosition = new Vector3(l_baseRoom.returnPosition("right").x + (l_baseRoomSize.x / 2) + m_offsetRoomPositions, l_baseRoom.transform.position.y, l_baseRoom.transform.position.z);
             }
         }
         else
         {
             //PROBLEMA AL HABER MAS DE 1 STAIR EN LA MISMA SALA
-            StaircaseScript conectedStairs = baseRoom.GetComponentInChildren<StaircaseScript>();
+            StaircaseScript conectedStairs = l_baseRoom.GetComponentInChildren<StaircaseScript>();
             Vector3 positionToConnect = conectedStairs.m_endOfStaircaseGameobject.transform.position;
 
 
             if (_baseConnectionName.Contains("up"))
             {
-                newPosition = new Vector3(positionToConnect.x, positionToConnect.y + (baseRoomSize.y / 3), positionToConnect.z + (baseRoomSize.z / 2));
+                l_newPosition = new Vector3(positionToConnect.x, positionToConnect.y + (l_baseRoomSize.y / 3), positionToConnect.z + (l_baseRoomSize.z / 2));
             }
             else if (_baseConnectionName.Contains("down"))
             {
-                newPosition = new Vector3(positionToConnect.x, positionToConnect.y + (baseRoomSize.y / 3), positionToConnect.z - (baseRoomSize.z / 2));
+                l_newPosition = new Vector3(positionToConnect.x, positionToConnect.y + (l_baseRoomSize.y / 3), positionToConnect.z - (l_baseRoomSize.z / 2));
             }
             else if (_baseConnectionName.Contains("left"))
             {
-                newPosition = new Vector3(positionToConnect.x - (baseRoomSize.x / 2), positionToConnect.y + (baseRoomSize.y / 3), positionToConnect.z);
+                l_newPosition = new Vector3(positionToConnect.x - (l_baseRoomSize.x / 2), positionToConnect.y + (l_baseRoomSize.y / 3), positionToConnect.z);
             }
             else if (_baseConnectionName.Contains("right"))
             {
-                newPosition = new Vector3(positionToConnect.x + (baseRoomSize.x / 2), positionToConnect.y + (baseRoomSize.y / 3), positionToConnect.z);
+                l_newPosition = new Vector3(positionToConnect.x + (l_baseRoomSize.x / 2), positionToConnect.y + (l_baseRoomSize.y / 3), positionToConnect.z);
             }
 
 
@@ -195,7 +196,7 @@ public class DungeonGeneration : MonoBehaviour
 
         }
 
-        targetRoom.transform.localPosition = newPosition;
+        l_targetRoom.transform.localPosition = l_newPosition;
 
 
         if (_baseConnectionName.Contains("key"))

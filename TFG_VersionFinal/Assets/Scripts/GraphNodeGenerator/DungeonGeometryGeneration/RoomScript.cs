@@ -20,27 +20,27 @@ public class RoomScript : MonoBehaviour
         return new Vector3(l_gameobjRenderer.bounds.size.x, l_gameobjRenderer.bounds.size.y, l_gameobjRenderer.bounds.size.z);
     }
 
-    public void GenerateDoor(string _roomConnection)
+    public void GenerateConnectionsOnRoom(string _connectionType)
     {
 
-        if (_roomConnection.Contains("up"))
+        if (_connectionType.Contains("up"))
         {
-            GenerateRoomConections(_roomConnection, 0);
+            GenerateConnections(_connectionType, 0);
 
         }
-        else if (_roomConnection.Contains("down"))
+        else if (_connectionType.Contains("down"))
         {
-            GenerateRoomConections(_roomConnection, 1);
+            GenerateConnections(_connectionType, 1);
 
         }
-        else if (_roomConnection.Contains("left"))
+        else if (_connectionType.Contains("left"))
         {
-            GenerateRoomConections(_roomConnection, 2);
+            GenerateConnections(_connectionType, 2);
 
         }
-        else if (_roomConnection.Contains("right"))
+        else if (_connectionType.Contains("right"))
         {
-            GenerateRoomConections(_roomConnection, 3);
+            GenerateConnections(_connectionType, 3);
         }
     }
 
@@ -51,7 +51,7 @@ public class RoomScript : MonoBehaviour
         return l_selectedDoor.transform.position;
     }
 
-    public void GenerateRoomConections(string _type, int _doorIndex)
+    private void GenerateConnections(string _type, int _doorIndex)
     {
         m_doorsPlaceHolders[_doorIndex].SetActive(false);
 

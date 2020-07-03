@@ -223,7 +223,7 @@ public class GrammarGraphWindow : EditorWindow
         }
         else
         {
-            Debug.Log("0 Nodes to Expand. Only non-terminal nodes can be expanded. You should dismark 'isTerminal' from any node to expand it");
+            Debug.Log("0 Nodes to expand found. Only non-terminal nodes can be expanded. You should dismark 'isTerminal' from any node to expand it");
         }
 
 
@@ -235,7 +235,7 @@ public class GrammarGraphWindow : EditorWindow
     {
         List<RoomNode> l_newInstantiatedRoomsList = new List<RoomNode>();
 
-        foreach (RoomNodeData rData in _graphToLoadCache.roomNodeData) //para cada nodo en el nuevo grafico (la regla que acabo de cargar);
+        foreach (RoomNodeData rData in _graphToLoadCache.m_roomNodeDataList) //para cada nodo en el nuevo grafico (la regla que acabo de cargar);
         {
             RoomNode l_tempRoom = m_graphView.CreateRoomNode(rData.nodeType, rData.isTerminal);//instancio el nodo
             l_newInstantiatedRoomsList.Add(l_tempRoom);//lo añado a la lista de "nuevas salas"
@@ -243,17 +243,16 @@ public class GrammarGraphWindow : EditorWindow
             m_graphView.AddElement(l_tempRoom);//añado el elemento al grafico
 
             //creo los puertos de entrada y salida que le tocan al nodo
-            List<RoomNodeConnectionsData> l_tempOutRoomPorts = _graphToLoadCache.roomConnectionsData.Where(x => x.baseNodeId == rData.nodeID).ToList();
+            List<RoomNodeConnectionsData> l_tempOutRoomPorts = _graphToLoadCache.m_roomConnectionsDataList.Where(x => x.baseNodeId == rData.nodeID).ToList();
             l_tempOutRoomPorts.ForEach(x => m_graphView.GenerateOutputPortsOnNode(l_tempRoom, x.basePortName));
 
-            List<RoomNodeConnectionsData> l_tempInputRoomPorts = _graphToLoadCache.roomConnectionsData.Where(x => x.targetNodeId == rData.nodeID).ToList();
+            List<RoomNodeConnectionsData> l_tempInputRoomPorts = _graphToLoadCache.m_roomConnectionsDataList.Where(x => x.targetNodeId == rData.nodeID).ToList();
             l_tempInputRoomPorts.ForEach(x => m_graphView.GenerateInputPortsOnNode(l_tempRoom, x.targetPortName));
         }
-
         for (int i = 0; i < l_newInstantiatedRoomsList.Count; i++)// para cada nodo que acabo de instanciar
         {
             //busco las conexiones que tiene
-            List<RoomNodeConnectionsData> l_connectionDataCache = _graphToLoadCache.roomConnectionsData.Where(x => x.baseNodeId == l_newInstantiatedRoomsList[i].roomID).ToList();
+            List<RoomNodeConnectionsData> l_connectionDataCache = _graphToLoadCache.m_roomConnectionsDataList.Where(x => x.baseNodeId == l_newInstantiatedRoomsList[i].roomID).ToList();
 
             for (int j = 0; j < l_connectionDataCache.Count; j++)
             {
@@ -275,7 +274,7 @@ public class GrammarGraphWindow : EditorWindow
                 LinkRoomPorts(l_newInstantiatedRoomsList[i].outputContainer[j].Q<Port>(), l_targetPortToConnect);
 
                 //seteo su position basadome en la posicion del nodo expandido
-                l_targetRoom.SetPosition(new Rect(_graphToLoadCache.roomNodeData.First(x => x.nodeID == l_targetRoom.roomID).position +
+                l_targetRoom.SetPosition(new Rect(_graphToLoadCache.m_roomNodeDataList.First(x => x.nodeID == l_targetRoom.roomID).position +
                     roomToExpand.GetPosition().position, m_graphView.defaultNodeSize));
             }//end for
         }//end of for loop
@@ -360,14 +359,13 @@ public class GrammarGraphWindow : EditorWindow
             RoomNode l_startNode = m_graphView.CreateRoomNode("Start", true);
             m_graphView.AddElement(l_startNode);
             m_numberOfRoomsInstantiated++;
-            GenereteNeighbourRooms(l_startNode);
-
+            GenereteNeighbourNodes(l_startNode);
             //mientras no se hayan creado el numero maximo de habitaciones;
             while (m_numberOfRoomsInstantiated < m_numberOfRoomsToGenerate)
             {
                 if (m_currentlyInstantiatedRoomList.Count > 0)
                 {
-                    GenereteNeighbourRooms(m_currentlyInstantiatedRoomList.First());
+                    GenereteNeighbourNodes(m_currentlyInstantiatedRoomList.First());
                     m_currentlyInstantiatedRoomList.Remove(m_currentlyInstantiatedRoomList.First());
                 }
             }
@@ -376,7 +374,7 @@ public class GrammarGraphWindow : EditorWindow
             {
                 Debug.Log($"Generating {m_numberOfFloorsToGenerate} floors");
 
-                GenerateStairsNodes();
+                GenerateStairsOnNodes();
             }
             else
             {
@@ -393,7 +391,7 @@ public class GrammarGraphWindow : EditorWindow
 
     }
 
-    private void GenereteNeighbourRooms(RoomNode _baseRoom)
+    private void GenereteNeighbourNodes(RoomNode _baseRoom)
     {
 
         int l_numberOfConnections;
@@ -520,8 +518,7 @@ public class GrammarGraphWindow : EditorWindow
         }
     }
 
-
-    private void GenerateStairsNodes()
+    private void GenerateStairsOnNodes()
     {
 
         List<RoomNode> l_allNodesOnGraphWithOutputs = m_graphView.nodes.ToList().Where(x => x.outputContainer.Q<Port>() != null).Cast<RoomNode>().ToList();

@@ -62,7 +62,7 @@ public class UtilitiesAndReferencesClass
 
     public List<string> ReturnListOfRoomTypes()
     {
-        m_typesOfRoomsList = new List<string>();
+        m_typesOfRoomsList.Clear();
 
         List<GameObject> gameObjList = Resources.LoadAll<GameObject>("Prefabs/RoomPrefabs").ToList();
 

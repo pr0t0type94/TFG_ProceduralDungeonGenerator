@@ -196,7 +196,7 @@ public class GrammarGraphView : GraphView
 
     //metodo para aceptar conexiones de un puerto //definimos los posibles tipos de input de los puertos 
     //obligatorio hacer override de la funcion, sino no podemos conectar nodos 
-    public override List<Port> GetCompatiblePorts(Port _basePort, NodeAdapter nodeAdapter)
+    public override List<Port> GetCompatiblePorts(Port _basePort, NodeAdapter _nodeAdapter)
     {
         List<Port> nodePortsList = new List<Port>();//creamos una lista con todos los puertos de ese nodo
 

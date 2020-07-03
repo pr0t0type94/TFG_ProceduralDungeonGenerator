@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: Example3
+  m_EditorClassIdentifier: 
+  m_roomConnectionsDataList:
+  - baseNodeId: 7def0448-fe41-4cfa-88a0-cb76391a551f
+    basePortName: up
+    targetNodeId: d64fc277-453d-46bb-99c6-218f327fc16c
+    targetPortName: down
+  - baseNodeId: 7def0448-fe41-4cfa-88a0-cb76391a551f
+    basePortName: right key stairs
+    targetNodeId: 091f5c09-078f-4ca8-988a-db9d585b882e
+    targetPortName: left key
+  - baseNodeId: 83774f98-cf2e-4ccd-b6c9-332fe282fa1b
+    basePortName: right
+    targetNodeId: 7def0448-fe41-4cfa-88a0-cb76391a551f
+    targetPortName: left
+  m_roomNodeDataList:
+  - nodeID: 83774f98-cf2e-4ccd-b6c9-332fe282fa1b
+    nodeType: Start
+    position: {x: 41, y: 61}
+    isTerminal: 1
+  - nodeID: 7def0448-fe41-4cfa-88a0-cb76391a551f
+    nodeType: Forest Room
+    position: {x: 407, y: 38}
+    isTerminal: 1
+  - nodeID: d64fc277-453d-46bb-99c6-218f327fc16c
+    nodeType: Enemy
+    position: {x: 412, y: -82}
+    isTerminal: 1
+  - nodeID: 091f5c09-078f-4ca8-988a-db9d585b882e
+    nodeType: Trap
+    position: {x: 819, y: 54}
+    isTerminal: 1
