@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: Multifloor
+  m_EditorClassIdentifier: 
+  m_roomConnectionsDataList:
+  - baseNodeId: 9c5f5069-6c3e-4eb3-be20-0cd7aa093a3d
+    basePortName: right
+    targetNodeId: bc4b4ed0-0f9e-47ff-98ab-039c6fb4ea4b
+    targetPortName: left
+  - baseNodeId: 9c5f5069-6c3e-4eb3-be20-0cd7aa093a3d
+    basePortName: left key stairs
+    targetNodeId: 98f6e587-0276-4816-8c69-b24216065b57
+    targetPortName: right key
+  - baseNodeId: bc4b4ed0-0f9e-47ff-98ab-039c6fb4ea4b
+    basePortName: right key stairs
+    targetNodeId: a6ac7062-feef-4982-a564-1876174ba327
+    targetPortName: left key
+  - baseNodeId: bc4b4ed0-0f9e-47ff-98ab-039c6fb4ea4b
+    basePortName: down
+    targetNodeId: 1d422830-3cbf-4530-b77a-ae06e6335fa7
+    targetPortName: up
+  - baseNodeId: bc4b4ed0-0f9e-47ff-98ab-039c6fb4ea4b
+    basePortName: up
+    targetNodeId: 96a5c93a-da0f-44e8-a69e-f3d690894722
+    targetPortName: down
+  - baseNodeId: 98f6e587-0276-4816-8c69-b24216065b57
+    basePortName: down stairs
+    targetNodeId: c869c18d-66c3-4de5-95b0-52715cf7f7d6
+    targetPortName: up
+  - baseNodeId: 98f6e587-0276-4816-8c69-b24216065b57
+    basePortName: up
+    targetNodeId: cd35f968-e226-4f20-8949-241ee8d34526
+    targetPortName: down
+  - baseNodeId: 98f6e587-0276-4816-8c69-b24216065b57
+    basePortName: left key
+    targetNodeId: 84b04511-c5fc-44ef-9768-86f7635d6591
+    targetPortName: right key
+  m_roomNodeDataList:
+  - nodeID: 9c5f5069-6c3e-4eb3-be20-0cd7aa093a3d
+    nodeType: begin
+    position: {x: 20, y: 20}
+    isTerminal: 1
+  - nodeID: bc4b4ed0-0f9e-47ff-98ab-039c6fb4ea4b
+    nodeType: Treasure And Enemies
+    position: {x: 400, y: 0}
+    isTerminal: 1
+  - nodeID: 98f6e587-0276-4816-8c69-b24216065b57
+    nodeType: Puzzle And Trap
+    position: {x: -400, y: 0}
+    isTerminal: 1
+  - nodeID: a6ac7062-feef-4982-a564-1876174ba327
+    nodeType: Enemy 2
+    position: {x: 800, y: 0}
+    isTerminal: 1
+  - nodeID: 1d422830-3cbf-4530-b77a-ae06e6335fa7
+    nodeType: Water Room
+    position: {x: 400, y: 200}
+    isTerminal: 1
+  - nodeID: 96a5c93a-da0f-44e8-a69e-f3d690894722
+    nodeType: Treasure
+    position: {x: 400, y: -200}
+    isTerminal: 1
+  - nodeID: c869c18d-66c3-4de5-95b0-52715cf7f7d6
+    nodeType: Treasure
+    position: {x: -400, y: 200}
+    isTerminal: 1
+  - nodeID: cd35f968-e226-4f20-8949-241ee8d34526
+    nodeType: Water Room
+    position: {x: -400, y: -200}
+    isTerminal: 1
+  - nodeID: 84b04511-c5fc-44ef-9768-86f7635d6591
+    nodeType: Enemy 2
+    position: {x: -800, y: 0}
+    isTerminal: 1

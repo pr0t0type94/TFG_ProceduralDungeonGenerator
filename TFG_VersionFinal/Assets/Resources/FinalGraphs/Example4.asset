@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: Example4
+  m_EditorClassIdentifier: 
+  m_roomConnectionsDataList:
+  - baseNodeId: 2dedf3b6-d975-4788-a48b-d09e006fdcc5
+    basePortName: left stairs
+    targetNodeId: 407fc011-39cc-49d0-9d0a-81b72b87edf4
+    targetPortName: right
+  - baseNodeId: 407fc011-39cc-49d0-9d0a-81b72b87edf4
+    basePortName: down key
+    targetNodeId: 489c8e45-a940-4be4-8e48-da68a69e56d8
+    targetPortName: up key
+  - baseNodeId: 489c8e45-a940-4be4-8e48-da68a69e56d8
+    basePortName: right
+    targetNodeId: 2b10320e-d7a3-4402-80bf-c3be373969f8
+    targetPortName: left
+  - baseNodeId: 489c8e45-a940-4be4-8e48-da68a69e56d8
+    basePortName: left key
+    targetNodeId: 26d42183-da13-4743-af19-dc1a814a9b42
+    targetPortName: right key
+  m_roomNodeDataList:
+  - nodeID: 2dedf3b6-d975-4788-a48b-d09e006fdcc5
+    nodeType: Start
+    position: {x: 20, y: 20}
+    isTerminal: 1
+  - nodeID: 407fc011-39cc-49d0-9d0a-81b72b87edf4
+    nodeType: Water Room
+    position: {x: -400, y: 0}
+    isTerminal: 1
+  - nodeID: 489c8e45-a940-4be4-8e48-da68a69e56d8
+    nodeType: Enemies And Trap
+    position: {x: -400, y: 200}
+    isTerminal: 1
+  - nodeID: 2b10320e-d7a3-4402-80bf-c3be373969f8
+    nodeType: Enemies And Trap
+    position: {x: 0, y: 200}
+    isTerminal: 1
+  - nodeID: 26d42183-da13-4743-af19-dc1a814a9b42
+    nodeType: Puzzle And Trap
+    position: {x: -800, y: 200}
+    isTerminal: 1

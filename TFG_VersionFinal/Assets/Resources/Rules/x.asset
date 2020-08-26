@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: x
+  m_EditorClassIdentifier: 
+  m_roomConnectionsDataList:
+  - baseNodeId: 5ef3c1ac-a3f5-40dc-bfa9-da4a574d0562
+    basePortName: left
+    targetNodeId: 7724738c-3533-4c4e-badc-62f0917712ff
+    targetPortName: right
+  m_roomNodeDataList:
+  - nodeID: 5ef3c1ac-a3f5-40dc-bfa9-da4a574d0562
+    nodeType: begin
+    position: {x: 20, y: 20}
+    isTerminal: 1
+  - nodeID: 7724738c-3533-4c4e-badc-62f0917712ff
+    nodeType: Room
+    position: {x: 471, y: 11}
+    isTerminal: 1
+  - nodeID: d57006ba-3ce1-4b8f-9970-a106ebf27daf
+    nodeType: Room
+    position: {x: 13, y: 193}
+    isTerminal: 1

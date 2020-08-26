@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: SecondRule
+  m_EditorClassIdentifier: 
+  m_roomConnectionsDataList:
+  - baseNodeId: 6be195af-ed82-4259-84e5-8e3045fc970a
+    basePortName: right
+    targetNodeId: b7deeae3-a24e-4e32-9182-0980949c5815
+    targetPortName: left
+  - baseNodeId: b7deeae3-a24e-4e32-9182-0980949c5815
+    basePortName: down
+    targetNodeId: 6c18175b-051d-4074-80fe-4fd0fc6cf007
+    targetPortName: up
+  m_roomNodeDataList:
+  - nodeID: 6be195af-ed82-4259-84e5-8e3045fc970a
+    nodeType: begin
+    position: {x: 20, y: 20}
+    isTerminal: 1
+  - nodeID: b7deeae3-a24e-4e32-9182-0980949c5815
+    nodeType: Treasure
+    position: {x: 409, y: 19}
+    isTerminal: 1
+  - nodeID: 6c18175b-051d-4074-80fe-4fd0fc6cf007
+    nodeType: Enemy
+    position: {x: 417, y: 154}
+    isTerminal: 1

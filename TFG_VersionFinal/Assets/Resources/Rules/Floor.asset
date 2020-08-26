@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: Floor
+  m_EditorClassIdentifier: 
+  m_roomConnectionsDataList:
+  - baseNodeId: dc4d6612-373d-433b-a152-b11d48f29fe9
+    basePortName: left key
+    targetNodeId: 3d5f2a59-6b9a-4733-972e-f4a41da93e1b
+    targetPortName: right key
+  - baseNodeId: 3d5f2a59-6b9a-4733-972e-f4a41da93e1b
+    basePortName: down
+    targetNodeId: 6e792c28-799c-4675-b9fd-12ab3b9a5373
+    targetPortName: up
+  - baseNodeId: e58615cf-9251-4601-8072-196840c76e22
+    basePortName: left key
+    targetNodeId: edf84cd3-95b1-41ab-a9f7-2a30d60dc2d9
+    targetPortName: right key
+  - baseNodeId: e58615cf-9251-4601-8072-196840c76e22
+    basePortName: up key
+    targetNodeId: 94d51840-8d83-4668-bd63-803264f0662c
+    targetPortName: down key
+  - baseNodeId: e58615cf-9251-4601-8072-196840c76e22
+    basePortName: right key
+    targetNodeId: c44635d9-2a90-4040-837e-2e357d896fc2
+    targetPortName: left key
+  m_roomNodeDataList:
+  - nodeID: dc4d6612-373d-433b-a152-b11d48f29fe9
+    nodeType: begin
+    position: {x: 20, y: 20}
+    isTerminal: 1
+  - nodeID: 3d5f2a59-6b9a-4733-972e-f4a41da93e1b
+    nodeType: Enemies And Trap
+    position: {x: -400, y: 0}
+    isTerminal: 1
+  - nodeID: e58615cf-9251-4601-8072-196840c76e22
+    nodeType: Forest Room
+    position: {x: 0, y: -200}
+    isTerminal: 1
+  - nodeID: 6e792c28-799c-4675-b9fd-12ab3b9a5373
+    nodeType: Puzzle And Trap
+    position: {x: -400, y: 200}
+    isTerminal: 1
+  - nodeID: edf84cd3-95b1-41ab-a9f7-2a30d60dc2d9
+    nodeType: Trap
+    position: {x: -400, y: -200}
+    isTerminal: 1
+  - nodeID: 94d51840-8d83-4668-bd63-803264f0662c
+    nodeType: Puzzle And Trap
+    position: {x: 0, y: -400}
+    isTerminal: 1
+  - nodeID: c44635d9-2a90-4040-837e-2e357d896fc2
+    nodeType: Forest Room
+    position: {x: 400, y: -200}
+    isTerminal: 1

@@ -1,0 +1,252 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: MassiveDungeon
+  m_EditorClassIdentifier: 
+  m_roomConnectionsDataList:
+  - baseNodeId: 30e52c2b-84bb-4737-b18d-bd1fe5d7bea4
+    basePortName: up key
+    targetNodeId: 535e0033-6c53-4302-9aeb-4750ff03aa27
+    targetPortName: down key
+  - baseNodeId: 30e52c2b-84bb-4737-b18d-bd1fe5d7bea4
+    basePortName: left key
+    targetNodeId: 40973d0a-508c-47a2-a83f-c7e71f8d4712
+    targetPortName: right key
+  - baseNodeId: 535e0033-6c53-4302-9aeb-4750ff03aa27
+    basePortName: up stairs
+    targetNodeId: 0c3b7390-5039-425e-b56f-3f41c8b32b20
+    targetPortName: down
+  - baseNodeId: 535e0033-6c53-4302-9aeb-4750ff03aa27
+    basePortName: right key
+    targetNodeId: 5fc5c6c9-781c-4e19-8c46-f60015cc3854
+    targetPortName: left key
+  - baseNodeId: 535e0033-6c53-4302-9aeb-4750ff03aa27
+    basePortName: left
+    targetNodeId: 37e94ded-c786-4fb9-bef7-f592e9474e55
+    targetPortName: right
+  - baseNodeId: 40973d0a-508c-47a2-a83f-c7e71f8d4712
+    basePortName: up
+    targetNodeId: 91c58945-fe42-40fa-b9e2-28a1f56bc610
+    targetPortName: down
+  - baseNodeId: 40973d0a-508c-47a2-a83f-c7e71f8d4712
+    basePortName: down key
+    targetNodeId: fb40b969-f4be-443a-badc-3d43c9099b8d
+    targetPortName: up key
+  - baseNodeId: 40973d0a-508c-47a2-a83f-c7e71f8d4712
+    basePortName: left key
+    targetNodeId: 8d291b14-bc26-41a6-87fe-e1be7b9724a9
+    targetPortName: right key
+  - baseNodeId: 0c3b7390-5039-425e-b56f-3f41c8b32b20
+    basePortName: right key
+    targetNodeId: 29414cd4-34a3-4afa-a51a-5728a3991e19
+    targetPortName: left key
+  - baseNodeId: 0c3b7390-5039-425e-b56f-3f41c8b32b20
+    basePortName: left key
+    targetNodeId: 8eee2b56-90b3-4626-bc67-5ec2270dc498
+    targetPortName: right key
+  - baseNodeId: 0c3b7390-5039-425e-b56f-3f41c8b32b20
+    basePortName: up
+    targetNodeId: dc41c2f0-0cfa-4601-b85c-969a929304f1
+    targetPortName: down
+  - baseNodeId: 5fc5c6c9-781c-4e19-8c46-f60015cc3854
+    basePortName: right
+    targetNodeId: f36bef49-1001-4bca-8b9a-46da75e63439
+    targetPortName: left
+  - baseNodeId: 5fc5c6c9-781c-4e19-8c46-f60015cc3854
+    basePortName: down
+    targetNodeId: 9ce399a3-2944-4214-a4c9-d93f42452132
+    targetPortName: up
+  - baseNodeId: 5fc5c6c9-781c-4e19-8c46-f60015cc3854
+    basePortName: up key
+    targetNodeId: c7cd4467-4536-4eb7-831e-49a4188c37cf
+    targetPortName: down key
+  - baseNodeId: 37e94ded-c786-4fb9-bef7-f592e9474e55
+    basePortName: left
+    targetNodeId: 25eaa4ee-6332-45e1-877f-63730d1703dd
+    targetPortName: right
+  - baseNodeId: 91c58945-fe42-40fa-b9e2-28a1f56bc610
+    basePortName: left key
+    targetNodeId: 6c48d820-b3f3-49d4-ba34-a1b6dfaa78a2
+    targetPortName: right key
+  - baseNodeId: fb40b969-f4be-443a-badc-3d43c9099b8d
+    basePortName: down key
+    targetNodeId: 681aa263-6d0b-4adc-be11-4047e558fe7c
+    targetPortName: up key
+  - baseNodeId: fb40b969-f4be-443a-badc-3d43c9099b8d
+    basePortName: left
+    targetNodeId: 76f69338-758f-4c92-9da1-48520f517010
+    targetPortName: right
+  - baseNodeId: fb40b969-f4be-443a-badc-3d43c9099b8d
+    basePortName: right key
+    targetNodeId: 0bfa97c6-97de-46de-a2dd-91e4b763c115
+    targetPortName: left key
+  - baseNodeId: 8d291b14-bc26-41a6-87fe-e1be7b9724a9
+    basePortName: down key
+    targetNodeId: 26bf2a8c-6e10-4eb3-ac21-8b5fd9fa1653
+    targetPortName: up key
+  - baseNodeId: 8d291b14-bc26-41a6-87fe-e1be7b9724a9
+    basePortName: left key
+    targetNodeId: 084a1166-ac62-4f88-8da1-174437fdb6f4
+    targetPortName: right key
+  - baseNodeId: 8d291b14-bc26-41a6-87fe-e1be7b9724a9
+    basePortName: up key
+    targetNodeId: 28db7f2d-136a-4a85-a6f2-15cd34c0b32c
+    targetPortName: down key
+  - baseNodeId: 29414cd4-34a3-4afa-a51a-5728a3991e19
+    basePortName: up key
+    targetNodeId: 56a2ab80-09d2-45be-a016-d7835ac57c8d
+    targetPortName: down key
+  - baseNodeId: 29414cd4-34a3-4afa-a51a-5728a3991e19
+    basePortName: right key
+    targetNodeId: cad5230e-98ed-450d-84a4-4461916d5968
+    targetPortName: left key
+  - baseNodeId: 29414cd4-34a3-4afa-a51a-5728a3991e19
+    basePortName: down
+    targetNodeId: 632b8645-482e-472b-916c-b853fcf76baf
+    targetPortName: up
+  - baseNodeId: 8eee2b56-90b3-4626-bc67-5ec2270dc498
+    basePortName: up
+    targetNodeId: 9fa11383-290e-40e8-8a1a-fcd80de2a9e0
+    targetPortName: down
+  - baseNodeId: dc41c2f0-0cfa-4601-b85c-969a929304f1
+    basePortName: left key
+    targetNodeId: 0a307fe4-6302-474d-95ee-c7aa2d3ff8c4
+    targetPortName: right key
+  - baseNodeId: dc41c2f0-0cfa-4601-b85c-969a929304f1
+    basePortName: up key
+    targetNodeId: dd7f63aa-2150-40b6-b556-009f69af2e53
+    targetPortName: down key
+  - baseNodeId: f36bef49-1001-4bca-8b9a-46da75e63439
+    basePortName: up
+    targetNodeId: ae1003a0-ed8b-42eb-b443-0e88ae2205aa
+    targetPortName: down
+  m_roomNodeDataList:
+  - nodeID: 30e52c2b-84bb-4737-b18d-bd1fe5d7bea4
+    nodeType: Start
+    position: {x: 20, y: 20}
+    isTerminal: 1
+  - nodeID: 535e0033-6c53-4302-9aeb-4750ff03aa27
+    nodeType: Treasure
+    position: {x: 0, y: -200}
+    isTerminal: 1
+  - nodeID: 40973d0a-508c-47a2-a83f-c7e71f8d4712
+    nodeType: Forest Room
+    position: {x: -400, y: 0}
+    isTerminal: 1
+  - nodeID: 0c3b7390-5039-425e-b56f-3f41c8b32b20
+    nodeType: Trap 2
+    position: {x: 0, y: -400}
+    isTerminal: 1
+  - nodeID: 5fc5c6c9-781c-4e19-8c46-f60015cc3854
+    nodeType: Treasure
+    position: {x: 400, y: -200}
+    isTerminal: 1
+  - nodeID: 37e94ded-c786-4fb9-bef7-f592e9474e55
+    nodeType: Treasure And Enemies
+    position: {x: -400, y: -200}
+    isTerminal: 1
+  - nodeID: 91c58945-fe42-40fa-b9e2-28a1f56bc610
+    nodeType: Enemies And Trap
+    position: {x: -400, y: -200}
+    isTerminal: 1
+  - nodeID: fb40b969-f4be-443a-badc-3d43c9099b8d
+    nodeType: Treasure
+    position: {x: -400, y: 200}
+    isTerminal: 1
+  - nodeID: 8d291b14-bc26-41a6-87fe-e1be7b9724a9
+    nodeType: Water Room
+    position: {x: -800, y: 0}
+    isTerminal: 1
+  - nodeID: 29414cd4-34a3-4afa-a51a-5728a3991e19
+    nodeType: Puzzle And Trap
+    position: {x: 400, y: -400}
+    isTerminal: 1
+  - nodeID: 8eee2b56-90b3-4626-bc67-5ec2270dc498
+    nodeType: Water Room
+    position: {x: -400, y: -400}
+    isTerminal: 1
+  - nodeID: dc41c2f0-0cfa-4601-b85c-969a929304f1
+    nodeType: Trap 2
+    position: {x: 0, y: -600}
+    isTerminal: 1
+  - nodeID: f36bef49-1001-4bca-8b9a-46da75e63439
+    nodeType: Enemy 2
+    position: {x: 800, y: -200}
+    isTerminal: 1
+  - nodeID: 9ce399a3-2944-4214-a4c9-d93f42452132
+    nodeType: Treasure
+    position: {x: 400, y: 0}
+    isTerminal: 1
+  - nodeID: c7cd4467-4536-4eb7-831e-49a4188c37cf
+    nodeType: Treasure And Enemies
+    position: {x: 400, y: -400}
+    isTerminal: 1
+  - nodeID: 25eaa4ee-6332-45e1-877f-63730d1703dd
+    nodeType: Treasure And Enemies
+    position: {x: -800, y: -200}
+    isTerminal: 1
+  - nodeID: 6c48d820-b3f3-49d4-ba34-a1b6dfaa78a2
+    nodeType: Water Room
+    position: {x: -800, y: -200}
+    isTerminal: 1
+  - nodeID: 681aa263-6d0b-4adc-be11-4047e558fe7c
+    nodeType: Puzzle And Trap
+    position: {x: -400, y: 400}
+    isTerminal: 1
+  - nodeID: 76f69338-758f-4c92-9da1-48520f517010
+    nodeType: Multi Puzzle
+    position: {x: -800, y: 200}
+    isTerminal: 1
+  - nodeID: 0bfa97c6-97de-46de-a2dd-91e4b763c115
+    nodeType: Puzzle And Trap
+    position: {x: 0, y: 200}
+    isTerminal: 1
+  - nodeID: 26bf2a8c-6e10-4eb3-ac21-8b5fd9fa1653
+    nodeType: Treasure
+    position: {x: -800, y: 200}
+    isTerminal: 1
+  - nodeID: 084a1166-ac62-4f88-8da1-174437fdb6f4
+    nodeType: Puzzle And Trap
+    position: {x: -1200, y: 0}
+    isTerminal: 1
+  - nodeID: 28db7f2d-136a-4a85-a6f2-15cd34c0b32c
+    nodeType: Forest Room
+    position: {x: -800, y: -200}
+    isTerminal: 1
+  - nodeID: 56a2ab80-09d2-45be-a016-d7835ac57c8d
+    nodeType: Enemy 2
+    position: {x: 400, y: -600}
+    isTerminal: 1
+  - nodeID: cad5230e-98ed-450d-84a4-4461916d5968
+    nodeType: Water Room
+    position: {x: 800, y: -400}
+    isTerminal: 1
+  - nodeID: 632b8645-482e-472b-916c-b853fcf76baf
+    nodeType: Trap 2
+    position: {x: 400, y: -200}
+    isTerminal: 1
+  - nodeID: 9fa11383-290e-40e8-8a1a-fcd80de2a9e0
+    nodeType: Enemy 2
+    position: {x: -400, y: -600}
+    isTerminal: 1
+  - nodeID: 0a307fe4-6302-474d-95ee-c7aa2d3ff8c4
+    nodeType: Treasure
+    position: {x: -400, y: -600}
+    isTerminal: 1
+  - nodeID: dd7f63aa-2150-40b6-b556-009f69af2e53
+    nodeType: Multi Puzzle
+    position: {x: 0, y: -800}
+    isTerminal: 1
+  - nodeID: ae1003a0-ed8b-42eb-b443-0e88ae2205aa
+    nodeType: Trap
+    position: {x: 800, y: -400}
+    isTerminal: 1

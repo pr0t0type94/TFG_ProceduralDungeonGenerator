@@ -10,35 +10,51 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
-  m_Name: Example2
+  m_Name: example2
   m_EditorClassIdentifier: 
   m_roomConnectionsDataList:
-  - baseNodeId: 7def0448-fe41-4cfa-88a0-cb76391a551f
-    basePortName: up
-    targetNodeId: d64fc277-453d-46bb-99c6-218f327fc16c
+  - baseNodeId: 43325479-13c8-4a72-a8f4-545029fc57e3
+    basePortName: up stairs
+    targetNodeId: 7fd93153-0db3-462b-99b7-3920ebed91e5
     targetPortName: down
-  - baseNodeId: 83774f98-cf2e-4ccd-b6c9-332fe282fa1b
-    basePortName: right
-    targetNodeId: 7def0448-fe41-4cfa-88a0-cb76391a551f
-    targetPortName: left
-  - baseNodeId: 7def0448-fe41-4cfa-88a0-cb76391a551f
+  - baseNodeId: 43325479-13c8-4a72-a8f4-545029fc57e3
     basePortName: right key
-    targetNodeId: 091f5c09-078f-4ca8-988a-db9d585b882e
+    targetNodeId: eb64fe4c-e999-4b74-946b-2d7bb5026d2b
     targetPortName: left key
+  - baseNodeId: 7fd93153-0db3-462b-99b7-3920ebed91e5
+    basePortName: right key
+    targetNodeId: c9491e5b-b332-4db1-a531-de09ade002fc
+    targetPortName: left key
+  - baseNodeId: 7fd93153-0db3-462b-99b7-3920ebed91e5
+    basePortName: up
+    targetNodeId: 2674070d-da86-48aa-a870-801593ac472c
+    targetPortName: down
+  - baseNodeId: 7fd93153-0db3-462b-99b7-3920ebed91e5
+    basePortName: left key
+    targetNodeId: 473e166d-a6ab-4fd6-b7e0-bbb19c43a024
+    targetPortName: right key
   m_roomNodeDataList:
-  - nodeID: 7def0448-fe41-4cfa-88a0-cb76391a551f
-    nodeType: Forest Room
-    position: {x: 433, y: 43}
-    isTerminal: 1
-  - nodeID: 83774f98-cf2e-4ccd-b6c9-332fe282fa1b
+  - nodeID: 43325479-13c8-4a72-a8f4-545029fc57e3
     nodeType: Start
     position: {x: 20, y: 20}
     isTerminal: 1
-  - nodeID: d64fc277-453d-46bb-99c6-218f327fc16c
-    nodeType: Enemy
-    position: {x: 441, y: -114}
+  - nodeID: 7fd93153-0db3-462b-99b7-3920ebed91e5
+    nodeType: Trap 2
+    position: {x: 0, y: -200}
     isTerminal: 1
-  - nodeID: 091f5c09-078f-4ca8-988a-db9d585b882e
-    nodeType: Trap
-    position: {x: 881, y: 56}
+  - nodeID: eb64fe4c-e999-4b74-946b-2d7bb5026d2b
+    nodeType: Trap 2
+    position: {x: 400, y: 0}
+    isTerminal: 1
+  - nodeID: c9491e5b-b332-4db1-a531-de09ade002fc
+    nodeType: Enemy 2
+    position: {x: 400, y: -200}
+    isTerminal: 1
+  - nodeID: 2674070d-da86-48aa-a870-801593ac472c
+    nodeType: Enemies And Trap
+    position: {x: 0, y: -400}
+    isTerminal: 1
+  - nodeID: 473e166d-a6ab-4fd6-b7e0-bbb19c43a024
+    nodeType: Trap 2
+    position: {x: -400, y: -200}
     isTerminal: 1

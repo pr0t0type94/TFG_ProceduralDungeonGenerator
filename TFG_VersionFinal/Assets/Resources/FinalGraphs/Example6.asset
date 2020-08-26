@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: Example6
+  m_EditorClassIdentifier: 
+  m_roomConnectionsDataList:
+  - baseNodeId: e1c24ba0-8193-4281-ae36-af19b19b932c
+    basePortName: down
+    targetNodeId: d59d7441-577a-41b8-93b0-c8eac0bf3ba1
+    targetPortName: up
+  - baseNodeId: e1c24ba0-8193-4281-ae36-af19b19b932c
+    basePortName: right key
+    targetNodeId: 7b26f9d0-6cab-44e2-ac4d-38d62d3b07f2
+    targetPortName: left key
+  - baseNodeId: d59d7441-577a-41b8-93b0-c8eac0bf3ba1
+    basePortName: down key
+    targetNodeId: c427d57a-1232-4a00-9958-9bf7899fa666
+    targetPortName: up key
+  - baseNodeId: d59d7441-577a-41b8-93b0-c8eac0bf3ba1
+    basePortName: right
+    targetNodeId: a0e86821-acec-4369-b6f7-7cf76f3a98d2
+    targetPortName: left
+  - baseNodeId: d59d7441-577a-41b8-93b0-c8eac0bf3ba1
+    basePortName: left
+    targetNodeId: 3af04014-2ce6-44c0-bd52-8e28d3ecbad3
+    targetPortName: right
+  m_roomNodeDataList:
+  - nodeID: e1c24ba0-8193-4281-ae36-af19b19b932c
+    nodeType: Start
+    position: {x: 20, y: 20}
+    isTerminal: 1
+  - nodeID: d59d7441-577a-41b8-93b0-c8eac0bf3ba1
+    nodeType: Multi Puzzle
+    position: {x: 0, y: 200}
+    isTerminal: 1
+  - nodeID: 7b26f9d0-6cab-44e2-ac4d-38d62d3b07f2
+    nodeType: Water Room
+    position: {x: 400, y: 0}
+    isTerminal: 1
+  - nodeID: c427d57a-1232-4a00-9958-9bf7899fa666
+    nodeType: Multi Puzzle
+    position: {x: 0, y: 400}
+    isTerminal: 1
+  - nodeID: a0e86821-acec-4369-b6f7-7cf76f3a98d2
+    nodeType: Enemy 2
+    position: {x: 400, y: 200}
+    isTerminal: 1
+  - nodeID: 3af04014-2ce6-44c0-bd52-8e28d3ecbad3
+    nodeType: Treasure
+    position: {x: -400, y: 200}
+    isTerminal: 1

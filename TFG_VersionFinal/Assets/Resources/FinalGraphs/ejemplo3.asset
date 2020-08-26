@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: ejemplo3
+  m_EditorClassIdentifier: 
+  m_roomConnectionsDataList:
+  - baseNodeId: 2d7fd193-d816-49d6-9462-10005eea4276
+    basePortName: up
+    targetNodeId: dc38673a-0bf9-4505-9375-022aa01f18a5
+    targetPortName: down
+  - baseNodeId: dc38673a-0bf9-4505-9375-022aa01f18a5
+    basePortName: up
+    targetNodeId: d4379620-fe03-4c22-9e80-421b84fca769
+    targetPortName: down
+  - baseNodeId: d4379620-fe03-4c22-9e80-421b84fca769
+    basePortName: up key stairs
+    targetNodeId: 6bc1d766-1cfd-42c8-827c-a411914d0293
+    targetPortName: down key
+  - baseNodeId: d4379620-fe03-4c22-9e80-421b84fca769
+    basePortName: right key
+    targetNodeId: a46f8804-be0d-4deb-9bf9-687c78f62ac3
+    targetPortName: left key
+  - baseNodeId: d4379620-fe03-4c22-9e80-421b84fca769
+    basePortName: left
+    targetNodeId: fd687516-b369-4bbd-9204-c458b9a441b9
+    targetPortName: right
+  - baseNodeId: 6bc1d766-1cfd-42c8-827c-a411914d0293
+    basePortName: up key stairs
+    targetNodeId: c8512bee-8260-40ea-8afb-be0cc8010892
+    targetPortName: down key
+  - baseNodeId: 6bc1d766-1cfd-42c8-827c-a411914d0293
+    basePortName: left key
+    targetNodeId: 662f46a5-324a-4888-8eb5-464bf855e861
+    targetPortName: right key
+  - baseNodeId: a46f8804-be0d-4deb-9bf9-687c78f62ac3
+    basePortName: right key
+    targetNodeId: 2bacc98b-a59d-4e28-8a68-9a7f023889ed
+    targetPortName: left key
+  - baseNodeId: a46f8804-be0d-4deb-9bf9-687c78f62ac3
+    basePortName: down key
+    targetNodeId: efc52be7-9b08-45a7-8fb3-9ee4a458d342
+    targetPortName: up key
+  - baseNodeId: a46f8804-be0d-4deb-9bf9-687c78f62ac3
+    basePortName: up
+    targetNodeId: 800450b4-1c00-4361-abca-1c2d6526cc1c
+    targetPortName: down
+  - baseNodeId: fd687516-b369-4bbd-9204-c458b9a441b9
+    basePortName: up
+    targetNodeId: 30b73038-e65e-4bbd-b8f1-f64020e68ccf
+    targetPortName: down
+  - baseNodeId: fd687516-b369-4bbd-9204-c458b9a441b9
+    basePortName: down key
+    targetNodeId: a1aa9eea-6f36-4e4e-9a7a-e1e9d8b71523
+    targetPortName: up key
+  - baseNodeId: fd687516-b369-4bbd-9204-c458b9a441b9
+    basePortName: left key
+    targetNodeId: 95b708c5-ef0c-4883-a626-d77344e137e1
+    targetPortName: right key
+  - baseNodeId: c8512bee-8260-40ea-8afb-be0cc8010892
+    basePortName: left key
+    targetNodeId: 685a67a5-466c-42a9-a689-718c46aa95db
+    targetPortName: right key
+  - baseNodeId: 662f46a5-324a-4888-8eb5-464bf855e861
+    basePortName: up key
+    targetNodeId: da13ddf6-5f19-43dc-b413-d5271f711bf8
+    targetPortName: down key
+  - baseNodeId: 662f46a5-324a-4888-8eb5-464bf855e861
+    basePortName: down stairs
+    targetNodeId: de80f59c-70ab-4661-b3b9-f85aa6b9df82
+    targetPortName: up
+  - baseNodeId: 2bacc98b-a59d-4e28-8a68-9a7f023889ed
+    basePortName: up key
+    targetNodeId: 7a827735-6eec-4b51-9f5b-3c5f9867e2b1
+    targetPortName: down key
+  - baseNodeId: 2bacc98b-a59d-4e28-8a68-9a7f023889ed
+    basePortName: down
+    targetNodeId: b4884980-634d-453d-88c8-4566fff8b0a9
+    targetPortName: up
+  - baseNodeId: 2bacc98b-a59d-4e28-8a68-9a7f023889ed
+    basePortName: right
+    targetNodeId: 1772337a-3171-40b3-b11b-0d6ad4cf3555
+    targetPortName: left
+  m_roomNodeDataList:
+  - nodeID: 2d7fd193-d816-49d6-9462-10005eea4276
+    nodeType: Start
+    position: {x: 20, y: 20}
+    isTerminal: 1
+  - nodeID: dc38673a-0bf9-4505-9375-022aa01f18a5
+    nodeType: Trap 2
+    position: {x: 0, y: -200}
+    isTerminal: 1
+  - nodeID: d4379620-fe03-4c22-9e80-421b84fca769
+    nodeType: Forest Room
+    position: {x: 0, y: -400}
+    isTerminal: 1
+  - nodeID: 6bc1d766-1cfd-42c8-827c-a411914d0293
+    nodeType: Water Room
+    position: {x: 0, y: -600}
+    isTerminal: 1
+  - nodeID: a46f8804-be0d-4deb-9bf9-687c78f62ac3
+    nodeType: Forest Room
+    position: {x: 400, y: -400}
+    isTerminal: 1
+  - nodeID: fd687516-b369-4bbd-9204-c458b9a441b9
+    nodeType: Forest Room
+    position: {x: -400, y: -400}
+    isTerminal: 1
+  - nodeID: c8512bee-8260-40ea-8afb-be0cc8010892
+    nodeType: Trap 2
+    position: {x: 0, y: -800}
+    isTerminal: 1
+  - nodeID: 662f46a5-324a-4888-8eb5-464bf855e861
+    nodeType: Trap 2
+    position: {x: -400, y: -600}
+    isTerminal: 1
+  - nodeID: 2bacc98b-a59d-4e28-8a68-9a7f023889ed
+    nodeType: Treasure
+    position: {x: 800, y: -400}
+    isTerminal: 1
+  - nodeID: efc52be7-9b08-45a7-8fb3-9ee4a458d342
+    nodeType: Enemies And Trap
+    position: {x: 400, y: -200}
+    isTerminal: 1
+  - nodeID: 800450b4-1c00-4361-abca-1c2d6526cc1c
+    nodeType: Enemy 2
+    position: {x: 400, y: -600}
+    isTerminal: 1
+  - nodeID: 30b73038-e65e-4bbd-b8f1-f64020e68ccf
+    nodeType: Enemy 2
+    position: {x: -400, y: -600}
+    isTerminal: 1
+  - nodeID: a1aa9eea-6f36-4e4e-9a7a-e1e9d8b71523
+    nodeType: Water Room
+    position: {x: -400, y: -200}
+    isTerminal: 1
+  - nodeID: 95b708c5-ef0c-4883-a626-d77344e137e1
+    nodeType: Trap 2
+    position: {x: -800, y: -400}
+    isTerminal: 1
+  - nodeID: 685a67a5-466c-42a9-a689-718c46aa95db
+    nodeType: Water Room
+    position: {x: -400, y: -800}
+    isTerminal: 1
+  - nodeID: da13ddf6-5f19-43dc-b413-d5271f711bf8
+    nodeType: Enemies And Trap
+    position: {x: -400, y: -800}
+    isTerminal: 1
+  - nodeID: de80f59c-70ab-4661-b3b9-f85aa6b9df82
+    nodeType: Puzzle And Trap
+    position: {x: -400, y: -400}
+    isTerminal: 1
+  - nodeID: 7a827735-6eec-4b51-9f5b-3c5f9867e2b1
+    nodeType: Puzzle And Trap
+    position: {x: 800, y: -600}
+    isTerminal: 1
+  - nodeID: b4884980-634d-453d-88c8-4566fff8b0a9
+    nodeType: Enemy 2
+    position: {x: 800, y: -200}
+    isTerminal: 1
+  - nodeID: 1772337a-3171-40b3-b11b-0d6ad4cf3555
+    nodeType: Forest Room
+    position: {x: 1200, y: -400}
+    isTerminal: 1

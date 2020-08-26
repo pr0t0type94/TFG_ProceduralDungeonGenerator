@@ -12,41 +12,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
   m_Name: tr
   m_EditorClassIdentifier: 
-  roomConnectionsData:
-  - baseNodeId: d04f2256-182a-498e-9ab4-5108aa8950f8
+  m_roomConnectionsDataList:
+  - baseNodeId: 7be21fc8-ba71-419e-8d07-1c1fc013496e
     basePortName: down key
-    targetNodeId: b8697f56-9145-49c1-99ea-e2e6f22ead1f
+    targetNodeId: c70a5b64-c080-4c03-961f-ffd3ada7864d
     targetPortName: up key
-  - baseNodeId: b8697f56-9145-49c1-99ea-e2e6f22ead1f
-    basePortName: left key
-    targetNodeId: 85d28ece-ec17-4de3-b933-f00ba90d27ea
-    targetPortName: right key
-  - baseNodeId: b8697f56-9145-49c1-99ea-e2e6f22ead1f
-    basePortName: down
-    targetNodeId: 4b1e68e2-be3d-4d2c-b45e-03287375f135
-    targetPortName: up
-  - baseNodeId: b8697f56-9145-49c1-99ea-e2e6f22ead1f
-    basePortName: right key stairs
-    targetNodeId: 1d57d653-737c-4abf-9aa6-903e1f7164c5
-    targetPortName: left key
-  roomNodeData:
-  - nodeID: d04f2256-182a-498e-9ab4-5108aa8950f8
+  - baseNodeId: c70a5b64-c080-4c03-961f-ffd3ada7864d
+    basePortName: left stairs
+    targetNodeId: 1bc340aa-e844-4943-af4e-666a4daf6872
+    targetPortName: right
+  - baseNodeId: c70a5b64-c080-4c03-961f-ffd3ada7864d
+    basePortName: down key
+    targetNodeId: 7e034247-337a-47c2-93ed-ab11ac219f19
+    targetPortName: up key
+  - baseNodeId: c70a5b64-c080-4c03-961f-ffd3ada7864d
+    basePortName: right
+    targetNodeId: e9ddda18-7188-4461-9e9e-18034bdbc1d7
+    targetPortName: left
+  m_roomNodeDataList:
+  - nodeID: 7be21fc8-ba71-419e-8d07-1c1fc013496e
     nodeType: Start
     position: {x: 20, y: 20}
     isTerminal: 1
-  - nodeID: b8697f56-9145-49c1-99ea-e2e6f22ead1f
-    nodeType: Room
+  - nodeID: c70a5b64-c080-4c03-961f-ffd3ada7864d
+    nodeType: Treasure And Enemies
     position: {x: 0, y: 200}
     isTerminal: 1
-  - nodeID: 85d28ece-ec17-4de3-b933-f00ba90d27ea
-    nodeType: Enemy
+  - nodeID: 1bc340aa-e844-4943-af4e-666a4daf6872
+    nodeType: Enemy 2
     position: {x: -400, y: 200}
     isTerminal: 1
-  - nodeID: 4b1e68e2-be3d-4d2c-b45e-03287375f135
-    nodeType: Trap
+  - nodeID: 7e034247-337a-47c2-93ed-ab11ac219f19
+    nodeType: Enemy 2
     position: {x: 0, y: 400}
     isTerminal: 1
-  - nodeID: 1d57d653-737c-4abf-9aa6-903e1f7164c5
-    nodeType: Trap
+  - nodeID: e9ddda18-7188-4461-9e9e-18034bdbc1d7
+    nodeType: Trap 2
     position: {x: 400, y: 200}
     isTerminal: 1

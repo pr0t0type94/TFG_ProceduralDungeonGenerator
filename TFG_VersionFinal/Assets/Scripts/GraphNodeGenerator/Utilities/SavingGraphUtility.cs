@@ -86,10 +86,22 @@ public class SavingGraphUtility
 
         if (!isFinalGraph)
         {
-            if (!m_roomsList.Exists(x => x.roomType == "begin")) { Debug.Log("You need to create a 'begin'(NO capital 'b') node to save a Rule"); return; }
+            if (!m_roomsList.Exists(x => x.roomType == "begin")) 
+            { 
+                Debug.Log("You need to create a 'begin'(NO capital 'b') node to save a Rule"); 
+                return; 
+            }
             else
             {
-                AssetDatabase.CreateAsset(l_nodeContainerData, $"Assets/Resources/Rules/{_fileName}.asset");//generamos un asset con la informacion 
+                if(m_roomsList.Find(x=>x.roomType == "begin").outputContainer.childCount>1)
+                {
+                    Debug.Log("'begin' node must have only 1 output connection");
+                }
+                else
+                {
+                    AssetDatabase.CreateAsset(l_nodeContainerData, $"Assets/Resources/Rules/{_fileName}.asset");//generamos un asset con la informacion 
+
+                }
             }
         }
         else

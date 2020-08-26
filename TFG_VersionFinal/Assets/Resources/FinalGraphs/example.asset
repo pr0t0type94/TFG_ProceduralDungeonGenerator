@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: example
+  m_EditorClassIdentifier: 
+  m_roomConnectionsDataList:
+  - baseNodeId: 7afbd67e-d9ec-47c5-97cf-26457b312b07
+    basePortName: up
+    targetNodeId: 6ed34b20-8286-4ae7-bce4-06c9b2b5fc04
+    targetPortName: down
+  - baseNodeId: 7afbd67e-d9ec-47c5-97cf-26457b312b07
+    basePortName: left
+    targetNodeId: 90a2481e-3456-48ca-ace9-5caaa66f88c0
+    targetPortName: right
+  - baseNodeId: 7afbd67e-d9ec-47c5-97cf-26457b312b07
+    basePortName: right key
+    targetNodeId: e0e67336-78cc-4f66-a3d4-e66ff65eafd5
+    targetPortName: left key
+  - baseNodeId: 6ed34b20-8286-4ae7-bce4-06c9b2b5fc04
+    basePortName: up
+    targetNodeId: 88296189-4b7e-4e47-91a7-da36cbddd6d6
+    targetPortName: down
+  - baseNodeId: 6ed34b20-8286-4ae7-bce4-06c9b2b5fc04
+    basePortName: right stairs
+    targetNodeId: 9416e19e-82d1-4b76-9140-1e445394bf48
+    targetPortName: left
+  m_roomNodeDataList:
+  - nodeID: 7afbd67e-d9ec-47c5-97cf-26457b312b07
+    nodeType: Start
+    position: {x: 20, y: 20}
+    isTerminal: 1
+  - nodeID: 6ed34b20-8286-4ae7-bce4-06c9b2b5fc04
+    nodeType: Treasure
+    position: {x: 0, y: -200}
+    isTerminal: 1
+  - nodeID: 90a2481e-3456-48ca-ace9-5caaa66f88c0
+    nodeType: Enemies And Trap
+    position: {x: -400, y: 0}
+    isTerminal: 1
+  - nodeID: e0e67336-78cc-4f66-a3d4-e66ff65eafd5
+    nodeType: Water Room
+    position: {x: 400, y: 0}
+    isTerminal: 1
+  - nodeID: 88296189-4b7e-4e47-91a7-da36cbddd6d6
+    nodeType: Treasure And Enemies
+    position: {x: 0, y: -400}
+    isTerminal: 1
+  - nodeID: 9416e19e-82d1-4b76-9140-1e445394bf48
+    nodeType: Forest Room
+    position: {x: 400, y: -200}
+    isTerminal: 1

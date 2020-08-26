@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f93e5c089ce1469ac2fafbee04221, type: 3}
+  m_Name: Example5
+  m_EditorClassIdentifier: 
+  m_roomConnectionsDataList:
+  - baseNodeId: 53a9a083-3573-4703-9831-be4341cc47a2
+    basePortName: right
+    targetNodeId: aec20df5-9cf4-4eed-bfb7-a1fe8bf13298
+    targetPortName: left
+  - baseNodeId: aec20df5-9cf4-4eed-bfb7-a1fe8bf13298
+    basePortName: down key
+    targetNodeId: 3dc12cae-1ce8-48d5-a450-dd04ae13e63f
+    targetPortName: up key
+  - baseNodeId: aec20df5-9cf4-4eed-bfb7-a1fe8bf13298
+    basePortName: right key
+    targetNodeId: 46a3104f-8bb9-41e2-b930-b14af86fdbc1
+    targetPortName: left key
+  - baseNodeId: aec20df5-9cf4-4eed-bfb7-a1fe8bf13298
+    basePortName: up
+    targetNodeId: ce01a497-ae1c-49c7-93fb-208701bd5209
+    targetPortName: down
+  m_roomNodeDataList:
+  - nodeID: 53a9a083-3573-4703-9831-be4341cc47a2
+    nodeType: Start
+    position: {x: 20, y: 20}
+    isTerminal: 1
+  - nodeID: aec20df5-9cf4-4eed-bfb7-a1fe8bf13298
+    nodeType: Trap
+    position: {x: 400, y: 0}
+    isTerminal: 1
+  - nodeID: 3dc12cae-1ce8-48d5-a450-dd04ae13e63f
+    nodeType: Puzzle And Trap
+    position: {x: 400, y: 200}
+    isTerminal: 1
+  - nodeID: 46a3104f-8bb9-41e2-b930-b14af86fdbc1
+    nodeType: Multi Puzzle
+    position: {x: 800, y: 0}
+    isTerminal: 1
+  - nodeID: ce01a497-ae1c-49c7-93fb-208701bd5209
+    nodeType: Puzzle And Trap
+    position: {x: 400, y: -200}
+    isTerminal: 1

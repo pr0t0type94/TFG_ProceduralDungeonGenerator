@@ -13,40 +13,32 @@ MonoBehaviour:
   m_Name: Example1
   m_EditorClassIdentifier: 
   m_roomConnectionsDataList:
-  - baseNodeId: 83774f98-cf2e-4ccd-b6c9-332fe282fa1b
-    basePortName: up
-    targetNodeId: f2cdf441-da92-449b-80e4-fc5c205766d3
-    targetPortName: down
-  - baseNodeId: 83774f98-cf2e-4ccd-b6c9-332fe282fa1b
-    basePortName: down
-    targetNodeId: 873405b4-565a-4739-9ac4-088ccace5c13
-    targetPortName: up
-  - baseNodeId: 83774f98-cf2e-4ccd-b6c9-332fe282fa1b
-    basePortName: right
-    targetNodeId: 7def0448-fe41-4cfa-88a0-cb76391a551f
-    targetPortName: left
   - baseNodeId: f2cdf441-da92-449b-80e4-fc5c205766d3
     basePortName: right
     targetNodeId: df5fd51f-cf13-4a93-b2be-f7290f898f02
+    targetPortName: left
+  - baseNodeId: 83774f98-cf2e-4ccd-b6c9-332fe282fa1b
+    basePortName: up key
+    targetNodeId: f2cdf441-da92-449b-80e4-fc5c205766d3
+    targetPortName: down key
+  - baseNodeId: 83774f98-cf2e-4ccd-b6c9-332fe282fa1b
+    basePortName: right
+    targetNodeId: 7def0448-fe41-4cfa-88a0-cb76391a551f
     targetPortName: left
   m_roomNodeDataList:
   - nodeID: f2cdf441-da92-449b-80e4-fc5c205766d3
     nodeType: Enemy
     position: {x: 20, y: -119}
     isTerminal: 1
-  - nodeID: 873405b4-565a-4739-9ac4-088ccace5c13
-    nodeType: Trap
-    position: {x: 23, y: 161}
-    isTerminal: 1
   - nodeID: 7def0448-fe41-4cfa-88a0-cb76391a551f
     nodeType: Puzzle
     position: {x: 394, y: 20}
     isTerminal: 1
+  - nodeID: 83774f98-cf2e-4ccd-b6c9-332fe282fa1b
+    nodeType: Start
+    position: {x: 26, y: -2}
+    isTerminal: 1
   - nodeID: df5fd51f-cf13-4a93-b2be-f7290f898f02
     nodeType: Treasure And Enemies
     position: {x: 400, y: -119}
-    isTerminal: 1
-  - nodeID: 83774f98-cf2e-4ccd-b6c9-332fe282fa1b
-    nodeType: Start
-    position: {x: 21, y: -4}
     isTerminal: 1
